@@ -5,10 +5,10 @@ to fit the development of your application.
 
 It uses the same file the server uses to establish
 the database connection:
---- server/db/index.js
+//--- server/db/index.js
 
 The name of the database used is set in your environment files:
---- server/env/*
+//--- server/env/*
 
 This seed file has a safety check to see if you already have users
 in the database. If you are developing multiple applications with the
@@ -22,6 +22,12 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
+var Order = Promise.promisifyAll(mongoose.model('Order'));
+var Review = Promise.promisifyAll(mongoose.model('Review'));
+var Location = Promise.promisifyAll(mongoose.model('Location'));
+var Product = Promise.promisifyAll(mongoose.model('Product'));
+
+var tempData = {};
 
 var seedUsers = function () {
 
@@ -40,6 +46,23 @@ var seedUsers = function () {
 
 };
 
+var seedProducts = function (users) {
+
+    var products = [
+        {
+            email: 'testing@fsa.com',
+            password: 'password'
+        },
+        {
+            email: 'obama@gmail.com',
+            password: 'potus'
+        }
+    ];
+
+    return Product.createAsync(products);
+
+};
+
 connectToDb.then(function () {
     User.findAsync({}).then(function (users) {
         if (users.length === 0) {
@@ -48,9 +71,18 @@ connectToDb.then(function () {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
             process.kill(0);
         }
-    }).then(function () {
+    }).then(function (users) {
+		
+		tempData.users = users;
+		
+		return seedProducts(users);
+		
         console.log(chalk.green('Seed successful!'));
-        process.kill(0);
+       // process.kill(0);
+    }).then(function(products){
+    	
+		tempData.products = products;
+			
     }).catch(function (err) {
         console.error(err);
         process.kill(1);
