@@ -1,6 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
-var ObjectId = mongoose.schema.Types.ObjectId;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
 	name: {

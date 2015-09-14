@@ -1,6 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
-var ObjectId = mongoose.schema.Types.ObjectId;
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
 	userId: {
@@ -8,9 +8,6 @@ var schema = new mongoose.Schema({
 	},
 	products:{
 		type: [ObjectId], ref: "Product",
-	},
-	payment:{
-		type: ObjectId, ref: "Payment",
 	},
 	date: {type: Date, default: Date.now},
 	

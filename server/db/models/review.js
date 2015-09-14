@@ -3,7 +3,6 @@
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var ObjectId = mongoose.Schema.Types.ObjectId;
-var User = require('./user');
 
 var schema = new mongoose.Schema({
     byUser: {type: ObjectId, ref: 'User', required: true},
@@ -21,4 +20,4 @@ schema.static('aggRating').get(function(userId) {
     });
 });
 
-mongoose.model('User', schema);
+mongoose.model('Review', schema);
