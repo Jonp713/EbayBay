@@ -3,8 +3,7 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var ObjectId = mongoose.Schema.Types.ObjectId;
-var Review = require('./review.js');
-var Order = require('./')
+var Order = require('./order.js')
 
 var schema = new mongoose.Schema({
     firstName: {
