@@ -3,7 +3,8 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var ObjectId = mongoose.Schema.Types.ObjectId;
-var Order = require('./order.js')
+var Order = require('./order.js');
+var Product = require('./product.js')
 
 var schema = new mongoose.Schema({
     firstName: {
@@ -93,5 +94,21 @@ schema.statics.encryptPassword = encryptPassword;
 schema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
+
+schema.method('addToCart', function (product){
+  if (!(product instanceof Product)) throw new Error('not a product');
+  this.cart.push(product._id);
+  return this.save().exec();
+});
+
+schema.method('removeFromCart', function (product){
+  if (!(product instanceof Product)) throw new Error('not a product');
+  var productIndex = this.cart.indexOf(product._id);
+  if (productIndex+1) {
+    this.cart.splice(productIndex, 1);
+  }
+  return this.save().exec();
+});
+
 
 mongoose.model('User', schema);

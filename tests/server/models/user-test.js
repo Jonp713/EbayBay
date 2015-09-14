@@ -142,6 +142,10 @@ describe('User model', function () {
 
         });
 
+        // describe('cart', function() {
+        //     beforeAll()
+        // });
+
     });
 
 });
