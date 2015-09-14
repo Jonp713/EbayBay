@@ -19,14 +19,16 @@ var schema = new mongoose.Schema({
       default: false
     },
     email: {
-        type: String
+        type: String,
+		unique: true,
+		required: true,
     },
     photoUrl: {
       type: String,
       default: '/images/default-img.png'
     },
     password: {
-        type: String
+        type: String,
     },
     salt: {
         type: String

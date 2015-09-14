@@ -5,6 +5,7 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var schema = new mongoose.Schema({
 	userId: {
 		type: ObjectId, ref: "User",
+		required: true,
 	},
 	products:{
 		type: [ObjectId], ref: "Product",

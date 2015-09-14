@@ -5,8 +5,10 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var schema = new mongoose.Schema({
 	name: {
 		type: String,
+		required: true,
 	},
 	price: {
+		required: true,
 		type: Number,
 	},
 	description:{
