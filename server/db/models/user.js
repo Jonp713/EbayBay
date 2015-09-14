@@ -1,10 +1,30 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var Promise = require('bluebird');
+var ObjectId = mongoose.Schema.Types.ObjectId;
+var Review = require('./review.js');
+var Order = require('./')
 
 var schema = new mongoose.Schema({
+    firstName: {
+      type: String,
+      required: true
+    },
+    lastName: {
+      type: String,
+      required: true
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
     email: {
         type: String
+    },
+    photoUrl: {
+      type: String,
+      default: '/images/default-img.png'
     },
     password: {
         type: String
@@ -23,8 +43,24 @@ var schema = new mongoose.Schema({
     },
     google: {
         id: String
-    }
+    },
+    cart: [{type: ObjectId, ref: 'Product'}],
 });
+
+schema.virtual('aggRating').get(function() {
+
+});
+schema.methods.transmitToOrder = function() {
+  Order.create({products: this.cart})
+  .then(function(order) {
+    this.cart = [];
+    return [Promise.resolve(order), this.save()];
+  })
+  .then(function(arr) {
+    return Promise.all(arr);
+  });
+};
+
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
