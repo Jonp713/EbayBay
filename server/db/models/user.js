@@ -2,8 +2,9 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
-var Order = require('./order.js');
-var Product = require('./product.js');
+require('./index.js')
+var Order = mongoose.Model('Order');
+var Product = mongoose.Model('Product');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
@@ -57,12 +58,17 @@ schema.virtual('aggRating').get(function() {
 });
 
 schema.methods.transmitToOrder = function() {
+	console.log(Order);
+	console.log("here3.4", this);
   return Order.create({userId: this._id, products: this.cart})
   .then(function(order) {
+	  
+  	console.log("here3.5", order); 
     this.cart = [];
     return [Promise.resolve(order), this.save()];
-  })
-  .then(function(arr) {
+  }.bind(this))
+  .then(function(arr) {  
+  	console.log("here3.6", arr);
     return Promise.all(arr);
   });
 };
@@ -97,10 +103,11 @@ schema.method('correctPassword', function (candidatePassword) {
 });
 
 schema.method('addToCart', function (product){
- // if (!(product instanceof Product)) throw new Error('not a product');
+  //if (!(product instanceof Product)) throw new Error('not a product');
   this.cart.push(product._id);
-  console.log(product);
-  return this.save();
+  return this.save().then(function(user){
+	  return user;
+  })
 });
 
 schema.method('removeFromCart', function (product){

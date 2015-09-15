@@ -165,16 +165,14 @@ describe('User model', function () {
 				  	return createProduct(user);
                 })
 				.then(function(product){
-					console.log(product);
                 	return currentUser.addToCart(product);
                 })
 				.then(function(user) {
-					console.log(user);
+					console.log('here3');
 					return user.transmitToOrder();
 				})
 				.then(function(orderUser){
 					console.log('here4');
-					
 					expect( orderUser[0].products.indexOf( { name: 'obama figurine', price: "100", userId: currentUser._id} ) ).to.be.equal(0);
 					done();
 				});
