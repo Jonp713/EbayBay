@@ -27,26 +27,26 @@ describe('Product model', function(){
     });
 
     beforeEach('Make a user', function(done){
-    	User.create({
-    		firstName: 'Joe',
-    		lastName: 'A',
-    		email: 'joe@email'
-    	}).then(function(user){
-    		done();
-    	});
-    });
-
-    beforeEach('find the userId', function(done){
-		User.findOne().exec()
-		.then(function(user){
-			userId = user._id;
-			done();
+			User.create({
+				firstName: 'Joe',
+				lastName: 'A',
+				email: 'joe@email'
+			}).then(function(user){
+				done();
 		});
     });
 
-    afterEach('Disconnect', function(done){
-    	clearDB(done);
+    beforeEach('find the userId', function(done){
+			User.findOne().exec()
+			.then(function(user){
+				userId = user._id;
+				done();
+			});
     });
+
+    afterEach('Disconnect', function(done){
+			clearDB(done);
+		});
 
     it('Product model should exist', function () {
         expect(Product).to.be.a('function');
