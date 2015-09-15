@@ -22,7 +22,7 @@ router.param('userId', function(req, res, next, id) {
         });
 });
 
-router.get('/:userId', function(req, res, next) {
+router.get('/:userId', function(req, res) {
     res.json(req.foundUser);
 });
 

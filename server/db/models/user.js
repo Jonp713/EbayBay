@@ -57,7 +57,7 @@ schema.virtual('aggRating').get(function() {
 });
 
 schema.methods.transmitToOrder = function() {
-  Order.create({products: this.cart})
+  return Order.create({userId: this._id, products: this.cart})
   .then(function(order) {
     this.cart = [];
     return [Promise.resolve(order), this.save()];
@@ -97,9 +97,10 @@ schema.method('correctPassword', function (candidatePassword) {
 });
 
 schema.method('addToCart', function (product){
-  if (!(product instanceof Product)) throw new Error('not a product');
+ // if (!(product instanceof Product)) throw new Error('not a product');
   this.cart.push(product._id);
-  return this.save().exec();
+  console.log(product);
+  return this.save();
 });
 
 schema.method('removeFromCart', function (product){
