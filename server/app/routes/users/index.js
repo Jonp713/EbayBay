@@ -36,30 +36,31 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    if(!req.user.isAdmin) delete req.body.isAdmin;
+    if(req.user && !req.user.isAdmin) delete req.body.isAdmin;
     User.create(req.body)
         .then(function(user) {
             req.login(user, function(error) {
                 if(error) throw new Error();
                 res.json(user);
             });
-
         })
         .then(null, next);
 });
 
 router.put('/:userId', function(req, res, next) {
+    console.log('in the put');
     var isAdmin = req.user.isAdmin;
-    //checks to see if current user is admin;
+    console.log('req.foundUser', req.foundUser);
+    console.log('req.user', req.user);
     if(req.user !== req.foundUser && !isAdmin) return res.sendStatus(403);
     //if user is an admin or is the viewed user allow for changes
-    if(!isAdmin) delete req.body.isAdmin;
+    if(req.user && !isAdmin) delete req.body.isAdmin;
     Object.keys(req.body).forEach(function(key) {
         if(req.foundUser[key]) req.foundUser[key] = req.body[key];
     });
-    req.foundUser.save()
+    return req.foundUser.save()
         .then(function(element) {
-            res.json(element);
+            return res.json(element);
         })
         .then(null, next);
 });
