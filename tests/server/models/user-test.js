@@ -145,51 +145,88 @@ describe('User model', function () {
             });
 
         });
-		
-	    describe('methods', function () {
-			
-            var createUser = function () {
-                return User.create({firstName: "Barack", lastName: "Obizz", email: 'obama@gmail.com', password: 'potus' });
-            };
-			
-            var createProduct = function (user) {
-                return Product.create({ name: 'obama figurine', price: "100", userId: user._id});
-            };
-			
-		
-            it('should create a new order on transmitToOrder', function (done) {
-				var currentUser;
-                createUser().then(function (user) {
-					currentUser = user;
-					
-				  	return createProduct(user);
-                })
-				.then(function(product){
-                	return currentUser.addToCart(product);
-                })
-				.then(function(user) {
-					console.log('here3');
-					return user.transmitToOrder();
-				})
-				.then(function(orderUser){
-					console.log('here4');
-					expect( orderUser[0].products.indexOf( { name: 'obama figurine', price: "100", userId: currentUser._id} ) ).to.be.equal(0);
-					done();
-				});
-				
-				
-            });
-			
-            it('should have an empty card after transmitToOrder', function (done) {
-				done();
-            });
-		
-		});
-
-        // describe('cart', function() {
-        //     beforeAll()
-        // });
-
     });
+
+    describe('methods', function () {
+
+          var createUser = function () {
+              return User.create({firstName: "Barack", lastName: "Obizz", email: 'obama@gmail.com', password: 'potus' });
+          };
+
+          var createProduct = function (user) {
+              return Product.create({ name: 'obama figurine', price: "100", userId: user._id});
+          };
+          var addToCart = function() {
+            var currentUser;
+            return createUser()
+            .then(function(user) {
+              currentUser = user;
+              return createProduct(user);
+            })
+            .then(function(product) {
+              return currentUser.addToCart(product);
+            });
+          }
+          it('should add a new product to cart on addToCart', function(done) {
+            addToCart()
+            .then(function(user) {
+              expect(user.cart.length).to.be.equal(1);
+              done();
+            })
+          })
+          it('should remove a product from cart on removeFromCart', function(done) {
+            addToCart()
+            .then(function(element) {
+              return Product.findById(element.cart[0])
+              .then(function(product) {
+                return element.removeFromCart(product);
+              })
+            })
+            .then(function(user) {
+              expect(user.cart.length).to.be.equal(0);
+              done();
+            })
+          });
+          it('should create a new order on transmitToOrder', function (done) {
+              var currentUser, currentProduct;
+              createUser()
+              .then(function (user) {
+                 currentUser = user;
+                 return createProduct(user);
+               })
+              .then(function(product){
+                currentProduct = product;
+                return currentUser.addToCart(product);
+              })
+              .then(function(user) {
+                return user.transmitToOrder();
+              })
+              .then(function(orderUser){
+                expect(orderUser[0].products.indexOf(currentProduct._id)).to.be.equal(0);
+                done();
+              });
+          });
+
+          it('should have an empty card after transmitToOrder', function (done) {
+            var currentUser, currentProduct;
+            createUser()
+            .then(function (user) {
+               currentUser = user;
+               return createProduct(user);
+             })
+            .then(function(product){
+              currentProduct = product;
+              return currentUser.addToCart(product);
+            })
+            .then(function(user) {
+              return user.transmitToOrder();
+            })
+            .then(function(orderUser){
+              expect(orderUser[1].cart.length).to.be.equal(0);
+              done();
+            });
+          });
+
+  });
 
 });

@@ -2,9 +2,10 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
-require('./index.js')
-var Order = mongoose.Model('Order');
-var Product = mongoose.Model('Product');
+require('./order.js');
+require('./product.js');
+var Order = mongoose.model('Order');
+var Product = mongoose.model('Product');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
@@ -58,17 +59,12 @@ schema.virtual('aggRating').get(function() {
 });
 
 schema.methods.transmitToOrder = function() {
-	console.log(Order);
-	console.log("here3.4", this);
   return Order.create({userId: this._id, products: this.cart})
   .then(function(order) {
-	  
-  	console.log("here3.5", order); 
     this.cart = [];
     return [Promise.resolve(order), this.save()];
   }.bind(this))
-  .then(function(arr) {  
-  	console.log("here3.6", arr);
+  .then(function(arr) {
     return Promise.all(arr);
   });
 };
@@ -103,20 +99,17 @@ schema.method('correctPassword', function (candidatePassword) {
 });
 
 schema.method('addToCart', function (product){
-  //if (!(product instanceof Product)) throw new Error('not a product');
   this.cart.push(product._id);
-  return this.save().then(function(user){
-	  return user;
-  })
+  return this.save();
 });
 
 schema.method('removeFromCart', function (product){
-  if (!(product instanceof Product)) throw new Error('not a product');
+  // if (!(product instanceof Product)) throw new Error('not a product');
   var productIndex = this.cart.indexOf(product._id);
   if (productIndex+1) {
     this.cart.splice(productIndex, 1);
   }
-  return this.save().exec();
+  return this.save();
 });
 
 
