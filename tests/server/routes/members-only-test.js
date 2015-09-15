@@ -43,6 +43,8 @@ describe('Members Route', function () {
 		var loggedInAgent;
 
 		var userInfo = {
+			firstName: "Joe",
+			lastName: "Eric",
 			email: 'joe@gmail.com',
 			password: 'shoopdawoop'
 		};

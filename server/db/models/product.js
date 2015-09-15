@@ -24,13 +24,12 @@ var schema = new mongoose.Schema({
 	category: {
 		type: String
 	},
-	user: {
+	userId: {
 		type: ObjectId, ref:"user",
 		required : true
 	},
 	location: {
 		type: ObjectId, ref:"location",
-		required : true
 	},
 	quantity: {
 		type: Number,

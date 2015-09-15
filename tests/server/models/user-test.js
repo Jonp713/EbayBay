@@ -2,6 +2,7 @@ var dbURI = 'mongodb://localhost:27017/testingDB';
 var clearDB = require('mocha-mongoose')(dbURI);
 
 var sinon = require('sinon');
+
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
 
@@ -9,6 +10,9 @@ var mongoose = require('mongoose');
 require('../../../server/db/models');
 
 var User = mongoose.model('User');
+var Product = mongoose.model('Product');
+var Order = mongoose.model('Order');
+
 
 describe('User model', function () {
 
@@ -103,7 +107,7 @@ describe('User model', function () {
             var saltSpy;
 
             var createUser = function () {
-                return User.create({ email: 'obama@gmail.com', password: 'potus' });
+                return User.create({ firstName: "Justin", lastName : "Fullchart", isAdmin: false, email: 'obama@gmail.com', password: 'potus' });
             };
 
             beforeEach(function () {
@@ -141,6 +145,48 @@ describe('User model', function () {
             });
 
         });
+		
+	    describe('methods', function () {
+			
+            var createUser = function () {
+                return User.create({firstName: "Barack", lastName: "Obizz", email: 'obama@gmail.com', password: 'potus' });
+            };
+			
+            var createProduct = function (user) {
+                return Product.create({ name: 'obama figurine', price: "100", userId: user._id});
+            };
+			
+		
+            it('should create a new order on transmitToOrder', function (done) {
+				var currentUser;
+                createUser().then(function (user) {
+					currentUser = user;
+					
+				  	return createProduct(user);
+                })
+				.then(function(product){
+					console.log(product);
+                	return currentUser.addToCart(product);
+                })
+				.then(function(user) {
+					console.log(user);
+					return user.transmitToOrder();
+				})
+				.then(function(orderUser){
+					console.log('here4');
+					
+					expect( orderUser[0].products.indexOf( { name: 'obama figurine', price: "100", userId: currentUser._id} ) ).to.be.equal(0);
+					done();
+				});
+				
+				
+            });
+			
+            it('should have an empty card after transmitToOrder', function (done) {
+				done();
+            });
+		
+		});
 
         // describe('cart', function() {
         //     beforeAll()

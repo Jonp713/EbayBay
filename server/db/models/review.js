@@ -1,7 +1,6 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Promise = require('bluebird');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
