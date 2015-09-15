@@ -6,6 +6,7 @@ var Product = mongoose.model('Product');
 
 
 var missingItemHandler = function(error, cb) {
+    console.log("couldn't find the product");
     error.status(404);
     cb(error);
     //custom error handler for missing users and products
@@ -15,6 +16,7 @@ router.param('productId', function(req, res, next, id) {
     Product.findById(id)
         .then(function(element) {
             req.foundProduct = element;
+            console.log("found product :", req.foundProduct);
             next();
         })
         .then(null, function(error) {
@@ -47,7 +49,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:productId', function(req, res, next) {
-    if(req.product.userId !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
+    if(req.foundProduct.userId !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
     //if user is an admin or is the owner of the product, allow for changes
     Object.keys(req.body).forEach(function(key) {
         if(req.foundProduct[key]) req.foundProduct[key] = req.body[key];
@@ -60,10 +62,12 @@ router.put('/:productId', function(req, res, next) {
 });
 
 router.delete('/:productId', function(req, res, next) {
-    if(req.product.userId !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
+    if (!req.user || (!req.user.isAdmin && req.foundProduct.userId !== req.user._id)){
+        res.sendStatus(403);
+    }
     req.foundProduct.remove()
         .then(function() {
-            res.sendStatus(204);
+            res.status(204).end();
         })
         .then(null, next);
 });
