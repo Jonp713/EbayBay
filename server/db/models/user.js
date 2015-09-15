@@ -2,9 +2,9 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
-var ObjectId = mongoose.Schema.Types.ObjectId;
 var Order = require('./order.js');
-var Product = require('./product.js')
+var Product = require('./product.js');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
     firstName: {
@@ -20,38 +20,42 @@ var schema = new mongoose.Schema({
       default: false
     },
     email: {
-        type: String,
-		unique: true,
-		required: true,
+      type: String,
+      unique: true,
+      required: true,
     },
     photoUrl: {
       type: String,
       default: '/images/default-img.png'
     },
     password: {
-        type: String,
+      type: String,
     },
     salt: {
-        type: String
+      type: String
     },
     twitter: {
-        id: String,
-        username: String,
-        token: String,
-        tokenSecret: String
+      id: String,
+      username: String,
+      token: String,
+      tokenSecret: String
     },
     facebook: {
-        id: String
+      id: String
     },
     google: {
-        id: String
+      id: String
     },
-    cart: [{type: ObjectId, ref: 'Product'}],
+    cart: [{
+      type: ObjectId,
+      ref: 'Product'
+    }],
 });
 
 schema.virtual('aggRating').get(function() {
-
+  // calculate rating here
 });
+
 schema.methods.transmitToOrder = function() {
   Order.create({products: this.cart})
   .then(function(order) {
@@ -78,14 +82,11 @@ var encryptPassword = function (plainText, salt) {
 };
 
 schema.pre('save', function (next) {
-
     if (this.isModified('password')) {
         this.salt = this.constructor.generateSalt();
         this.password = this.constructor.encryptPassword(this.password, this.salt);
     }
-
     next();
-
 });
 
 schema.statics.generateSalt = generateSalt;

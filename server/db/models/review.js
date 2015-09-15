@@ -5,11 +5,30 @@ var Promise = require('bluebird');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
-    byUser: {type: ObjectId, ref: 'User', required: true},
-    aboutUser: {type: ObjectId, ref: 'User', required: true},
-    title: {type: String, required: true},
-    descr: {type: String, required: true},
-    stars: {type: Number, min: 1, max: 5, required: true}
+    byUser: {
+        type: ObjectId,
+        ref: 'User',
+        required: true
+    },
+    aboutUser: {
+        type: ObjectId,
+        ref: 'User',
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    descr: {
+        type: String,
+        required: true
+    },
+    stars: {
+        type: Number,
+        min: 1,
+        max: 5,
+        required: true
+    }
 });
 
 schema.static('aggRating').get(function(userId) {
