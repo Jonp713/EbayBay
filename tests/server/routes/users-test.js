@@ -11,7 +11,7 @@ var clearDB = require('mocha-mongoose')(dbURI);
 var supertest = require('supertest');
 var app = require('../../../server/app');
 
-describe('Members Route', function () {
+describe('Users Route', function () {
 
 	beforeEach('Establish DB connection', function (done) {
 		if (mongoose.connection.db) return done();
@@ -26,32 +26,61 @@ describe('Members Route', function () {
 
 		var userAgent;
     var currentUser;
+    var userInfo;
+    var loggedInAgent;
 
-		beforeEach('Create guest agent', function (done) {
-			userAgent = supertest.agent(app);
-      User.create({firstName: 'barack', lastName: 'obeezy', email: 'barack@aol.com', password:'Michelle'})
+    beforeEach('Create User', function(done) {
+      userInfo = {firstName: 'barack', lastName: 'obeezy', email: 'barack@aol.com', password:'Michelle', isAdmin: true};
+      User.create(userInfo)
       .then(function(user) {
         currentUser = user;
         done();
       });
+    })
+		beforeEach('Create user agent', function (done) {
+			userAgent = supertest.agent(app);
+      done();
 		});
 
-		it('should get a 200 response and return an array of users', function (done) {
-			userAgent.get('/api/users/')
-				.expect(200).end(function(err, response) {
-          if(err) return done(err);
-          expect(response.body).to.be.an('array');
-          expect(response.body[0]._id).to.equal(currentUser._id.toString());
-          done();
-        });
-		});
-    it('should create a user', function(done) {
-      userAgent.post('/api/users').send({firstName: 'BeckyLee', lastName: 'Dell', email: 'beckylee@isTheCoolest.com', password: 'ganondorf'})
-      .end(function(err, response) {
-        if(err) return done(err);
-        console.log(response.body);
-        expect(response.body).to.be.instanceof(User);
-        done();
+    beforeEach('Create logged in agent', function(done) {
+      loggedInAgent = supertest.agent(app);
+      console.log(currentUser);
+			loggedInAgent.post('/login').send(userInfo).end(done);
+    })
+
+    describe('users get route', function() {
+  		it('should get a 200 response and return an array of users', function (done) {
+  			userAgent.get('/api/users/')
+  				.expect(200).end(function(err, response) {
+            if(err) return done(err);
+            expect(response.body).to.be.an('array');
+            expect(response.body[0]._id).to.equal(currentUser._id.toString());
+            done();
+          });
+  		});
+    });
+
+    describe('users post route', function() {
+      it('should return a user', function(done) {
+        userAgent.post('/api/users').send({firstName: 'BeckyLee', lastName: 'Dell', email: 'beckylee@isTheCoolest.com', password: 'ganondorf'})
+        .end(function(err, response) {
+            if(err) return done(err);
+            console.log(response.body);
+            expect(response.body.email).to.be.equal('beckylee@isTheCoolest.com');
+            done();
+          });
+      });
+    });
+
+    describe('users put route', function() {
+      it('should update a user', function(done) {
+        loggedInAgent.put('/api/users/' + currentUser._id).send({lastName: 'obizzle'})
+        .end(function(err, response) {
+            if(err) return done(err);
+            console.log(response.body);
+            expect(response.body.lastName).to.be.equal('obizzle');
+            done();
+          });
       });
     });
 	});
