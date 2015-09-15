@@ -17,8 +17,7 @@ var schema = new mongoose.Schema({
 	zip:{
 		type: String,
 		required: true,
-	},
-
+	}
 });
 
 mongoose.model('Location', schema);

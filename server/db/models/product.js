@@ -5,34 +5,38 @@ var ObjectId = mongoose.Schema.Types.ObjectId;
 var schema = new mongoose.Schema({
 	name: {
 		type: String,
-		required: true,
+		required: true
 	},
 	price: {
-		required: true,
 		type: Number,
+		required: true
 	},
 	description:{
 		type: String
 	},
 	keywords:{
-		type: [String],
+		type: [String]
 	},
 	photo: {
 		type: String,
-		default: '',
+		default: ''
 	},
 	category: {
-		type: String,
+		type: String
 	},
 	user: {
 		type: ObjectId, ref:"user",
-		required : true,
+		required : true
 	},
 	location: {
 		type: ObjectId, ref:"location",
-		required : true,
+		required : true
 	},
-	quantity: {type: Number, default: 1, min: 0},
+	quantity: {
+		type: Number,
+		default: 1,
+		min: 0
+	},
 });
 
 mongoose.model('Product', schema);
