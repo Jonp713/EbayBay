@@ -84,35 +84,4 @@ describe('Users Route', function () {
       });
     });
 	});
-
-	describe('Authenticated request', function () {
-
-		var loggedInAgent;
-
-		var userInfo = {
-			firstName: "Joe",
-			lastName: "Eric",
-			email: 'joe@gmail.com',
-			password: 'shoopdawoop'
-		};
-
-		beforeEach('Create a user', function (done) {
-			User.create(userInfo, done);
-		});
-
-		beforeEach('Create loggedIn user agent and authenticate', function (done) {
-			loggedInAgent = supertest.agent(app);
-			loggedInAgent.post('/login').send(userInfo).end(done);
-		});
-
-		it('should get with 200 response and with an array as the body', function (done) {
-			loggedInAgent.get('/api/members/secret-stash').expect(200).end(function (err, response) {
-				if (err) return done(err);
-				expect(response.body).to.be.an('array');
-				done();
-			});
-		});
-
-	});
-
 });
