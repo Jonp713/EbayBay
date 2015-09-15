@@ -48,10 +48,8 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:userId', function(req, res, next) {
-    console.log('in the put');
     var isAdmin = req.user.isAdmin;
-    console.log('req.foundUser', req.foundUser);
-    console.log('req.user', req.user);
+
     if(req.user !== req.foundUser && !isAdmin) return res.sendStatus(403);
     //if user is an admin or is the viewed user allow for changes
     if(req.user && !isAdmin) delete req.body.isAdmin;
