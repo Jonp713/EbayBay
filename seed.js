@@ -43,6 +43,18 @@ var seedUsers = function () {
             lastName: "Carter",
             email: 'carty@fsa.com',
             password: 'password'
+        },
+        {
+            firstName: "Omri",
+            lastName: "Zeke",
+            email: 'omri@fsa.com',
+            password: 'password'
+        },
+        {
+            firstName: "Gabe",
+            lastName: "Neon",
+            email: 'gabe@fsa.com',
+            password: 'password'
         }
     ];
 
@@ -63,6 +75,18 @@ var seedLocation = function() {
         city: "Brooklyn",
         state: "New York",
         zip: "11216"
+    },
+    {
+        street: "5 Hanover Square",
+        city: "New York",
+        state: "New York",
+        zip: "10004"
+    },
+    {
+        street: "1720 Grape Ave",
+        city: "Boulder",
+        state: "Colorado",
+        zip: "80304"
     }
     ];
     return Location.createAsync(location);
@@ -87,6 +111,24 @@ var seedProducts = function (users, location) {
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 2
+        },
+        {
+            name: "This project is my life bear",
+            price: 25,
+            description: "I'm scary, I swear!",
+            category: "Real Animal",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 3
+        },
+        {
+            name: "The Best Milkshake ever!",
+            price: 205,
+            description: "Purple Haze",
+            category: "Milkshake",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 1
         }
     ];
 
@@ -108,12 +150,13 @@ connectToDb.then(function () {
 		
 		return seedLocation();
 		
-       // process.kill(0);
     }).then(function(location){
         
         tempData.location = location;
         console.log(chalk.green('Seed successful!'));
-		return seedProducts(tempData.users, tempData.location);
+        return seedProducts(tempData.users, tempData.location);
+    }).then(function() {
+       return process.kill(0);
     }).catch(function (err) {
         console.error(err);
         process.kill(1);
