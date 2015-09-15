@@ -29,7 +29,7 @@ var schema = new mongoose.Schema({
 		required : true
 	},
 	location: {
-		type: ObjectId, ref:"location",
+		type: ObjectId, ref:"location"
 	},
 	quantity: {
 		type: Number,
