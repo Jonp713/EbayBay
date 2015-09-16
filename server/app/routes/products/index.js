@@ -62,9 +62,12 @@ router.put('/:productId', function(req, res, next) {
 });
 
 router.delete('/:productId', function(req, res, next) {
+    console.log('req.user', req.user);
     if (!req.user || (!req.user.isAdmin && req.foundProduct.userId !== req.user._id)){
-        res.sendStatus(403);
+        return res.sendStatus(403);
     }
+    // console.log('am I an admin?', req.user.isAdmin)
+    console.log('prod', req.foundProduct)
     req.foundProduct.remove()
         .then(function() {
             res.status(204).end();
