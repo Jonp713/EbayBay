@@ -1,7 +1,6 @@
 app.factory('Order', function(DS) {
     return DS.defineResource({
         name: 'orders',
-        basePath: '/api/users/',
         idAttribute: '_id',
         relations: {
             belongsTo: {
