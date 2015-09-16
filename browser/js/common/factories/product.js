@@ -1,5 +1,4 @@
-app.factory('Product', function (DS) {
-
+app.factory('ProductFactory', function (DS) {
 	return DS.defineResource({
 		name: 'products',
 		idAttribute: "_id",
@@ -12,4 +11,4 @@ app.factory('Product', function (DS) {
             }
         }
 	})
-}).run(function(Product){});
+}).run(function(ProductFactory){});

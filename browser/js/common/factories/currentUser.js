@@ -1,0 +1,3 @@
+app.factory('CurrentUserFactory', function() {
+
+});

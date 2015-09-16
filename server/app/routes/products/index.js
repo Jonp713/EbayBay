@@ -30,7 +30,7 @@ router.get('/:productId', function(req, res, next) {
 
 router.get('/', function(req, res, next) {
     Product.find(req.query)
-        //req.query will contain search params for filtering products 
+        //req.query will contain search params for filtering products
         .then(function(results) {
             res.json(results);
         })

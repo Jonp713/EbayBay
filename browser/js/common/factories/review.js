@@ -11,9 +11,4 @@ app.factory('Review', function (DS) {
             }
         }
     });
-}).run(function(Review){
-    Review.findAll()
-        .then(function(elements){
-            console.log(elements);
-        })
-});
+}).run(function(Review){});
