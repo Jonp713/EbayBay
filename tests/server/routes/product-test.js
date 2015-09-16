@@ -138,36 +138,33 @@ describe('Product Route', function () {
 			loggedInAgent.post('/login').send(userInfo).end(done);
 		});
 
-		it('should get with 204 response', function (done) {
-			loggedInAgent.get('/api/delete/' + createdProd._id).expect(204).end(function (err, response) {
+		it('should delete with 204 response', function (done) {
+			console.log('logged in and admin?', createdProd._id)
+			loggedInAgent.delete('/api/products/' + createdProd._id).expect(204).end(function (err, response) {
 				if (err) return done(err);
 				done();
 			});
 		});
 
-		xit("should delete the product from the database", function(done) {
-			loggedInAgent.get('/api/delete/' + createdProd._id).expect(204).end(function (err, response) {
+		it("should delete the product from the database", function(done) {
+			loggedInAgent.delete('/api/products/' + createdProd._id).end(function(err, response){
 				if (err) return done(err);
-			})
-			.then(function() {
-				return Product.find({_id: createdProd._id});
-			})
-			.then(function(result){
-				expect(result.length).to.equal(0);
-				done();
+				return Product.find({_id: createdProd._id}, function(err, result){
+					if (err) return done(err);
+					expect(result.length).to.equal(0);
+					done();	
+				});
 			});
 		});
 
-		xit("should not drop the entire database", function(done) {
-			loggedInAgent.get('/api/delete/' + createdProd._id).expect(204).end(function (err, response) {
+		it("should not drop the entire database", function(done) {
+			loggedInAgent.delete('/api/products/' + createdProd._id).end(function (err, response) {
 				if (err) return done(err);
-			})
-			.then(function() {
-				return Product.find();
-			})
-			.then(function(result){
-				expect(result.length).to.equal(1);
-				done();
+				return Product.find({}, function(err, result){
+					if (err) return done(err);
+					expect(result.length).to.equal(1);
+					done();
+				});
 			});
 		});
 	});
