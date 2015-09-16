@@ -32,6 +32,7 @@ var schema = new mongoose.Schema({
     },
     password: {
       type: String,
+        select:false
     },
     salt: {
       type: String
