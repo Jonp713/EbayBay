@@ -1,4 +1,4 @@
-app.factory('Product', function (DS) {
+app.factory('ProductFactory', function (DS) {
 
 	return DS.defineResource({
 		name: 'products',
