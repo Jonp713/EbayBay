@@ -1,5 +1,4 @@
 app.factory('ProductFactory', function (DS) {
-
 	return DS.defineResource({
 		name: 'products',
 		idAttribute: "_id",

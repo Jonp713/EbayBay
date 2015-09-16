@@ -6,7 +6,7 @@ app.config(function($stateProvider) {
             controller: 'ProductController',
             resolve: {
                 product: function(ProductFactory, $stateParams) {
-                    return ProductFactory.find($stateParams.id)
+                    return ProductFactory.find($stateParams.id);
                 }
             }
         })
