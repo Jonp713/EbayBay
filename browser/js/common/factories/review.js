@@ -15,4 +15,8 @@ app.factory('ReviewFactory', function (DS) {
             }
         }
     });
+<<<<<<< HEAD
 }).run(function(ReviewFactory){});
+=======
+}).run(function(Review){});
+>>>>>>> 26a5089e8db86599dc0f15288f830e217f11c29b
