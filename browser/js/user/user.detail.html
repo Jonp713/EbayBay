@@ -1,11 +1,31 @@
-<div>
+<div class = "col-xs-12">
+	<span class = "user-profile col-xs-offset-1 col-xs-2">
+		{{user.pictureUrl}}
+		<br>
+		{{user.location}}
+	</span>
+	<span class = "user-profile col-xs-6">
+		{{user.firstName}} {{user.lastName}}
+		<br>
+		<a ui-sref = "products({userId: user._id})">See my products</a>
+		<br><br>
+		<div class = "white-bg">
+			REVIEWS
+			<br>
+			REVIEWS
+			<br>
+			REVDIEWS ABOUT ME
+			<review-list></review-list>
+		</div>
+			
+	</span>
 	
 </div>
 
 
 
-name,
+<!-- name,
 pic,
 reviews, limit char, - expand
 location,
-button for prod,
+button for prod, -->

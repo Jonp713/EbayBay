@@ -12,4 +12,4 @@ app.factory('ProductFactory', function (DS) {
             }
         }
 	})
-}).run(function(Product){});
+}).run(function(ProductFactory){});
