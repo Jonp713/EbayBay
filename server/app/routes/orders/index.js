@@ -22,7 +22,7 @@ router.param('orderId', function(req, res, next, id) {
         });
 });
 
-router.get('/:productId', function(req, res, next) {
+router.get('/:orderId', function(req, res, next) {
     res.json(req.foundProduct);
 });
 
