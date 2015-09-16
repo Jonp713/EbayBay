@@ -44,7 +44,7 @@ describe('Users Route', function () {
 
     beforeEach('Create logged in agent', function(done) {
       loggedInAgent = supertest.agent(app);
-      console.log(currentUser);
+      // console.log(currentUser);
 			loggedInAgent.post('/login').send(userInfo).end(done);
     })
 
@@ -65,7 +65,7 @@ describe('Users Route', function () {
         userAgent.post('/api/users').send({firstName: 'BeckyLee', lastName: 'Dell', email: 'beckylee@isTheCoolest.com', password: 'ganondorf'})
         .end(function(err, response) {
             if(err) return done(err);
-            console.log(response.body);
+            // console.log(response.body);
             expect(response.body.email).to.be.equal('beckylee@isTheCoolest.com');
             done();
           });
@@ -77,7 +77,7 @@ describe('Users Route', function () {
         loggedInAgent.put('/api/users/' + currentUser._id).send({lastName: 'obizzle'})
         .end(function(err, response) {
             if(err) return done(err);
-            console.log(response.body);
+            // console.log(response.body);
             expect(response.body.lastName).to.be.equal('obizzle');
             done();
           });
