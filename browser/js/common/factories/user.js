@@ -1,17 +1,24 @@
 app.factory('User', function (DS) {
 
 	var User = DS.defineResource({
-		name: 'users', 
-		idAttribute: "_id",		
+		name: 'users',
+		idAttribute: "_id",
+        relations: {
+            hasMany: {
+                products: {
+                    localField: 'products',
+                    foreignKey: 'userId'
+                }
+            }
+        }
 	})
 
     return User;
 
 
 }).run(function(User){
-	
-	User.findAll().then(function(users){
-		console.dir(users);
-		
-	});
+    User.findAll()
+        .then(function(element) {
+            console.log(element);
+        })
 });

@@ -1,11 +1,17 @@
 app.factory('Product', function (DS) {
 
 	var Product = DS.defineResource({
-		name: 'product', 
-		idAttribute: "_id",		
+		name: 'products',
+		idAttribute: "_id",
+        relations: {
+            belongsTo: {
+                users: {
+                    localKey: 'userId',
+                    localField: 'user'
+                }
+            }
+        }
 	})
 
     return Product;
-
-
-}).run(function(User){});
+}).run(function(Product){});
