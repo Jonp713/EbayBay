@@ -1,6 +1,6 @@
 app.factory('Product', function (DS) {
 
-	var Product = DS.defineResource({
+	return DS.defineResource({
 		name: 'products',
 		idAttribute: "_id",
         relations: {
@@ -12,6 +12,4 @@ app.factory('Product', function (DS) {
             }
         }
 	})
-
-    return Product;
 }).run(function(Product){});

@@ -1,6 +1,5 @@
 app.factory('User', function (DS) {
-
-	var User = DS.defineResource({
+	return DS.defineResource({
 		name: 'users',
 		idAttribute: "_id",
         relations: {
@@ -11,14 +10,5 @@ app.factory('User', function (DS) {
                 }
             }
         }
-	})
-
-    return User;
-
-
-}).run(function(User){
-    User.findAll()
-        .then(function(element) {
-            console.log(element);
-        })
-});
+	});
+}).run(function(User){});
