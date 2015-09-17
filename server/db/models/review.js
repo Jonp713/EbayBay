@@ -14,11 +14,7 @@ var schema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    title: {
-        type: String,
-        required: true
-    },
-    descr: {
+    content: {
         type: String,
         required: true
     },
