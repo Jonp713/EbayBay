@@ -1,12 +1,6 @@
 <div class="container">
     <div class="row">
-        <ul>
-            <li ng-repeat="product in products">
-                <a ui-sref="product({id: product._id})"><h3>{{product.name}}</h3></a>
-                <hr/>
-                <p>Description: {{product.description}}</p>
-                <p>Cost: ${{product.price}}</p>
-            </li>
-        </ul>
+	    <product-list-item product='product' ng-repeat='product in products'>
+	    </product-list-item>
     </div>
 </div>
