@@ -55,10 +55,6 @@ var schema = new mongoose.Schema({
     }],
 });
 
-schema.virtual('aggRating').get(function() {
-  // calculate rating here
-});
-
 schema.methods.transmitToOrder = function() {
   return Order.create({userId: this._id, products: this.cart})
   .then(function(order) {

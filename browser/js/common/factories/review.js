@@ -1,14 +1,19 @@
-app.factory('Review', function (DS) {
+app.factory('ReviewFactory', function (DS) {
     return DS.defineResource({
         name: 'reviews',
         idAttribute: "_id",
         relations: {
-            hasOne: {
-                users: {
-                    localKey: 'userId',
-                    localField: 'user'
-                }
+            belongsTo: {
+                users: [{
+                    localKey: 'aboutUser',
+                    localField: 'aboutUserPop'
+                }, 
+                {
+                    localKey: 'byUser',
+                    localField: 'byUserPop'
+                }] 
             }
         }
     });
-}).run(function(Review){});
+}).run(function(ReviewFactory){});
+
