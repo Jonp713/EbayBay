@@ -99,18 +99,24 @@ schema.method('correctPassword', function (candidatePassword) {
 });
 
 
-///this is not finished yet
 schema.method('addToCart', function (obj, cb){
     var self = this;
+    //obj argument is passed from middleware and is an obj corresponding to {quantity: num, product: productModel}
+    //cb to be called from middleware
     self.deepPopulate('cart.product', function(err, _user) {
         if(err) return cb(err);
+        var flag = false;
         self.cart = _user.cart.map(function(element, idx) {
-            if(element.product._id === obj.product._id) element.quantity += obj.quantity;
+            if(element.product._id === obj.product._id) {
+                flag = true;
+                element.quantity += obj.quantity;
+            }
             return element;
         });
+        if(!flag) self.cart.push(obj);
         self.save(function(err, user) {
             if(err) return cb(err);
-            return cb(user);
+            return cb(null,user);
         })
     })
   //var self = this;
