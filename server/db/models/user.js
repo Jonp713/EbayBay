@@ -2,11 +2,14 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
+var R = require('ramda');
 require('./order.js');
 require('./product.js');
+require('./orderItem.js');
 var Order = mongoose.model('Order');
 var Product = mongoose.model('Product');
 var ObjectId = mongoose.Schema.Types.ObjectId;
+var OrderItem = mongoose.model('OrderItem');
 
 var schema = new mongoose.Schema({
     firstName: {
@@ -51,7 +54,7 @@ var schema = new mongoose.Schema({
     },
     cart: [{
       type: ObjectId,
-      ref: 'Product'
+      ref: 'OrderItem'
     }],
 });
 
@@ -95,9 +98,26 @@ schema.method('correctPassword', function (candidatePassword) {
     return encryptPassword(candidatePassword, this.salt) === this.password;
 });
 
-schema.method('addToCart', function (product){
-  this.cart.push(product._id);
-  return this.save();
+
+///this is not finished yet
+schema.method('addToCart', function (obj){
+  var self = this;
+  this.populate('cart')
+  .then(function(elements) {
+    var id;
+    elements.forEach(function(element) {
+      if(element.product._id === obj.product._id) {
+        id = element._id;
+      }
+    });
+    if(id) {
+      return OrderItem.findByIdAndUpdate(id, {quantity: });
+    }
+    else return OrderItem.create(obj);
+  })
+  .then(function(element) {
+
+  });
 });
 
 schema.method('removeFromCart', function (product){
