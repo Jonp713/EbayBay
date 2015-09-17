@@ -14,9 +14,10 @@ app.config(function($stateProvider) {
 
 app.controller('ProductController', function($scope, product, CartFactory, $state) {
     $scope.quantity = 1;
+    console.log($scope.quantity);
     $scope.product = product;
-    $scope.addToCart = function(product) {
-        CartFactory.addToCart(product)
+    $scope.addToCart = function() {
+        CartFactory.addToCart($scope.product,$scope.quantity)
         .then(function(element) {
                 $state.go('home');
             })
