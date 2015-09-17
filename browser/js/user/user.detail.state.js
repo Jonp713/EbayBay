@@ -17,8 +17,11 @@ app.config(function ($stateProvider) {
         	user: function(UserFactory, $stateParams){
         		return UserFactory.find($stateParams.id);
         	},
-        	reviews: function(ReviewFactory, $stateParams) {
-        		return ReviewFactory.findAll({aboutUser: $stateParams.id});
+        	reviews: function(ReviewFactory, user, $stateParams) {
+        		return ReviewFactory.findAll({aboutUser: $stateParams.id})
+                .then(function(reviews) {
+                    return reviews;
+                });
         	}
         }
     });

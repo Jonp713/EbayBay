@@ -37,10 +37,32 @@ function randPhoto () {
         min: 0,
         max: 96
     });
-    return 'http://api.randomuser.me/portraits/med/' + g + '/' + n + '.jpg'
+    return 'http://api.randomuser.me/portraits/med/' + g + '/' + n + '.jpg';
 }
 
+var seedReviews = function(users) {
+    var reviews = [{
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "This person is a horrible horrible person. He came to my house and ate my food",
+        stars: 5,
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Tried to hug them but they said not today, Jr. Not today. Decent lamp.",
+        stars: 2
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Surprised that a dog managed to use the internet. Bad communication. Great licks.",
+        stars: 4
+    }];
 
+        return Review.createAsync(reviews);
+
+};
 
 
 var seedUsers = function () {
@@ -174,7 +196,11 @@ connectToDb.then(function () {
         tempData.location = location;
         console.log(chalk.green('Seed successful!'));
         return seedProducts(tempData.users, tempData.location);
-    }).then(function() {
+    }).then(function(products){
+        tempData.products = products;
+        return seedReviews(tempData.users);
+    })
+    .then(function() {
        return process.kill(0);
     }).catch(function (err) {
         console.error(err);
