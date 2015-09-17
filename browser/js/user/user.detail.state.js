@@ -3,16 +3,10 @@ app.config(function ($stateProvider) {
         url: '/users/:id',
         templateUrl: 'js/user/user.detail.html',
         controller: function($scope, user, reviews){
-			
-			console.log("I will not get here");
-			
-        	$scope.user = user;
-			
-			console.log($scope.user);
-			
+						
+        	$scope.user = user;			
         	$scope.reviews = reviews;
 			//calculate user's agg rating
-			
 			
         	if(reviews.length) $scope.userAggRating = (reviews.reduce((last, rev)=> rev.stars + last))/reviews.length;
         	
@@ -21,8 +15,6 @@ app.config(function ($stateProvider) {
         }, 
         resolve: {
         	user: function(UserFactory, $stateParams){
-				console.log("def not here");
-				
         		return UserFactory.find($stateParams.id);
         	},
         	reviews: function(ReviewFactory, $stateParams) {
@@ -30,7 +22,5 @@ app.config(function ($stateProvider) {
         	}
         }
     });
-	
-	console.log("I will get here");
-		
+			
 });
