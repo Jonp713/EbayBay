@@ -17,15 +17,17 @@ router.post('/', function(req, res, next) {
     if(!req.session.cart) req.session.cart = [];
 
     //if the product is in the cart add the quantities
+
+    var mappedCart = req.session.cart.map(function(item){
+    	return item.product;
+    });
     var findIndexInCart = R.findIndex(R.propEq('_id', req.body.product._id));
-    var index = findIndexInCart(req.session.cart);
+    var index = findIndexInCart(mappedCart);
+    console.log('index: ', index);
     if(index + 1) req.session.cart[index].quantity += req.body.quantity;
     else {
-		req.session.cart.push(req.body.product);
+		req.session.cart.push(req.body);
     }
-
-    /// FIND USER IN DB, user.cart = req.session.cart
-    ///deal with product quantities - changing in cart changes in db
 
     if(req.user) req.user.addToCart(req.body, function(err, user) {
         if(err) return next(err);
@@ -33,6 +35,28 @@ router.post('/', function(req, res, next) {
     });
     else res.sendStatus(201);
 
-//update route - decrement
-
 });
+
+router.delete('/:id', function(req, res, next){
+	var mappedCart = req.session.cart.map(function(item){
+    	return item.product;
+    });
+    var findIndexInCart = R.findIndex(R.propEq('_id', req.body.product._id));
+    var index = findIndexInCart(mappedCart);
+    console.log('index:', index);
+    if(index + 1) {
+    	var err = new Error();
+    	err.status = 404;
+    	return next(err);
+    }
+    req.session.cart.splice(index, 1);
+    if(req.user) req.user.removeFromCart(req.body, function(err, user) {
+        if(err) return next(err);
+        res.sendStatus(204);
+    });
+    else res.sendStatus(204);
+});
+
+
+
+

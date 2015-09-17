@@ -22,4 +22,11 @@ app.controller('ProductController', function($scope, product, CartFactory, $stat
                 $state.go('home');
             })
     }
+
+    $scope.removeFromCart = function() {
+        CartFactory.removeFromCart($scope.product,$scope.quantity)
+        .then(function(element) {
+                $state.go('home');
+            })
+    }
 });
