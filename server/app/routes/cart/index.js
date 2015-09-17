@@ -19,18 +19,19 @@ router.post('/', function(req, res, next) {
     //if the product is in the cart add the quantities
     var findIndexInCart = R.findIndex(R.propEq('_id', req.body.product._id));
     var index = findIndexInCart(req.session.cart);
-    if(index + 1) req.session.cart[index].quantity += req.body.product.quantity;
+    if(index + 1) req.session.cart[index].quantity += req.body.quantity;
     else {
 		req.session.cart.push(req.body.product);
-    } 
+    }
 
     /// FIND USER IN DB, user.cart = req.session.cart
     ///deal with product quantities - changing in cart changes in db
 
-    if(req.user) req.user.addToCart(req.body.product)
-    .then(function(){
-    	res.sendStatus(201);
+    if(req.user) req.user.addToCart(req.body, function(err, user) {
+        if(err) return next(err);
+        res.sendStatus(201);
     });
+    else res.sendStatus(201);
 
 //update route - decrement
 

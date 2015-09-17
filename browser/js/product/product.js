@@ -13,6 +13,7 @@ app.config(function($stateProvider) {
 })
 
 app.controller('ProductController', function($scope, product, CartFactory, $state) {
+    $scope.quantity = 1;
     $scope.product = product;
     $scope.addToCart = function(product) {
         CartFactory.addToCart(product)
