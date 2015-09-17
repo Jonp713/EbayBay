@@ -3,12 +3,13 @@ var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
 var R = require('ramda');
-require('./order.js');
-require('./product.js');
-require('./orderItem.js');
-var Order = mongoose.model('Order');
-var Product = mongoose.model('Product');
+require('./order.js'); //Remove
+require('./product.js');//Remove
+require('./orderItem.js');//Remove
+var Order = mongoose.model('Order');//Remove
+var Product = mongoose.model('Product');//Remove
 var ObjectId = mongoose.Schema.Types.ObjectId;
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 var OrderItem = mongoose.model('OrderItem');
 
 var schema = new mongoose.Schema({
@@ -53,20 +54,19 @@ var schema = new mongoose.Schema({
       id: String
     },
     cart: [{
-      type: ObjectId,
-      ref: 'OrderItem'
-    }],
+        quantity: {type: Number, min: 0, default: 1},
+        product: {type: ObjectId, ref: 'Product'}
+    }]
 });
+schema.plugin(deepPopulate, {});
 
 schema.methods.transmitToOrder = function() {
   return Order.create({userId: this._id, products: this.cart})
   .then(function(order) {
     this.cart = [];
-    return [Promise.resolve(order), this.save()];
-  }.bind(this))
-  .then(function(arr) {
-    return Promise.all(arr);
-  });
+    return Promise.all([Promise.resolve(order), this.save()]);
+          //the purpose of this is to both return the order and the user for later use.
+  }.bind(this));
 };
 
 
@@ -100,25 +100,37 @@ schema.method('correctPassword', function (candidatePassword) {
 
 
 ///this is not finished yet
-schema.method('addToCart', function (obj){
-  var self = this;
-  this.populate('cart')
-  .then(function(elements) {
-    var id;
-    elements.forEach(function(element) {
-      if(element.product._id === obj.product._id) {
-        id = element._id;
-      }
-    });
-    if(!id) return OrderItem.create(obj);
-    return OrderItem.findByIdAndUpdate(id, {$inc: {quantity: obj.quantity}}).then(function(element) {
-      return undefined;
-    });
-  })
-  .then(function(element) {
-    if(element) self.cart.push(element._id);
-    return self.save();
-  });
+schema.method('addToCart', function (obj, cb){
+    var self = this;
+    self.deepPopulate('cart.product', function(err, _user) {
+        if(err) return cb(err);
+        self.cart = _user.cart.map(function(element, idx) {
+            if(element.product._id === obj.product._id) element.quantity += obj.quantity;
+            return element;
+        });
+        self.save(function(err, user) {
+            if(err) return cb(err);
+            return cb(user);
+        })
+    })
+  //var self = this;
+  //this.populate('cart')
+  //.then(function(elements) {
+  //  var id;
+  //  elements.forEach(function(element) {
+  //    if(element.product._id === obj.product._id) {
+  //      id = element._id;
+  //    }
+  //  });
+  //  if(!id) return OrderItem.create(obj);
+  //  return OrderItem.findByIdAndUpdate(id, {$inc: {quantity: obj.quantity}}).then(function(element) {
+  //    return undefined;
+  //  });
+  //})
+  //.then(function(element) {
+  //  if(element) self.cart.push(element._id);
+  //  return self.save();
+  //});
 });
 
 schema.method('removeFromCart', function (product){
