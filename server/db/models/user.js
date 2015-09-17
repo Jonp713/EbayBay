@@ -110,13 +110,14 @@ schema.method('addToCart', function (obj){
         id = element._id;
       }
     });
-    if(id) {
-      return OrderItem.findByIdAndUpdate(id, {quantity: });
-    }
-    else return OrderItem.create(obj);
+    if(!id) return OrderItem.create(obj);
+    return OrderItem.findByIdAndUpdate(id, {$inc: {quantity: obj.quantity}}).then(function(element) {
+      return undefined;
+    });
   })
   .then(function(element) {
-
+    if(element) self.cart.push(element._id);
+    return self.save();
   });
 });
 
