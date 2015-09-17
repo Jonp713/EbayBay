@@ -1,4 +1,4 @@
-app.controller('ProductController', function($scope, product, ProductFactory) {
+app.controller('ProductController', function($scope, product) {
     $scope.product = product;
     //$scope.addToCart = function() {
     //    CartFactory.addToCart(CurrentUserFactory.getId(), $scope.product);

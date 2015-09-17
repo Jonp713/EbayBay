@@ -30,6 +30,7 @@ app.use(function (req, res, next) {
 });
 
 app.get('/*', function (req, res) {
+    console.log('we hit this');
     res.sendFile(app.get('indexHTMLPath'));
 });
 
