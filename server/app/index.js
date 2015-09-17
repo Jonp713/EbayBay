@@ -11,7 +11,10 @@ require('./configure')(app);
 // Routes that will be accessed via AJAX should be prepended with
 // /api so they are isolated from our GET /* wildcard.
 app.use('/api', require('./routes'));
-
+app.use(function(req,res, next) {
+    console.log(req.session);
+    next();
+})//this middleware was included just to see what req.session looked like after adding an item to cart
 
 /*
  This middleware will catch any URLs resembling a file extension

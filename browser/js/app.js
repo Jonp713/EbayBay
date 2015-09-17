@@ -137,6 +137,6 @@ app.config(function(DSProvider, $urlRouterProvider, $locationProvider) {
       });
 
   });
-  app.run(function(User) {
-      User.findAll()
+  app.run(function(UserFactory) {
+      UserFactory.findAll();
   })
