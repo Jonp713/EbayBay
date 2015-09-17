@@ -2,22 +2,15 @@
 	<span class = "user-profile col-xs-offset-1 col-xs-2">
 		<img src="{{user.photoUrl}}">
 		<br>
-		{{user.location}}
-	</span>
-	<span class = "user-profile col-xs-6">
 		{{user.firstName}} {{user.lastName}}
 		<br>
 		<a ui-sref = "product-list({userId: user._id})">See my products</a>
 		<br><br>
+	</span>
+	<span class = "user-profile col-xs-7">
 		<div class = "white-bg">
-			REVIEWS
-			<br>
-			REVIEWS
-			<br>
-			REVIEWS ABOUT ME
-			<review-list></review-list>
+			<review-list review="review" ng-repeat="review in reviews"></review-list>
 		</div>
-			
 	</span>
 	
 </div>
