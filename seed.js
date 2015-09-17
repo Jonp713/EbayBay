@@ -26,8 +26,22 @@ var Order = Promise.promisifyAll(mongoose.model('Order'));
 var Review = Promise.promisifyAll(mongoose.model('Review'));
 var Location = Promise.promisifyAll(mongoose.model('Location'));
 var Product = Promise.promisifyAll(mongoose.model('Product'));
+var chance = require('chance')(123);
+
 
 var tempData = {};
+
+function randPhoto () {
+    var g = chance.pick(['men', 'women']);
+    var n = chance.natural({
+        min: 0,
+        max: 96
+    });
+    return 'http://api.randomuser.me/portraits/med/' + g + '/' + n + '.jpg'
+}
+
+
+
 
 var seedUsers = function () {
 
@@ -36,25 +50,30 @@ var seedUsers = function () {
             firstName: "James",
             lastName: "Maddy",
             email: 'jm@fsa.com',
-            password: 'password'
+            password: 'password',
+            photoUrl: randPhoto()
         },
         {
             firstName: "Jimmy",
             lastName: "Carter",
             email: 'carty@fsa.com',
-            password: 'password'
+            password: 'password',
+            photoUrl: randPhoto()
+
         },
         {
             firstName: "Omri",
             lastName: "Zeke",
             email: 'omri@fsa.com',
-            password: 'password'
+            password: 'password',
+            photoUrl: randPhoto()
         },
         {
             firstName: "Gabe",
             lastName: "Neon",
             email: 'gabe@fsa.com',
-            password: 'password'
+            password: 'password',
+            photoUrl: randPhoto()
         }
     ];
 
