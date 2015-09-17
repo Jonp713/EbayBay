@@ -20,4 +20,9 @@ var schema = new mongoose.Schema({
 	}
 });
 
+
+schema.virtual("fulladdress").get(function() {
+  	return `$(this.street), $(this.city), $(this.state), $(this.zip), USA`;
+});
+
 mongoose.model('Location', schema);
