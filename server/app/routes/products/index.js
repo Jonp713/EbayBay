@@ -24,11 +24,12 @@ router.param('productId', function(req, res, next, id) {
         });
 });
 
-router.get('/:productId', function(req, res, next) {
+router.get('/:productId', function(req, res) {
     res.json(req.foundProduct);
 });
 
 router.get('/', function(req, res, next) {
+    console.log(req.query);
     Product.find(req.query)
         //req.query will contain search params for filtering products
         .then(function(results) {

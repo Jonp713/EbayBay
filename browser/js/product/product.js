@@ -11,3 +11,13 @@ app.config(function($stateProvider) {
             }
         })
 })
+
+app.controller('ProductController', function($scope, product, CartFactory, $state) {
+    $scope.product = product;
+    $scope.addToCart = function(product) {
+        CartFactory.addToCart(product)
+        .then(function(element) {
+                $state.go('home');
+            })
+    }
+});

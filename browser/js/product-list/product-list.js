@@ -6,7 +6,8 @@ app.config(function($stateProvider) {
             controller: 'ProductListController',
             resolve: {
                 products: function(ProductFactory, $stateParams) {
-                    console.log('in the state');
+                    console.log('in the resolve');
+                    console.log($stateParams);
                     return ProductFactory.findAll($stateParams)
                         .then(function(elements){console.log(elements);
                             return elements});
@@ -14,3 +15,8 @@ app.config(function($stateProvider) {
             }
         })
 })
+
+
+app.controller('ProductListController', function($scope, $location, products) {
+    $scope.products = products;
+});
