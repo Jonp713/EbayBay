@@ -1,8 +1,14 @@
-<div>
-	<a ui-sref="product({id: product._id})">
-	<h3>{{product.name}}</h3></a>
-	<p>sold by {{product.user.firstName}}</p>
-	<hr/>
-	<p>Description: {{product.description}}</p>
-	<p>Cost: ${{product.price}}</p>	
-</div>
+
+	<div class='col-xs-9'>
+		<a ui-sref="product({id: product._id})">
+		<h3>{{product.name}}</h3></a>
+		<p>sold by {{product.user.firstName}}</p>
+		<hr/>
+		<p>Description: {{product.description}}</p>
+		<p>Cost: ${{product.price}}</p>	
+	</div>
+
+	<div class = "col-xs-3">
+		<img class="img-responsive col-xs-8" src="{{product.user.photoUrl}}">
+		<p class="col-xs-6">{{product.user.firstName}}</p>
+	</div>
