@@ -100,13 +100,15 @@ schema.method('correctPassword', function (candidatePassword) {
 
 schema.method('addToCart', function (obj, cb){
     var self = this;
+    console.log(obj, 'object coming in')
     //obj argument is passed from middleware and is an obj corresponding to {quantity: num, product: productModel}
     //cb to be called from middleware
     self.deepPopulate('cart.product', function(err, _user) {
         if(err) return cb(err);
+        console.log(_user)
         var flag = false;
         self.cart = _user.cart.map(function(element, idx) {
-            if(element.product._id === obj.product._id) {
+            if(element.product._id.toString() === obj.product._id) {
                 flag = true;
                 element.quantity += obj.quantity;
             }
@@ -138,6 +140,7 @@ schema.method('addToCart', function (obj, cb){
   //  return self.save();
   //});
 });
+
 
 schema.method('removeFromCart', function (productObj,cb){
     console.log(productObj);

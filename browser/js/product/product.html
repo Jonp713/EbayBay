@@ -1,6 +1,19 @@
-<div>{{product}}</div>
+<div class='jumbotron'>
+	<span>
+		<img src='http://www.bearbiology.com/uploads/pics/Brown-Large_01.jpg'/>
+		<img src=product.pictureUrl/>
+		<big>{{product.name}}</big>
+	</span>
+	<br/>
+	<h4>{{product.description}}</h4>
+
+
+</div>
 <form name="productForm" ng-submit="productForm.$valid && addToCart()">
     <button type="submit">Add to Cart</button>
-    <input type="text" name='quantity' placeholder='quantity' ng-model="quantity"/>
-    <pre>{{quantity}}</pre>
+    <input type="number" name='quantity' placeholder='quantity' ng-model="quantity" ng-max='product.quantity'/>
+    <p ng-show='productForm.quantity.$error.max'>
+    	<small>You have ordered more than are available</small>
+    </p>
 </form>
+<a ng-click='removeFromCart()'>remove</a>

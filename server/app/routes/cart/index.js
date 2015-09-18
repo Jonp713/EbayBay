@@ -35,7 +35,7 @@ router.post('/', function(req, res, next) {
         res.sendStatus(201);
     });
     else res.sendStatus(201);
-})
+});
 router.delete('/:id', function(req, res, next){
     console.log('in the delete route',req.params.id);
     var index = findIndexOfProductInCart(req.session.cart, req.params.id)
