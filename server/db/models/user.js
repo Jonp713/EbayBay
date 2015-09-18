@@ -5,12 +5,10 @@ var Promise = require('bluebird');
 var R = require('ramda');
 require('./order.js'); //Remove
 require('./product.js');//Remove
-require('./orderItem.js');//Remove
 var Order = mongoose.model('Order');//Remove
 var Product = mongoose.model('Product');//Remove
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
-var OrderItem = mongoose.model('OrderItem');
 
 var schema = new mongoose.Schema({
     firstName: {
@@ -60,7 +58,7 @@ var schema = new mongoose.Schema({
 schema.plugin(deepPopulate, {});
 
 schema.methods.transmitToOrder = function() {
-  return Order.create({userId: this._id, products: this.cart})
+  return Order.create({user: this._id, products: this.cart})
   .then(function(order) {
     this.cart = [];
     return Promise.all([Promise.resolve(order), this.save()]);
@@ -121,37 +119,11 @@ schema.method('addToCart', function (obj, cb){
             return cb(null,user);
         })
     })
-  //var self = this;
-  //this.populate('cart')
-  //.then(function(elements) {
-  //  var id;
-  //  elements.forEach(function(element) {
-  //    if(element.product._id === obj.product._id) {
-  //      id = element._id;
-  //    }
-  //  });
-  //  if(!id) return OrderItem.create(obj);
-  //  return OrderItem.findByIdAndUpdate(id, {$inc: {quantity: obj.quantity}}).then(function(element) {
-  //    return undefined;
-  //  });
-  //})
-  //.then(function(element) {
-  //  if(element) self.cart.push(element._id);
-  //  return self.save();
-  //});
 });
 
 
 schema.method('removeFromCart', function (productObj,cb){
     console.log(productObj);
-  // // if (!(product instanceof Product)) throw new Error('not a product');
-  // var productIndex = this.cart.indexOf(product._id);
-  // if (productIndex+1) {
-  //   this.cart.splice(productIndex, 1);
-  // }
-  // return this.save();
-
-
   var self = this;
     //obj argument is passed from middleware and is an obj corresponding to {quantity: num, product: productModel}
     //cb to be called from middleware

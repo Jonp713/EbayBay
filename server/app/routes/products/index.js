@@ -16,7 +16,6 @@ router.param('productId', function(req, res, next, id) {
     Product.findById(id)
         .then(function(element) {
             req.foundProduct = element;
-            console.log("found product :", req.foundProduct);
             next();
         })
         .then(null, function(error) {
@@ -33,6 +32,7 @@ router.get('/', function(req, res, next) {
     Product.find(req.query)
         //req.query will contain search params for filtering products
         .then(function(results) {
+            console.log(results);
             res.json(results);
         })
         .then(null, next);
@@ -50,7 +50,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:productId', function(req, res, next) {
-    if(req.foundProduct.userId !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
+    if(req.foundProduct.user !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
     //if user is an admin or is the owner of the product, allow for changes
     Object.keys(req.body).forEach(function(key) {
         if(req.foundProduct[key]) req.foundProduct[key] = req.body[key];
@@ -64,7 +64,7 @@ router.put('/:productId', function(req, res, next) {
 
 router.delete('/:productId', function(req, res, next) {
     console.log('req.user', req.user);
-    if (!req.user || (!req.user.isAdmin && req.foundProduct.userId !== req.user._id)){
+    if (!req.user || (!req.user.isAdmin && req.foundProduct.user !== req.user._id)){
         return res.sendStatus(403);
     }
     // console.log('am I an admin?', req.user.isAdmin)

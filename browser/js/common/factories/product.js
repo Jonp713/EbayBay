@@ -7,8 +7,12 @@ app.factory('ProductFactory', function (DS) {
                 users: {
                     localKey: 'userId',
                     localField: 'user'
-                }
-            }
+                },
+				locations: {
+                    localKey: 'locationId',
+                    localField: 'location'
+				}
+            },
         }
 	})
 }).run(function(ProductFactory){});
