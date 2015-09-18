@@ -113,54 +113,29 @@ schema.method('addToCart', function (obj, cb){
             return element;
         });
         if(!flag) self.cart.push(obj);
+        //if(!flag) self.cart.push({quantity: obj.quantity, product: obj.product._id});
         self.save(function(err, user) {
             if(err) return cb(err);
             return cb(null,user);
         })
     })
-  //var self = this;
-  //this.populate('cart')
-  //.then(function(elements) {
-  //  var id;
-  //  elements.forEach(function(element) {
-  //    if(element.product._id === obj.product._id) {
-  //      id = element._id;
-  //    }
-  //  });
-  //  if(!id) return OrderItem.create(obj);
-  //  return OrderItem.findByIdAndUpdate(id, {$inc: {quantity: obj.quantity}}).then(function(element) {
-  //    return undefined;
-  //  });
-  //})
-  //.then(function(element) {
-  //  if(element) self.cart.push(element._id);
-  //  return self.save();
-  //});
 });
 
-schema.method('removeFromCart', function (product){
-  // // if (!(product instanceof Product)) throw new Error('not a product');
-  // var productIndex = this.cart.indexOf(product._id);
-  // if (productIndex+1) {
-  //   this.cart.splice(productIndex, 1);
-  // }
-  // return this.save();
 
-
+schema.method('removeFromCart', function (productObj,cb){
+    console.log(productObj);
   var self = this;
     //obj argument is passed from middleware and is an obj corresponding to {quantity: num, product: productModel}
     //cb to be called from middleware
     self.deepPopulate('cart.product', function(err, _user) {
         if(err) return cb(err);
-        var flag = false;
-        self.cart = _user.cart.map(function(element, idx) {
-            if(element.product._id.toString() === obj.product._id) {
-                flag = true;
-                element.quantity -= obj.quantity;
+        var index;
+        _user.cart.forEach(function(element, idx) {
+            if(element.product._id.toString() === productObj.product._id) {
+                index = idx;
             }
-            return element;
         });
-        if(!flag) return self; //throw error?
+        self.cart.splice(index, 1);
         self.save(function(err, user) {
             if(err) return cb(err);
             return cb(null,user);
