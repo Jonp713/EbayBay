@@ -4,7 +4,8 @@ app.factory('CartFactory', function($http) {
     }
 
     var removeFromCart = function(product, quantity){
-        return $http.delete('/api/cart/'+product._id, {product: product, quantity: quantity});
+        console.log('in the removeFromCart')
+        return $http.delete('/api/cart/'+product._id);
 
     }
 
@@ -13,10 +14,6 @@ app.factory('CartFactory', function($http) {
         .then(function(response) {
                 return response.data;
             })
-    }
-
-    var removeFromCart = function(product) {
-        return $http.delete('/api/cart' + product._id);
     }
 
     var updateCart = function() {

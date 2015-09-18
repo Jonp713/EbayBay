@@ -24,7 +24,7 @@ app.controller('ProductController', function($scope, product, CartFactory, $stat
     }
 
     $scope.removeFromCart = function() {
-        CartFactory.removeFromCart($scope.product,$scope.quantity)
+        CartFactory.removeFromCart($scope.product)
         .then(function(element) {
                 $state.go('home');
             })
