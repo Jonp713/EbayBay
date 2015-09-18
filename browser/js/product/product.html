@@ -15,5 +15,7 @@
     <p ng-show='productForm.quantity.$error.max'>
     	<small>You have ordered more than are available</small>
     </p>
+	
+	{{product.location}}
 </form>
-<a ng-click='removeFromCart()'>remove</a>
+<location-detail locations = "product.location"></location-detail>
