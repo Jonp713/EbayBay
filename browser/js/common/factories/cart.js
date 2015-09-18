@@ -23,11 +23,7 @@ app.factory('CartFactory', function($http) {
     return {
         addToCart: addToCart,
         getCart: getCart,
-<<<<<<< HEAD
         removeFromCart: removeFromCart,
         updateCart: updateCart
-=======
-        removeFromCart: removeFromCart
->>>>>>> 989a18be13329ee4f268c488318cd18ac208e4b9
     }
 });
