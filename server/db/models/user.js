@@ -113,6 +113,7 @@ schema.method('addToCart', function (obj, cb){
             return element;
         });
         if(!flag) self.cart.push(obj);
+        //if(!flag) self.cart.push({quantity: obj.quantity, product: obj.product._id});
         self.save(function(err, user) {
             if(err) return cb(err);
             return cb(null,user);
@@ -138,13 +139,33 @@ schema.method('addToCart', function (obj, cb){
   //});
 });
 
-schema.method('removeFromCart', function (product){
-  // if (!(product instanceof Product)) throw new Error('not a product');
-  var productIndex = this.cart.indexOf(product._id);
-  if (productIndex+1) {
-    this.cart.splice(productIndex, 1);
-  }
-  return this.save();
+schema.method('removeFromCart', function (productObj,cb){
+    console.log(productObj);
+  // // if (!(product instanceof Product)) throw new Error('not a product');
+  // var productIndex = this.cart.indexOf(product._id);
+  // if (productIndex+1) {
+  //   this.cart.splice(productIndex, 1);
+  // }
+  // return this.save();
+
+
+  var self = this;
+    //obj argument is passed from middleware and is an obj corresponding to {quantity: num, product: productModel}
+    //cb to be called from middleware
+    self.deepPopulate('cart.product', function(err, _user) {
+        if(err) return cb(err);
+        var index;
+        _user.cart.forEach(function(element, idx) {
+            if(element.product._id.toString() === productObj.product._id) {
+                index = idx;
+            }
+        });
+        self.cart.splice(index, 1);
+        self.save(function(err, user) {
+            if(err) return cb(err);
+            return cb(null,user);
+        });
+    });
 });
 
 
