@@ -5,12 +5,10 @@ var Promise = require('bluebird');
 var R = require('ramda');
 require('./order.js'); //Remove
 require('./product.js');//Remove
-require('./orderItem.js');//Remove
 var Order = mongoose.model('Order');//Remove
 var Product = mongoose.model('Product');//Remove
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
-var OrderItem = mongoose.model('OrderItem');
 
 var schema = new mongoose.Schema({
     firstName: {
@@ -60,7 +58,7 @@ var schema = new mongoose.Schema({
 schema.plugin(deepPopulate, {});
 
 schema.methods.transmitToOrder = function() {
-  return Order.create({userId: this._id, products: this.cart})
+  return Order.create({user: this._id, products: this.cart})
   .then(function(order) {
     this.cart = [];
     return Promise.all([Promise.resolve(order), this.save()]);

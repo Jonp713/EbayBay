@@ -154,7 +154,7 @@ describe('User model', function () {
           };
 
           var createProduct = function (user) {
-              return Product.create({ name: 'obama figurine', price: "100", userId: user._id});
+              return Product.create({ name: 'obama figurine', price: "100", user: user._id});
           };
           var addToCart = function() {
             var currentUser;

@@ -53,7 +53,7 @@ describe('Product model', function(){
     });
 
     describe('Product.create', function(){
-		var createdProd; 
+		var createdProd;
 		var newProd;
 
 		beforeEach('make a product', function(done){
@@ -62,7 +62,7 @@ describe('Product model', function(){
 				price: 20,
 				description: 'better than yours',
 				category: 'teddy bears',
-				userId: userId,
+				user: userId,
 				quantity: 1
 			};
 

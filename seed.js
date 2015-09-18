@@ -140,7 +140,7 @@ var seedProducts = function (users, location) {
             price: 20,
             description: "Fullstack Mascot",
             category: "Stuffed Animal",
-            userId: users[Math.floor(Math.random() * users.length)]._id,
+            user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 1
         },
@@ -149,7 +149,7 @@ var seedProducts = function (users, location) {
             price: 15,
             description: "Not a Fullstack Mascot",
             category: "Stuffed Animal",
-            userId: users[Math.floor(Math.random() * users.length)]._id,
+            user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 2
         },
@@ -158,7 +158,7 @@ var seedProducts = function (users, location) {
             price: 25,
             description: "I'm scary, I swear!",
             category: "Real Animal",
-            userId: users[Math.floor(Math.random() * users.length)]._id,
+            user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 3
         },
@@ -167,7 +167,7 @@ var seedProducts = function (users, location) {
             price: 205,
             description: "Purple Haze",
             category: "Milkshake",
-            userId: users[Math.floor(Math.random() * users.length)]._id,
+            user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 1
         }
@@ -186,13 +186,13 @@ connectToDb.then(function () {
             process.kill(0);
         }
     }).then(function (users) {
-		
+
 		tempData.users = users;
-		
+
 		return seedLocation();
-		
+
     }).then(function(location){
-        
+
         tempData.location = location;
         console.log(chalk.green('Seed successful!'));
         return seedProducts(tempData.users, tempData.location);

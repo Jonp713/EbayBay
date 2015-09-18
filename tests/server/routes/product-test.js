@@ -14,8 +14,8 @@ var app = require('../../../server/app');
 // things to test
 
 /*
-	1. params 
-	2. Get all products in database 	
+	1. params
+	2. Get all products in database
 	3. Get correct product for search by id
 	4. Create new product after post request - permissoins && reflected in the database
 	5. test delete route - permissions && reflected in the database
@@ -25,7 +25,7 @@ var app = require('../../../server/app');
 
 
 describe('Product Route', function () {
-	
+
 	var userId;
 
 	beforeEach('Establish DB connection', function (done) {
@@ -70,7 +70,7 @@ describe('Product Route', function () {
 			price: 20,
 			description: 'better than yours',
 			category: 'teddy bears',
-			userId: userId,
+			user: userId,
 			quantity: 1
 		};
 
@@ -79,7 +79,7 @@ describe('Product Route', function () {
 			price: 1,
 			description: 'not better than yours',
 			category: 'teddy bears',
-			userId: userId,
+			user: userId,
 			quantity: 1
 		};
 
@@ -104,7 +104,7 @@ describe('Product Route', function () {
 	describe('Unauthenticated request', function () {
 
 		var guestAgent;
-		
+
 		beforeEach('Create guest agent', function () {
 			guestAgent = supertest.agent(app);
 		});
@@ -152,7 +152,7 @@ describe('Product Route', function () {
 				return Product.find({_id: createdProd._id}, function(err, result){
 					if (err) return done(err);
 					expect(result.length).to.equal(0);
-					done();	
+					done();
 				});
 			});
 		});

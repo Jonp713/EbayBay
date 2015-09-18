@@ -13,6 +13,7 @@ app.factory('CartFactory', function($http) {
     }
     return {
         addToCart: addToCart,
-        getCart: getCart
+        getCart: getCart,
+        removeFromCart: removeFromCart
     }
 });

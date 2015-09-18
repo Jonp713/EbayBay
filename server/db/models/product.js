@@ -19,17 +19,16 @@ var schema = new mongoose.Schema({
 	},
 	photo: {
 		type: String,
-		default: ''
 	},
 	category: {
 		type: String
 	},
-	userId: {
-		type: ObjectId, ref:"user",
+	user: {
+		type: ObjectId, ref:"User",
 		required : true
 	},
 	location: {
-		type: ObjectId, ref:"location"
+		type: ObjectId, ref:"Location"
 	},
 	quantity: {
 		type: Number,
