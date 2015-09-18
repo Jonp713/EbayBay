@@ -173,6 +173,8 @@ var seedProducts = function (users, location) {
         }
     ];
 
+    products.forEach((prod)=>prod.photoUrl='http://lorempixel.com/400/300/cats/')
+
     return Product.createAsync(products);
 
 };
@@ -187,9 +189,9 @@ connectToDb.then(function () {
         }
     }).then(function (users) {
 
-		tempData.users = users;
+        tempData.users = users;
 
-		return seedLocation();
+        return seedLocation();
 
     }).then(function(location){
 
