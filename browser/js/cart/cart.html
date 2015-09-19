@@ -1,10 +1,10 @@
 <form name="cartForm" ng-submit="runUpdate()">
     <h3>
         Shopping Cart
-        <hr>
-        <button type='button' class="btn btn-info" ng-click='updateCart = !updateCart' ng-show="!updateCart">Modify</button>
-        <button type="submit" ng-show="updateCart" ng-click='updateCart=!updateCart' class="btn btn-default">Update</button>
     </h3>
+    <hr>
+    <button type='button' class="btn btn-info" ng-click='updateCart = !updateCart' ng-show="!updateCart">Modify</button>
+    <button type="submit" ng-show="updateCart" ng-click='updateCart=!updateCart' class="btn btn-default">Update</button>
     <div class='container'>
         <div ng-repeat="cartItem in cartItems">
             <div class="row">

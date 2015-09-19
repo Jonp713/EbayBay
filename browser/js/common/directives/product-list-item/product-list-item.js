@@ -9,6 +9,7 @@ app.directive('productListItem', function(UserFactory) {
             var getUser = function() {
                 UserFactory.find(scope.product.userId)
                 .then(function(user) {
+                    console.log(user);
                         scope.user = user;
                     });
             };
