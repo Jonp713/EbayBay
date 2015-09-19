@@ -11,8 +11,16 @@ app.controller('AddProductController', function($scope, $state) {
     $scope.product = {
         name: null,
         category: null,
-        quantity: null
+        quantity: null,
     }
-    $scope.quantitySelections = [1,2,3,4,5,6,7,8,9];
+    $scope.quantitySelections = [];
+    function createQuantity(num) {
+        return {name: String(num), quantity: num};
+    }
+    for(var i = 1; i <= 9; i++) {
+        $scope.quantitySelections.push(createQuantity(i));
+    }
+    console.log($scope.quantitySelections);
+    $scope.quantitySelections.push({name: '10+', quantity: 10});
     $scope.showQuantityInput = false;
 });

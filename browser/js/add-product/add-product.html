@@ -11,10 +11,12 @@
                     <label for="productCategory">Category</label>
                     <input type="text" class="form-control" name="productCategory" ng-model="product.category" required/>
                     <label for="productQuantity">Quantity</label>
-                    <input type="number" class="form-control" name="productQuantity" ng-model="product.quantity" ng-show="showQuantityInput" min="0" required/>
-                    <option ng-model="product.quantity">
-                        <select ng-repeat="quantity in quantitySelections"></select>
-                    </option>
+                    <input type="number" class="form-control" name="productQuantity" ng-model="product.quantity" placeholder="1" min="0" required/>
+                    <input type="text"class="form-control" name="productPhoto" ng-model="product.photo"/>
+                    <!--<select ng-model="product.quantity" ng-show="product.quantity < 10">-->
+                        <!--<option value="{{choice.quantity}}" ng-repeat="choice in quantitySelections">{{choice.name}}</option>-->
+                    <!--</select>-->
+                    <!--<pre>{{product.quantity | json}}</pre>-->
                 </div>
             </form>
         </div>
