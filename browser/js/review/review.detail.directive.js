@@ -1,4 +1,4 @@
-app.directive('reviewList', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('reviewList', function () {
 
     return {
         restrict: 'E',

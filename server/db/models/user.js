@@ -2,11 +2,9 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
-var R = require('ramda');
 require('./order.js'); //Remove
 require('./product.js');//Remove
 var Order = mongoose.model('Order');//Remove
-var Product = mongoose.model('Product');//Remove
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
@@ -66,7 +64,6 @@ schema.methods.transmitToOrder = function() {
   }.bind(this));
 };
 
-
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
 // are all used for local authentication security.
 var generateSalt = function () {
@@ -98,14 +95,12 @@ schema.method('correctPassword', function (candidatePassword) {
 
 schema.method('addToCart', function (obj, cb){
     var self = this;
-    console.log(obj, 'object coming in')
     //obj argument is passed from middleware and is an obj corresponding to {quantity: num, product: productModel}
     //cb to be called from middleware
     self.deepPopulate('cart.product', function(err, _user) {
         if(err) return cb(err);
-        console.log(_user)
         var flag = false;
-        self.cart = _user.cart.map(function(element, idx) {
+        self.cart = _user.cart.map(function(element) {
             if(element.product._id.toString() === obj.product._id) {
                 flag = true;
                 element.quantity += obj.quantity;
@@ -117,8 +112,8 @@ schema.method('addToCart', function (obj, cb){
         self.save(function(err, user) {
             if(err) return cb(err);
             return cb(null,user);
-        })
-    })
+        });
+    });
 });
 
 
@@ -147,7 +142,6 @@ schema.method('updateCart', function(cartObj, cb) {
     console.log(cartObj);
     this.cart = cartObj;
     return this.save();
-
-})
+});
 
 mongoose.model('User', schema);

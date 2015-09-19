@@ -19,14 +19,14 @@ app.controller('ProductController', function($scope, product, CartFactory, $stat
     $scope.product = product;
     $scope.addToCart = function() {
         CartFactory.addToCart($scope.product,$scope.quantity)
-        .then(function(element) {
+        .then(function() {
                 $state.go('home');
             });
     };
 
     $scope.removeFromCart = function() {
         CartFactory.removeFromCart($scope.product)
-        .then(function(element) {
+        .then(function() {
                 $state.go('home');
             });
     };
