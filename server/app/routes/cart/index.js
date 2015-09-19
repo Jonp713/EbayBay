@@ -1,10 +1,15 @@
 'use strict';
 var router = require('express').Router();
-module.exports = router;
-var mongoose = require('mongoose');
-var User = mongoose.model('User');
 var R = require('ramda');
 
+module.exports = router;
+
+function findIndexOfProductInCart(cart, id) {
+    var mappedCart = cart.map(function(item) {
+        return item.product;
+    });
+    return R.findIndex(R.propEq('_id', id))(mappedCart);
+}
 
 router.get('/', function(req, res, next) {
     res.json(req.session.cart);
@@ -27,12 +32,12 @@ router.post('/', function(req, res, next) {
     else res.sendStatus(201);
 });
 router.delete('/:id', function(req, res, next){
-    var index = findIndexOfProductInCart(req.session.cart, req.params.id)
+    var index = findIndexOfProductInCart(req.session.cart, req.params.id);
     if(!(index + 1)) {
-    	var err = new Error();
+        var err = new Error();
         console.log('in the delete error route');
-    	err.status = 404;
-    	return next(err);
+        err.status = 404;
+        return next(err);
     }
     var productToRemove = req.session.cart.splice(index, 1)[0];
     if(req.user) req.user.removeFromCart(productToRemove, function(err, user) {
@@ -50,7 +55,7 @@ router.put('/', function(req, res, next) {
     req.session.cart = req.body;
     if(req.user) {
         req.user.updateCart(req.body)
-        .then(function(user) {
+        .then(function() {
                 console.log(req.session.cart);
                 res.json(req.session.cart);
             })
@@ -61,10 +66,4 @@ router.put('/', function(req, res, next) {
 });
 
 
-function findIndexOfProductInCart(cart, id) {
-    var mappedCart = cart.map(function(item) {
-        return item.product;
-    })
-    return R.findIndex(R.propEq('_id', id))(mappedCart);
-}
 
