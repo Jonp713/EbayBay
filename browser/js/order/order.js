@@ -1,9 +1,9 @@
 app.config(function ($stateProvider) {
 
-    $stateProvider.state('checkout', {
+    $stateProvider.state('order', {
         url: '/checkout',
-        templateUrl: 'js/checkout/checkout.html',
-        controller: 'CheckoutCtrl',
+        templateUrl: 'js/order/order.html',
+        controller: 'OrderCtrl',
         // resolve: {
         //     cartItems: function(CartFactory){
         //         return CartFactory.getCart();
@@ -13,7 +13,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('CheckoutCtrl', function ($scope, CartFactory, $state, cartItems) {
+app.controller('OrderCtrl', function ($scope, CartFactory, $state, cartItems) {
     // $scope.updateCart = false;
     // $scope.cartItems = cartItems;
     // $scope.runUpdate = function() {

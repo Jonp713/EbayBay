@@ -13,8 +13,8 @@ app.config(function($stateProvider) {
 });
 
 app.controller('ProductController', function($scope, product, CartFactory, $state) {
-    // Work in progress. The quantity shouldn't be hardcoded 
-    $scope.quantity = product.quantity;
+    //Quantity is set to one so adding one to the cart is the default
+    $scope.quantity = 1;
     // console.log($scope.quantity);
     $scope.product = product;
     $scope.addToCart = function() {

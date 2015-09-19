@@ -5,8 +5,11 @@
 // 	name: {
 // 		type: String,
 // 		required: true,
+// 	},
+// 	abrv: {
+// 		type: String
 // 	}
 // });
 
 
-// mongoose.model('Category', schema);
+// mongoose.model('State', schema);

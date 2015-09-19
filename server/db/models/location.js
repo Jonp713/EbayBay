@@ -10,9 +10,15 @@ var schema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
-	state:{
+	// joe wanted us to change it to a collection - we may do this at some point
+	// state:{
+	// 	type: ObjectId,
+	// 	ref: 'State',
+	// 	required: true
+ //    },
+	state: {
 		type: String,
-		required: true,
+		required: true
 	},
 	zip:{
 		type: String,
@@ -22,7 +28,7 @@ var schema = new mongoose.Schema({
 
 
 schema.virtual("fulladdress").get(function() {
-  	return this.street + ", " + (this.city) + ", " + (this.state) + ", " + (this.zip) + ", USA";
+		return this.street + ", " + (this.city) + ", " + (this.state) + ", " + (this.zip) + ", USA";
 });
 
 mongoose.model('Location', schema);
