@@ -139,6 +139,7 @@ var seedProducts = function (users, location) {
             name: "Patrick the teddy bear",
             price: 20,
             description: "Fullstack Mascot",
+            photo: "http://thecatapi.com/api/images/get?format=src&type=gif",
             category: "Stuffed Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
@@ -148,6 +149,7 @@ var seedProducts = function (users, location) {
             name: "James the giant bear",
             price: 15,
             description: "Not a Fullstack Mascot",
+            photo: "http://thecatapi.com/api/images/get?format=src&type=gif",
             category: "Stuffed Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
@@ -157,6 +159,7 @@ var seedProducts = function (users, location) {
             name: "This project is my life bear",
             price: 25,
             description: "I'm scary, I swear!",
+            photo: "http://thecatapi.com/api/images/get?format=src&type=gif",
             category: "Real Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
@@ -166,12 +169,16 @@ var seedProducts = function (users, location) {
             name: "The Best Milkshake ever!",
             price: 205,
             description: "Purple Haze",
+            photo: "http://thecatapi.com/api/images/get?format=src&type=gif",
             category: "Milkshake",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 1
         }
     ];
+
+    // the function below wasn't working, so I commented it out
+    // products.forEach((prod)=>prod.photo='http://lorempixel.com/400/300/cats/');
 
     return Product.createAsync(products);
 
@@ -187,9 +194,9 @@ connectToDb.then(function () {
         }
     }).then(function (users) {
 
-		tempData.users = users;
+        tempData.users = users;
 
-		return seedLocation();
+        return seedLocation();
 
     }).then(function(location){
 

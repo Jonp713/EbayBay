@@ -9,24 +9,25 @@ app.config(function($stateProvider) {
                     return ProductFactory.find($stateParams.id);
                 }
             }
-        })
-})
+        });
+});
 
 app.controller('ProductController', function($scope, product, CartFactory, $state) {
-    $scope.quantity = 1;
-    console.log($scope.quantity);
+    // Work in progress. The quantity shouldn't be hardcoded 
+    $scope.quantity = product.quantity;
+    // console.log($scope.quantity);
     $scope.product = product;
     $scope.addToCart = function() {
         CartFactory.addToCart($scope.product,$scope.quantity)
         .then(function(element) {
                 $state.go('home');
-            })
-    }
+            });
+    };
 
     $scope.removeFromCart = function() {
         CartFactory.removeFromCart($scope.product)
         .then(function(element) {
                 $state.go('home');
-            })
-    }
+            });
+    };
 });
