@@ -20,7 +20,7 @@ app.controller('ProductController', function($scope, product, CartFactory, $stat
     $scope.addToCart = function() {
         CartFactory.addToCart($scope.product,$scope.quantity)
         .then(function() {
-                $state.go('home');
+                $state.go('cart');
             });
     };
 
