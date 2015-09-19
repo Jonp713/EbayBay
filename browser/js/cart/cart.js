@@ -18,8 +18,9 @@ app.controller('CartCtrl', function ($scope, CartFactory, $state, cartItems) {
     $scope.cartItems = cartItems;
     $scope.runUpdate = function() {
         CartFactory.updateCart($scope.cartItems)
-        .then(function() {
-                $state.go('cart');
-            })
+        .then(function(response) {
+                console.log(response);
+                $scope.cartItems = response;
+            });
     }
 });
