@@ -1,7 +1,7 @@
 <div class='jumbotron'>
 	<span>
 		<img src='http://www.bearbiology.com/uploads/pics/Brown-Large_01.jpg'/>
-		<img src=product.pictureUrl/>
+		<img src={{product.photo}}/>
 		<big>{{product.name}}</big>
 	</span>
 	<br/>
@@ -16,6 +16,5 @@
     	<small>You have ordered more than are available</small>
     </p>
 	
-	{{product.location}}
 </form>
 <location-detail locations = "product.location"></location-detail>
