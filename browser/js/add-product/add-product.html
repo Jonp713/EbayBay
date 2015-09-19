@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="jumbotron text-center">
+        <div class="row">
+            <h2 class="pull-left">Add a new Product</h2>
+        </div>
+        <div class="row">
+            <form name="addProductForm" ng-submit="addProductForm.$valid && addProduct()">
+                <label for="productName">Name</label>
+                <input type="text" class="form-control" name="productName" ng-model="product.name" required/>
+                <div class="form-group form-inline">
+                    <label for="productCategory">Category</label>
+                    <input type="text" class="form-control" name="productCategory" ng-model="product.category" required/>
+                    <label for="productQuantity">Quantity</label>
+                    <input type="number" class="form-control" name="productQuantity" ng-model="product.quantity" ng-show="showQuantityInput" min="0" required/>
+                    <option ng-model="product.quantity">
+                        <select ng-repeat="quantity in quantitySelections"></select>
+                    </option>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

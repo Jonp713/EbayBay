@@ -32,7 +32,6 @@ router.get('/', function(req, res, next) {
     Product.find(req.query)
         //req.query will contain search params for filtering products
         .then(function(results) {
-            console.log(results);
             res.json(results);
         })
         .then(null, next);
