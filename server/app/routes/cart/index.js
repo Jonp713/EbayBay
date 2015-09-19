@@ -42,6 +42,24 @@ router.delete('/:id', function(req, res, next){
     else res.sendStatus(204);
 });
 
+router.put('/', function(req, res, next) {
+    console.log(req.body);
+    req.body = req.body.filter(function(element) {
+        return !!element.quantity
+    })
+    req.session.cart = req.body;
+    if(req.user) {
+        req.user.updateCart(req.body)
+        .then(function() {
+                res.sendStatus(201);
+            })
+    }
+    else {
+        res.sendStatus(201);
+    }
+});
+
+
 function findIndexOfProductInCart(cart, id) {
     var mappedCart = cart.map(function(item) {
         return item.product;
