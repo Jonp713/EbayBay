@@ -6,15 +6,17 @@ app.config(function($stateProvider) {
             controller: 'ProductListController',
             resolve: {
                 products: function(ProductFactory, $stateParams) {
-                    console.log('in the resolve');
-                    console.log($stateParams);
+                    // console.log('in the resolve');
+                    // console.log($stateParams);
                     return ProductFactory.findAll($stateParams)
-                        .then(function(elements){console.log(elements);
-                            return elements});
+                    .then(function(elements){
+                        // console.log(elements);
+                        return elements;
+                    });
                 }
             }
-        })
-})
+        });
+});
 
 
 app.controller('ProductListController', function($scope, $location, products) {
