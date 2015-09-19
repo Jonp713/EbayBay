@@ -1,12 +1,12 @@
-// 'use strict';
-// var mongoose = require('mongoose');
+ 'use strict';
+ var mongoose = require('mongoose');
 
-// var schema = new mongoose.Schema({
-// 	name: {
-// 		type: String,
-// 		required: true,
-// 	}
-// });
+ var schema = new mongoose.Schema({
+ 	name: {
+ 		type: String,
+ 		required: true,
+ 	}
+ });
 
 
-// mongoose.model('Category', schema);
+ mongoose.model('Category', schema);
