@@ -143,5 +143,11 @@ schema.method('removeFromCart', function (productObj,cb){
     });
 });
 
+schema.method('updateCart', function(cartObj, cb) {
+    console.log(cartObj);
+    this.cart = cartObj;
+    return this.save();
+
+})
 
 mongoose.model('User', schema);

@@ -16,4 +16,10 @@ app.config(function ($stateProvider) {
 app.controller('CartCtrl', function ($scope, CartFactory, $state, cartItems) {
     $scope.updateCart = false;
     $scope.cartItems = cartItems;
+    $scope.runUpdate = function() {
+        CartFactory.updateCart($scope.cartItems)
+        .then(function() {
+                $state.go('cart');
+            })
+    }
 });
