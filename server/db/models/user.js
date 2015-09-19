@@ -5,6 +5,7 @@ var Promise = require('bluebird');
 require('./order.js'); //Remove
 require('./product.js');//Remove
 var Order = mongoose.model('Order');//Remove
+var Product = mongoose.model('Product');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
@@ -56,12 +57,25 @@ var schema = new mongoose.Schema({
 schema.plugin(deepPopulate, {});
 
 schema.methods.transmitToOrder = function() {
-  return Order.create({user: this._id, products: this.cart})
+  // need to add check that there are enough products available. Check quantity
+  var cartPromises = Promise.promisifyAll(this.cart);
+  cartPromises.map(function(cartItem) {
+    Product.find(cartItem.product._id)
+    .then(function(product) {
+      if (cartItem.quantity > product.quantity){
+        cartItem.quantity = product.quantity;
+      }
+    });
+  })
+  .then(function() {
+  return Order.create({user: this._id, products: this.cart});
+  })
   .then(function(order) {
     this.cart = [];
     return Promise.all([Promise.resolve(order), this.save()]);
           //the purpose of this is to both return the order and the user for later use.
-  }.bind(this));
+  }
+  .bind(this));
 };
 
 // generateSalt, encryptPassword and the pre 'save' and 'correctPassword' operations
