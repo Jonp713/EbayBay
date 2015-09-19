@@ -33,13 +33,11 @@ app.use(function (req, res, next) {
 });
 
 app.get('/*', function (req, res) {
-    console.log('we hit this');
     res.sendFile(app.get('indexHTMLPath'));
 });
 
 // Error catching endware.
 app.use(function (err, req, res, next) {
-    console.error(err, typeof next);
     res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
