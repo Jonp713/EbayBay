@@ -48,7 +48,7 @@ router.delete('/:id', function(req, res, next){
 });
 
 router.put('/', function(req, res, next) {
-    console.log(req.body);
+    //console.log(req.body);
     req.body = req.body.filter(function(element) {
         return !!element.quantity;
     });
@@ -56,11 +56,12 @@ router.put('/', function(req, res, next) {
     if(req.user) {
         req.user.updateCart(req.body)
         .then(function() {
-                res.sendStatus(201);
-            });
+                console.log(req.session.cart);
+                res.json(req.session.cart);
+            })
     }
     else {
-        res.sendStatus(201);
+        res.json(req.session.cart);
     }
 });
 
