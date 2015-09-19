@@ -3,7 +3,7 @@ app.factory('CartFactory', function($http) {
         return $http.post('/api/cart/', {product: product, quantity: quantity});
     }
 
-    var removeFromCart = function(product, quantity){
+    var removeFromCart = function(product){
         console.log('in the removeFromCart');
         return $http.delete('/api/cart/'+product._id);
 

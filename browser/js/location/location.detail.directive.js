@@ -1,4 +1,4 @@
-app.directive('locationDetail', function ($rootScope, AuthService, AUTH_EVENTS, $state) {
+app.directive('locationDetail', function () {
 
     return {
         restrict: 'E',

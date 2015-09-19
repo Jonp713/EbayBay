@@ -18,7 +18,7 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory)
         $scope.error = null;
         console.log(signupInfo);
         UserFactory.create(signupInfo)
-        .then(function(res){
+        .then(function(){
             $state.go("home");
         }).catch(function() {
             $scope.error = "Missing signup credentials";
