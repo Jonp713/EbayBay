@@ -137,11 +137,13 @@ app.config(function(DSProvider, $urlRouterProvider, $locationProvider) {
       });
 
   });
-  app.run(function(UserFactory) {
+  app.run(function(UserFactory, LocationFactory, StateFactory) {
       UserFactory.findAll();
+      LocationFactory.findAll();
+      StateFactory.findAll();
   })
 
-  app.run(function(LocationFactory) {
-      LocationFactory.findAll();
-  })
+  //app.run(function(LocationFactory) {
+  //    LocationFactory.findAll();
+  //})
 

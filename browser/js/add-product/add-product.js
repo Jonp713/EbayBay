@@ -15,7 +15,6 @@ app.controller('AddProductController', function($scope, $state, ProductFactory) 
         quantity: null,
         price: null,
         keywords: [],
-        location: {}
     }
     $scope.addProduct = function() {
         $scope.product.keywords = $scope.product.keywords.map(function(element) {

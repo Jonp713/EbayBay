@@ -37,4 +37,8 @@ var schema = new mongoose.Schema({
 	},
 });
 
+//schema.methods.createProductAndLocation = function(productObj) {
+//
+//}
+
 mongoose.model('Product', schema);

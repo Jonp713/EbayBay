@@ -1,5 +1,6 @@
 'use strict';
 var mongoose = require('mongoose');
+var ObjectId = mongoose.Schema.Types.ObjectId;
 
 var schema = new mongoose.Schema({
 	street: {
@@ -11,15 +12,11 @@ var schema = new mongoose.Schema({
 		required: true,
 	},
 	// joe wanted us to change it to a collection - we may do this at some point
-	// state:{
-	// 	type: ObjectId,
-	// 	ref: 'State',
-	// 	required: true
- //    },
-	state: {
-		type: String,
-		required: true
-	},
+	 state:{
+	 	type: ObjectId,
+	 	ref: 'State',
+	 	required: true
+     },
 	zip:{
 		type: String,
 		required: true,
