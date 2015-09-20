@@ -118,6 +118,8 @@ schema.method('addToCart', function (obj, cb){
             if(element.product._id.toString() === obj.product._id) {
                 flag = true;
                 element.quantity += obj.quantity;
+                //if the new quantity is more than availible in db inventory, quantity is inventory max
+                if(element.quantity > element.product.quantity) element.quantity = element.product.quantity;
             }
             return element;
         });
@@ -155,6 +157,30 @@ schema.method('removeFromCart', function (productObj,cb){
 schema.method('updateCart', function(cartObj, cb) {
     console.log(cartObj);
     this.cart = cartObj;
+    return this.save();
+});
+
+schema.method('mergeCart', function(sessionCart) {
+  //on login, merges session.cart with user.cart
+  //cartObj is session.cart
+  var user = this;
+
+  user.cart.forEach(function(cartItem){
+    var idx = false;
+    sessionCart.some(function(sessionCartItem, index){
+      if(sessionCartItem.product._id.toString() === cartItem.product.toString()) {
+        cartItem.quantity = sessionCartItem.quantity;
+        idx = index;
+        return true;
+      }
+    });
+    //remove the matched product from the session cart
+    if (idx) sessionCart.splice(idx, 1);
+  });
+  sessionCart.forEach(function(sessionCartItem){
+    //sessionCart is populated, so this fn constructs the cart item for the backend cart
+    user.cart.push({product: sessionCartItem.product._id, quantity: sessionCartItem.quantity});
+  });
     return this.save();
 });
 
