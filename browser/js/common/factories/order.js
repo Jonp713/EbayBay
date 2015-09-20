@@ -1,3 +1,4 @@
+
 app.factory('OrderFactory', function(DS) {
     return DS.defineResource({
         name: 'orders',
@@ -11,10 +12,19 @@ app.factory('OrderFactory', function(DS) {
             },
             hasMany: {
                 products: {
-                    localField: 'products',
+                    localField: 'product',
                     foreignKey: 'orderId'
                 }
             }
-        }
+        },
+        // methods: {
+        //     var getProducts = function() {
+
+        //         return $http.get('/api/products/', {_id: })
+        //         .then(function(response) {
+        //                 return response.data;
+        //     })
+        // }
+        
     });
 }).run(function(OrderFactory) {});
