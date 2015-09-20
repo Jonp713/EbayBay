@@ -139,8 +139,12 @@ app.config(function(DSProvider, $urlRouterProvider, $locationProvider) {
   });
   app.run(function(UserFactory, LocationFactory, StateFactory) {
       UserFactory.findAll();
+      StateFactory.findAll()
+      .then(function(elements) {
+              console.log(elements);
+          });
       LocationFactory.findAll();
-      StateFactory.findAll();
+
   })
 
   //app.run(function(LocationFactory) {

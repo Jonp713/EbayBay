@@ -1,7 +1,7 @@
 var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
-var State = mongoose.model('state');
+var State = mongoose.model('State');
 
 
 router.get('/', function(req, res, next) {
