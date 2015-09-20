@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('FullstackGeneratedApp', ['ui.router', 'js-data', 'ui.bootstrap', 'fsaPreBuilt']);
+window.app = angular.module('FullstackGeneratedApp', ['ui.router', 'js-data', 'ui.bootstrap', 'fsaPreBuilt', 'ngTagsInput']);
 
 app.config(function(DSProvider, $urlRouterProvider, $locationProvider) {
 
