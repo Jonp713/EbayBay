@@ -23,7 +23,7 @@ app.controller('AddProductController', function($scope, $state, ProductFactory) 
         });
         ProductFactory.create($scope.product)
         .then(function(element) {
-                $state.go('product' + element._id);
+                $state.go('product', {id: element._id});
             })
     }
 
