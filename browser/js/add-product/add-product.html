@@ -10,17 +10,26 @@
                 <div class="form-group form-inline">
                     <label for="productCategory">Category</label>
                     <input type="text" class="form-control" name="productCategory" ng-model="product.category" required/>
+                    <label for="productPrice">Price</label>
+                    <input type="number" class="form-control" name="productPrice" ng-model="product.price" min="0.01" required/>
                     <label for="productQuantity">Quantity</label>
                     <input type="number" class="form-control" name="productQuantity" ng-model="product.quantity" placeholder="1" min="0" required/>
                     <!--<select ng-model="product.quantity" ng-show="product.quantity < 10">-->
                     <!--<option value="{{choice.quantity}}" ng-repeat="choice in quantitySelections">{{choice.name}}</option>-->
                     <!--</select>-->
                 </div>
+                <label>Address</label>
+                <input type="text" class="form-control" ng-model="product.location.street" required/>
+                <label>City</label>
+                <input type="text" class="form-control" ng-model="product.location.city" required/>
+                <label>State</label>
+                <input ng-model="product.location.state" required/>
+                <label>Zip</label>
+                <input ng-model="product.location.zip" required/>
                 <label for="productPhoto">Photo Url</label>
                 <input type="text"class="form-control" name="productPhoto" ng-model="product.photo"/>
-                <div class="tagsinput"></div>
-                    <tags-input ng-model="product.keywords"></tags-input>
-                <pre>{{product.tags}}</pre>
+                <tags-input ng-model="product.keywords"></tags-input>
+                <button type="submit" class="btn btn-success pull-left">Submit</button>
             </form>
         </div>
     </div>
