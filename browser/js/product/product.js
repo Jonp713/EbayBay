@@ -17,7 +17,7 @@ app.controller('ProductController', function($scope, product, CartFactory, $stat
     $scope.quantity = 1;
     // console.log($scope.quantity);
     $scope.product = product;
-    console.log(product);
+
     $scope.addToCart = function() {
         CartFactory.addToCart($scope.product,$scope.quantity)
         .then(function() {
