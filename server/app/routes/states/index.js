@@ -3,6 +3,16 @@ module.exports = router;
 var mongoose = require('mongoose');
 var State = mongoose.model('State');
 
+router.param('stateId', function(req, res, next, id) {
+    Product.findById(id)
+        .then(function(element) {
+            req.state = element;
+            next();
+        })
+        .then(null, function(error) {
+            missingItemHandler(error, next);
+        });
+});
 
 router.get('/', function(req, res, next) {
     State.find()
@@ -11,6 +21,10 @@ router.get('/', function(req, res, next) {
             res.json(results);
         })
         .then(null, next);
+});
+
+router.get('/:stateId', function(req, res) {
+    res.json(req.foundProduct);
 });
 
 router.post('/', function(req, res, next) {
