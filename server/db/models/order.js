@@ -1,24 +1,26 @@
 'use strict';
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
-var deepPopulate = require('mongoose-deep-populate')(mongoose);
+// var deepPopulate = require('mongoose-deep-populate')(mongoose);
+var autopopulate = require('mongoose-autopopulate');
 
 
 var schema = new mongoose.Schema({
 	user: {
 		type: ObjectId,
 		ref: "User",
-		required: true
 	},
 	products: [{
 		quantity: {type: Number, min: 0},
-		product: {type: ObjectId, ref: 'Product'}
+		product: {type: ObjectId, ref: 'Product', autopopulate: true}
 	}],
 	date: {
 		type: Date,
 		default: Date.now
 	}
 });
+
+schema.plugin(autopopulate);
 
 schema.methods.total = function () {
 	return 20;
@@ -39,8 +41,6 @@ schema.methods.tax = function () {
 		return total * 0.07;
 	});
 };
-
-schema.plugin(deepPopulate, {});
 
 
 mongoose.model('Order', schema);

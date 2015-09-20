@@ -5,8 +5,8 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/order/order.html',
         controller: 'OrderCtrl',
         // resolve: {
-        //     cartItems: function(CartFactory){
-        //         return CartFactory.getCart();
+        //     products: function(OrderFactory){
+        //         return OrderFactory.find();
         //     }
         // }
     });

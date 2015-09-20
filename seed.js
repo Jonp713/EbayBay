@@ -184,6 +184,30 @@ var seedProducts = function (users, location) {
 
 };
 
+var seedOrders = function (users, products) {
+
+        //make an array of order items
+        var orderProducts = [];
+            //i must not be changed to a number higher than the number of products in the db
+            //using this method instead of math.random so that we don't risk adding the same product twice
+        for (var i=0; i<3; i++){
+            orderProducts.push({
+                product: products[i]._id,
+                // Math.ceil will avoid giving 0 as quantity
+                quantity: (Math.ceil(Math.random()) * products[i].quantity)
+            });
+        }
+
+
+        var order = [{   
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            products: orderProducts
+        }];
+
+        return Order.createAsync(order);
+        
+    };
+
 connectToDb.then(function () {
     User.findAsync({}).then(function (users) {
         if (users.length === 0) {
@@ -206,6 +230,9 @@ connectToDb.then(function () {
     }).then(function(products){
         tempData.products = products;
         return seedReviews(tempData.users);
+    })
+    .then(function(){
+        return seedOrders(tempData.users, tempData.products);
     })
     .then(function() {
        return process.kill(0);
