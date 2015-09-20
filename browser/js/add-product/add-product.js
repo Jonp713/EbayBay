@@ -7,14 +7,24 @@ app.config(function($stateProvider) {
         });
 });
 
-app.controller('AddProductController', function($scope, $state) {
+app.controller('AddProductController', function($scope, $state, ProductFactory) {
+    $('.chosen-select').chosen();
     $scope.product = {
         name: null,
         category: null,
         quantity: null,
-        keywords: []
+        price: null,
+        keywords: [],
+        location: {}
     }
-    $scope.quantitySelections = [];
+    $scope.addProduct = function() {
+        ProductFactory.create($scope.product)
+        .then(function(element) {
+                $state.go('product' + element._id);
+            })
+    }
+
+    //$scope.quantitySelections = [];
     //function createQuantity(num) {
     //    return {name: String(num), quantity: num};
     //}
@@ -23,7 +33,4 @@ app.controller('AddProductController', function($scope, $state) {
     //}
     //console.log($scope.quantitySelections);
     //$scope.quantitySelections.push({name: '10+', quantity: 10});
-    $scope.addProduct = function() {
-
-    }
 });
