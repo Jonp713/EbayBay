@@ -160,28 +160,35 @@ schema.method('updateCart', function(cartObj, cb) {
     return this.save();
 });
 
-schema.method('mergeCart', function(sessionCart) {
+schema.method('mergeCart', function(sessionCart, cb) {
   //on login, merges session.cart with user.cart
   //cartObj is session.cart
-  var user = this;
 
-  user.cart.forEach(function(cartItem){
+    //Justin version
+    //I kept your basic solution but just made some modifications
+
+  var self = this;
+  self.cart.forEach(function(cartItem){
     var idx = false;
-    sessionCart.some(function(sessionCartItem, index){
-      if(sessionCartItem.product._id.toString() === cartItem.product.toString()) {
+    sessionCart.forEach(function(sessionCartItem, index){
+      if(sessionCartItem.product._id === cartItem.product.toString()) {
         cartItem.quantity = sessionCartItem.quantity;
+        //Shouldn't we be adding to the cart not just modifying?
+          //otherwise why not just set the user cart to session cart
         idx = index;
-        return true;
       }
     });
     //remove the matched product from the session cart
     if (idx) sessionCart.splice(idx, 1);
   });
-  sessionCart.forEach(function(sessionCartItem){
-    //sessionCart is populated, so this fn constructs the cart item for the backend cart
-    user.cart.push({product: sessionCartItem.product._id, quantity: sessionCartItem.quantity});
-  });
-    return this.save();
+        user.cart.concat(sessionCart);
+    return this.save(function(err, user) {
+        if(err) return cb(err);
+        user.deepPopulate('cart.product', function(err, _user) {
+            if(err) return cb(err);
+            cb(null, _user);
+        })
+    });
 });
 
 mongoose.model('User', schema);
