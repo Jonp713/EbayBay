@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="jumbotron text-center">
+        <div class="row">
+            <h2 class="pull-left">Create a review</h2>
+        </div>
+        <div class="row">
+            <form name="addReviewForm" ng-submit="addReviewForm.$valid && addReview()">             
+								<label class="pull-left" for="review.comment">Provide your comments in the box below</label>
+                <textarea rows="5" type="text" class="form-control" name="review.comment" ng-model="user.review" placeholder="Write review here" required/></textarea>
+                <label class="pull-left" for="start">Rate user from 0 to 5</label>
+                <input type="number" class="form-control" name="review.stars" ng-model="user.review" placeholder="Give the user between 0-5 start" min="0" max="5" required/>
+                <!-- </div> -->
+                <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
