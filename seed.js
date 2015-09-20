@@ -133,6 +133,7 @@ var seedLocation = function() {
     return Location.createAsync(location);
 };
 
+
 var seedProducts = function (users, location) {
     var products = [
         {
@@ -199,13 +200,13 @@ var seedOrders = function (users, products) {
         }
 
 
-        var order = [{   
+        var order = [{
             user: users[Math.floor(Math.random() * users.length)]._id,
             products: orderProducts
         }];
 
         return Order.createAsync(order);
-        
+
     };
 
 connectToDb.then(function () {
