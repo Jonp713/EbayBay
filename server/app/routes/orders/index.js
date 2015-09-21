@@ -4,12 +4,12 @@ module.exports = router;
 var mongoose = require('mongoose');
 var Order = mongoose.model('Order');
 
-
 var missingItemHandler = function(error, cb) {
     error.status = 404;
     cb(error);
     //custom error handler for missing users and products
 };
+
 
 router.param('orderId', function(req, res, next, id) {
     Order.findById(id)
