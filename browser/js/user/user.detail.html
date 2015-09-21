@@ -1,12 +1,13 @@
-{{aggRating}}
 <div class = "col-xs-12">
 	<span class = "user-profile col-xs-offset-1 col-xs-2">
-		<img src="{{user.photoUrl}}">
+		<img class = "img-responsive" src="{{user.photoUrl}}">
 		<br>
 		{{user.firstName}} {{user.lastName}}
 		<br>
+		<span class = "glyphicon glyphicon-star">{{aggRating}}</span>
+		<br>
 		<a ui-sref = "product-list({userId: user._id})">See my products</a><br>
-		<a ui-sref = "addReview">Write a review</a>
+		<a ui-sref = "addReview({userId: user._id})">Write a review</a>
 		<br><br>
 	</span>
 	<span class = "user-profile col-xs-7">
@@ -14,7 +15,6 @@
 			<review-list review="review" ng-repeat="review in reviews"></review-list>
 		</div>
 	</span>
-	
 </div>
 
 
