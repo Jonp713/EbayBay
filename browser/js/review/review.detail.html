@@ -1,0 +1,14 @@
+<span class="row">
+	<span class = "col-xs-3">
+		<img class="img-responsive col-xs-8" src="{{review.byUserPop.photoUrl}}">
+		<p class="col-xs-6">
+			{{review.byUserPop.firstName}}
+		</p>
+	</span>
+	<span class = "col-xs-9">{{review.content}}
+		<br>
+		<span ng-repeat="i in loop(review.stars) track by $index" class="glyphicon glyphicon-star">
+		</span>
+		<span ng-repeat="i in loop(5-review.stars) track by $index" class="glyphicon glyphicon-star light-grey">
+		</span>
+</span>

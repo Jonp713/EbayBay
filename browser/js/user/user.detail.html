@@ -1,0 +1,26 @@
+{{aggRating}}
+<div class = "col-xs-12">
+	<span class = "user-profile col-xs-offset-1 col-xs-2">
+		<img src="{{user.photoUrl}}">
+		<br>
+		{{user.firstName}} {{user.lastName}}
+		<br>
+		<a ui-sref = "product-list({userId: user._id})">See my products</a><br>
+		<a ui-sref = "addReview">Write a review</a>
+		<br><br>
+	</span>
+	<span class = "user-profile col-xs-7">
+		<div class = "white-bg">
+			<review-list review="review" ng-repeat="review in reviews"></review-list>
+		</div>
+	</span>
+	
+</div>
+
+
+
+<!-- name,
+pic,
+reviews, limit char, - expand
+location,
+button for prod, -->

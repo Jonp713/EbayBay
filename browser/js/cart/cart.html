@@ -1,0 +1,23 @@
+<form name="cartForm" ng-submit="runUpdate()">
+    <h3>
+        Shopping Cart
+    </h3>
+    <span ng-show="!updateCart"><a ui-sref="order">Go to Checkout</a></span>
+    <hr>
+    <button type='button' ng-click='updateCart = !updateCart' ng-show="!updateCart">Modify</button>
+    <button type="submit" ng-show="updateCart" ng-click='updateCart=!updateCart'>Update</button>
+    <div class='container'>
+        <div ng-repeat="cartItem in cartItems">
+            <div class="row">
+                <div class="col-xs-12 col-sm-10 item-container">
+                    <product-list-item product="cartItem.product"></product-list-item>
+                </div>
+                <div class="col-xs-12 col-sm-2 remove-and-update-item">
+                    <button ng-show="updateCart">Remove</button>
+                    <p ng-show="!updateCart">Qty: {{cartItem.quantity}}</p>
+                    <input type="number" ng-model="cartItem.quantity" ng-show="updateCart"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="jumbotron text-center">
+        <div class="row">
+            <h2 class="pull-left">Add a new Product</h2>
+        </div>
+        <div class="row">
+            <form name="addProductForm" ng-submit="addProductForm.$valid && addProduct()">
+                <label class="pull-left" for="productName">Name</label>
+                <input type="text" class="form-control" name="productName" ng-model="product.name" required/>
+                <div class="form-group form-inline">
+                    <label for="productCategory">Category</label>
+                    <input type="text" class="form-control" name="productCategory" ng-model="product.category" required/>
+                    <label for="productPrice">Price</label>
+                    <input type="number" class="form-control" name="productPrice" ng-model="product.price" min="0.01" required/>
+                    <label for="productQuantity">Quantity</label>
+                    <input type="number" class="form-control" name="productQuantity" ng-model="product.quantity" placeholder="1" min="0" required/>
+                    <!--<select ng-model="product.quantity" ng-show="product.quantity < 10">-->
+                    <!--<option value="{{choice.quantity}}" ng-repeat="choice in quantitySelections">{{choice.name}}</option>-->
+                    <!--</select>-->
+                </div>
+                <label class="pull-left">Street Address</label>
+                <input type="text" class="form-control" ng-model="product.location.street" />
+                <label class="pull-left">City</label>
+                <input type="text" class="form-control" ng-model="product.location.city"/>
+                <label class="pull-left">State</label>
+                <input type="text" class="form-control" ng-model="product.location.state"/>
+                <label class="pull-left">Zip</label>
+                <input type="text" class="form-control" ng-model="product.location.zip"/>
+                <label class="pull-left" for="productPhoto">Photo Url</label>
+                <input type="text"class="form-control" name="productPhoto" ng-model="product.photo"/>
+                <tags-input ng-model="product.keywords"></tags-input>
+                <button type="submit" class="btn btn-success pull-left">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
