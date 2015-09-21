@@ -20,21 +20,22 @@ app.controller('AddProductController', function($scope, $state, ProductFactory, 
         category: null,
         quantity: null,
         price: null,
-        descr: null,
+        description: null,
         keywords: []
     }
     $scope.addProduct = function() {
-        $scope.product.keywords = $scope.product.keywords.map(function(element) {
+        var productObj = angular.copy($scope.product);
+        productObj.keywords = productObj.keywords.map(function(element) {
             return element.text;
         });
         //$scope.product.location.state = $scope.product.location.state._id;
-        LocationFactory.create($scope.product.location)
+        LocationFactory.create(productObj.location)
         .then(function(location) {
-                if(location) $scope.product.location = location._id;
-                return ProductFactory.create($scope.product);
+                if(location) productObj.location = location._id;
+                console.log('scope.product',productObj);
+                return ProductFactory.create(productObj);
             })
             .then(function(element) {
-                console.log(element);
                 $state.go('product', {id: element._id});
             })
     }
