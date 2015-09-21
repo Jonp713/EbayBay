@@ -6,7 +6,7 @@ var Location = mongoose.model('Location');
 
 
 var missingItemHandler = function(error, cb) {
-    error.status(404);
+    error.status = 404;
     cb(error);
     //custom error handler for missing users and products
 };
@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
     Location.find()
 		.then(function(results) {
 			console.log(results);
-			
+
             res.json(results);
         })
         .then(null, next);
@@ -40,11 +40,11 @@ router.post('/', function(req, res, next) {
     // if(!req.user.isLoggedIn) req.body.userId = userId;
     // need to verify users is logged in - in order to add a product to their page
     // if user is admin, should be able to create product on anyones page
-    Location.create(req.body)
-        .then(function(results) {
-            res.json(results);
-        })
-        .then(null, next);
+    console.log(req.body);
+    Location.findOrCreate(req.body)
+    .then(function(location) {
+            res.json(location);
+        });
 });
 
 router.put('/:locationId', function(req, res, next) {

@@ -7,7 +7,6 @@ app.directive('locationDetail', function () {
         },
         templateUrl: 'js/location/location.detail.html',
         link: function ($scope, elem) {
-			$scope.locations.hello = "hello";
 			$scope.locations.street = $scope.locations.street.replace(/\s/g, "%20");
 			$scope.locations.replacedState = $scope.locations.state.name.replace(/\s/g, "%20");
             console.log($scope.locations);

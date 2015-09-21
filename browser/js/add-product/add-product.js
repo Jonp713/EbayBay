@@ -4,24 +4,37 @@ app.config(function($stateProvider) {
             url: '/products/add',
             templateUrl: 'js/add-product/add-product.html',
             controller: 'AddProductController',
+            resolve: {
+                states: function(StateFactory) {
+                    return StateFactory.findAll();
+                }
+            }
         });
 });
 
-app.controller('AddProductController', function($scope, $state, ProductFactory) {
-    $('.chosen-select').chosen();
+app.controller('AddProductController', function($scope, $state, ProductFactory, LocationFactory, states) {
+    console.log(states);
+    $scope.states = states;
     $scope.product = {
         name: null,
         category: null,
         quantity: null,
         price: null,
-        keywords: [],
+        descr: null,
+        keywords: []
     }
     $scope.addProduct = function() {
         $scope.product.keywords = $scope.product.keywords.map(function(element) {
             return element.text;
         });
-        ProductFactory.create($scope.product)
-        .then(function(element) {
+        //$scope.product.location.state = $scope.product.location.state._id;
+        LocationFactory.create($scope.product.location)
+        .then(function(location) {
+                if(location) $scope.product.location = location._id;
+                return ProductFactory.create($scope.product);
+            })
+            .then(function(element) {
+                console.log(element);
                 $state.go('product', {id: element._id});
             })
     }
