@@ -4,11 +4,17 @@ app.config(function($stateProvider) {
             url: '/products/add',
             templateUrl: 'js/add-product/add-product.html',
             controller: 'AddProductController',
+            resolve: {
+                states: function(StateFactory) {
+                    return StateFactory.findAll();
+                }
+            }
         });
 });
 
-app.controller('AddProductController', function($scope, $state, ProductFactory) {
-    $('.chosen-select').chosen();
+app.controller('AddProductController', function($scope, $state, ProductFactory, states) {
+    console.log(states);
+    $scope.states = states;
     $scope.product = {
         name: null,
         category: null,

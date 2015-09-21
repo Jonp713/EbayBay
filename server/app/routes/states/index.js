@@ -23,7 +23,8 @@ router.get('/', function(req, res, next) {
         .then(null, next);
 });
 
-router.get('/:stateId', function(req, res) {
+router.get('/:state' +
+    'Id', function(req, res) {
     res.json(req.foundProduct);
 });
 
