@@ -1,7 +1,7 @@
 app.config(function ($stateProvider) {
 
     $stateProvider.state('order', {
-        url: '/checkout',
+        url: '/order',
         templateUrl: 'js/order/order.html',
         controller: 'OrderCtrl',
         // resolve: {

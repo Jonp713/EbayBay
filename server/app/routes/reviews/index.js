@@ -42,6 +42,7 @@ router.post('/', function(req, res, next) {
     // if user is admin, should be able to create product on anyones page
     Review.create(req.body)
         .then(function(results) {
+			console.log("yo");
             res.json(results);
         })
         .then(null, next);

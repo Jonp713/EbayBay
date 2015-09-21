@@ -12,7 +12,7 @@ app.config(function($stateProvider) {
         });
 });
 
-app.controller('AddProductController', function($scope, $state, ProductFactory, states) {
+app.controller('AddProductController', function($scope, $state, ProductFactory, LocationFactory, states) {
     console.log(states);
     $scope.states = states;
     $scope.product = {
@@ -20,15 +20,20 @@ app.controller('AddProductController', function($scope, $state, ProductFactory, 
         category: null,
         quantity: null,
         price: null,
-        keywords: [],
+        descr: null,
+        keywords: []
     }
     $scope.addProduct = function() {
         $scope.product.keywords = $scope.product.keywords.map(function(element) {
             return element.text;
         });
         //$scope.product.location.state = $scope.product.location.state._id;
-        ProductFactory.create($scope.product)
-        .then(function(element) {
+        LocationFactory.create($scope.product.location)
+        .then(function(location) {
+                if(location) $scope.product.location = location._id;
+                return ProductFactory.create($scope.product);
+            })
+            .then(function(element) {
                 console.log(element);
                 $state.go('product', {id: element._id});
             })

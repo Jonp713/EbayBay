@@ -153,7 +153,10 @@ gulp.task('default', function () {
     gulp.start('build');
 
     gulp.watch('browser/js/**', function () {
-        runSeq('buildJS', 'reload');
+		runSeq('buildJS');
+		setTimeout(function(){
+			runSeq('reload');
+		}, 1000);
     });
 
     gulp.watch('browser/scss/**', function () {
