@@ -26,6 +26,7 @@ var Order = Promise.promisifyAll(mongoose.model('Order'));
 var Review = Promise.promisifyAll(mongoose.model('Review'));
 var Location = Promise.promisifyAll(mongoose.model('Location'));
 var Product = Promise.promisifyAll(mongoose.model('Product'));
+var State = Promise.promisifyAll(mongoose.model('State'));
 var chance = require('chance')(123);
 
 
@@ -103,35 +104,242 @@ var seedUsers = function () {
 
 };
 
-var seedLocation = function() {
+var seedState = function() {
+    var states = [
+        {
+            name: 'Alabama',
+            abrv: 'AL'
+        },
+        {
+            name: 'Arkansas',
+            abrv: 'AK'
+        },
+        {
+            name: 'Arizona',
+            abrv: 'AZ'
+        },
+        {
+            name: 'California',
+            abrv: 'CA'
+        },
+        {
+            name: 'Colorado',
+            abrv: 'CO'
+        },
+        {
+            name: 'Connecticut',
+            abrv: 'CT'
+        },
+        {
+            name: 'Delaware',
+            abrv: 'DE'
+        },
+        {
+            name: 'Florida',
+            abrv: 'FL'
+        },
+        {
+            name: 'Georgia',
+            abrv: 'GA'
+        },
+        {
+            name: 'Hawaii',
+            abrv: 'HI'
+        },
+        {
+            name: 'Idaho' ,
+            abrv: 'ID'
+        },
+        {
+            name: 'Illinois' ,
+            abrv: 'IL'
+        },
+        {
+            name: 'Indiana' ,
+            abrv: 'IN'
+        },
+        {
+            name: 'Iowa' ,
+            abrv: 'IA'
+        },
+        {
+            name: 'Kansas' ,
+            abrv: 'KS'
+        },
+        {
+            name: 'Kentucky' ,
+            abrv: 'KY'
+        },
+        {
+            name: 'Louisiana' ,
+            abrv: 'LA'
+        },
+        {
+            name: 'Maine' ,
+            abrv: 'ME'
+        },
+        {
+            name: 'Maryland',
+            abrv: 'MD'
+        },
+        {
+            name: 'Massachusetts',
+            abrv: 'MA'
+        },
+        {
+            name: 'Michigan',
+            abrv: 'MI'
+        },
+        {
+            name: 'Minnesota',
+            abrv: 'MN'
+        },
+        {
+            name: 'Missouri',
+            abrv: 'MO'
+        },
+        {
+            name: 'Mississippi',
+            abrv: 'MS'
+        },
+        {
+            name: 'Missouri',
+            abrv: 'MO'
+        },
+        {
+            name: 'Montana',
+            abrv: 'MT'
+        },
+        {
+            name: 'Nebraska',
+            abrv: 'NE'
+        },
+        {
+            name: 'Nevada',
+            abrv: 'NV'
+        },
+        {
+            name: 'New Hampshire',
+            abrv: 'NH'
+        },
+        {
+            name: 'New Jersey',
+            abrv: 'NJ'
+        },
+        {
+            name: 'New Mexico',
+            abrv: 'NM'
+        },
+        {
+            name: 'New York',
+            abrv: 'NY'
+        },
+        {
+            name: 'North Carolina',
+            abrv: 'NC'
+        },
+        {
+            name: 'North Dakota',
+            abrv: 'ND'
+        },
+        {
+            name: 'Ohio',
+            abrv: 'OH'
+        },
+        {
+            name: 'Oklahoma',
+            abrv: 'OK'
+        },
+        {
+            name: 'Oregon',
+            abrv: 'OR'
+        },
+        {
+            name: 'Pennsylvania',
+            abrv: 'PA'
+        },
+        {
+            name: 'Rhode Island',
+            abrv: 'RI'
+        },
+        {
+            name: 'South Carolina',
+            abrv: 'SC'
+        },
+        {
+            name: 'South Dakota',
+            abrv: 'SD'
+        },
+        {
+            name: 'Tennessee',
+            abrv: 'TN'
+        },
+        {
+            name: 'Texas',
+            abrv: 'TX'
+        },
+        {
+            name: 'Utah',
+            abrv: 'UT'
+        },
+        {
+            name: 'Vermont',
+            abrv: 'VT'
+        },
+        {
+            name: 'Virginia',
+            abrv: 'VA'
+        },
+        {
+            name: 'Washington',
+            abrv: 'WA'
+        },
+        {
+            name: 'West Virginia',
+            abrv: 'WV'
+        },
+        {
+            name: 'Wisconsin',
+            abrv: 'WI'
+        },
+        {
+            name: 'Wyoming',
+            abrv: 'WY'
+        }
+    ]
+    return State.createAsync(states);
+}
+
+var seedLocation = function(states) {
     var location = [
     {
         street: "24 St Andrews Place",
         city: "Brooklyn",
-        state: "New York",
+        state: states[31]._id,
         zip: "11216"
     },
     {
         street: "26 St Andrews Place",
         city: "Brooklyn",
-        state: "New York",
+        state: states[31]._id,
         zip: "11216"
     },
     {
         street: "5 Hanover Square",
         city: "New York",
-        state: "New York",
+        state: states[31]._id,
         zip: "10004"
     },
     {
         street: "1720 Grape Ave",
         city: "Boulder",
-        state: "Colorado",
+        state: states[4]._id,
         zip: "80304"
     }
     ];
     return Location.createAsync(location);
 };
+
 
 var seedProducts = function (users, location) {
     var products = [
@@ -199,13 +407,13 @@ var seedOrders = function (users, products) {
         }
 
 
-        var order = [{   
+        var order = [{
             user: users[Math.floor(Math.random() * users.length)]._id,
             products: orderProducts
         }];
 
         return Order.createAsync(order);
-        
+
     };
 
 connectToDb.then(function () {
@@ -220,10 +428,11 @@ connectToDb.then(function () {
 
         tempData.users = users;
 
-        return seedLocation();
-
+        return seedState();
+    }).then(function(states) {
+        tempData.states = states;
+        return seedLocation(tempData.states);
     }).then(function(location){
-
         tempData.location = location;
         console.log(chalk.green('Seed successful!'));
         return seedProducts(tempData.users, tempData.location);

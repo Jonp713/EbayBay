@@ -1,8 +1,8 @@
 app.config(function ($stateProvider) {
 
     $stateProvider.state('addReview', {
-        url: '/addReview',
-        templateUrl: 'js/addReview/addReview.html',
+        url: '/review/add',
+        templateUrl: 'js/add-review/add-review.html',
         controller: 'AddReviewCtrl',
         // resolve: {
         //     cartItems: function(CartFactory){

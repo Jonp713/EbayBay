@@ -1,7 +1,7 @@
 <div class='jumbotron'>
 	<span>
 		<div><h3>{{product.name}}</h3></div>
-	<img src="{{product.photo}}"/>		
+	<img src="{{product.photo}}"/>
 	</span>
 <hr>
 <h5>Description: {{product.description}}</h5>
@@ -15,7 +15,7 @@
     <p ng-show='productForm.quantity.$error.max'>
     	<small>You have ordered more than are available</small>
     </p>
-	
+
 </form>
 </div>
 <location-detail locations = "product.location"></location-detail>

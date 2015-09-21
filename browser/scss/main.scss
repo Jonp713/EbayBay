@@ -24,6 +24,42 @@ body {
   color: #DDD;
 }
 
+.top-buff {
+  margin-top: 10px;
+}
+
+.no-margin {
+  margin: 0px;
+}
+
+.clickable:hover {
+  background: #E6F5E6;
+  cursor: pointer;
+}
+
+.crop {
+  height: 150px;
+  // width: 400px;
+  overflow: hidden;
+  img {
+    height: 128px;
+    width: auto;
+  }
+}
+
+.btn.no-focus:focus {
+  outline:0;
+}
+
+.width100 {
+  width:100%;
+}
+
+.witdth50 {
+  width:50%;
+}
+
+
 @import 'directives/main';
 @import 'home/main';
 @import 'about/main';
