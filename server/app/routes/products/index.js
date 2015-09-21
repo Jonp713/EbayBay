@@ -3,6 +3,7 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
+var Location = mongoose.model('Location');
 
 
 var missingItemHandler = function(error, cb) {
@@ -40,14 +41,33 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     // if(!req.user.isLoggedIn) req.body.userId = userId;
     // need to verify users is logged in - in order to add a product to their page
-    // if user is admin, should be able to create product on anyones page
-    req.body.user = req.user._id;
-    console.log(req.body);
-    Product.create(req.body)
-        .then(function(results) {
+    // if user is admin, should be able to create product on anyones pag
+    var productObj = req.body;
+    productObj.user = req.user._id;
+    Product.create(productObj)
+    .then(function(results) {
+            console.log('results', results);
             res.json(results);
         })
-        .then(null, next);
+    .then(null, next);
+
+    //var productObj = req.body;
+    //productObj.user = req.user._id;
+    //productObj.location.state = productObj.location.state._id;
+    //console.log('productObj', productObj);
+    //Location.findOrCreate(productObj.location)
+    //    .then(function(location) {
+    //        productObj.location = location._id;
+    //        return productObj;
+    //    })
+    //    .then(function(productObj) {
+    //        return Product.create(productObj);
+    //    })
+    //    .then(function(results) {
+    //        console.log('results', results);
+    //        res.json(results);
+    //    })
+    //    .then(null, next);
 });
 
 router.put('/:productId', function(req, res, next) {
