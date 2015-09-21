@@ -12,11 +12,11 @@ var deepPopulate = require('mongoose-deep-populate')(mongoose);
 var schema = new mongoose.Schema({
     firstName: {
       type: String,
-      required: true
+      // required: true
     },
     lastName: {
       type: String,
-      required: true
+      // required: true
     },
     isAdmin: {
       type: Boolean,
@@ -25,7 +25,7 @@ var schema = new mongoose.Schema({
     email: {
       type: String,
       unique: true,
-      required: true
+      // required: true
     },
     photoUrl: {
       type: String,
