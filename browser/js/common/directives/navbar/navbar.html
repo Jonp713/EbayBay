@@ -4,6 +4,7 @@
             <!-- <a ui-sref="user({id: product.user._id})">{{user.firstName}}</a> -->
             <a ui-sref="home"><fullstack-logo></fullstack-logo></a>
         </div>
+        <span ng-show="user">Welcome, {{user.firstName}}!</span>
         <ul class="nav navbar-nav">
 <!--             <li>
                 <form name="searchForm"></form>
@@ -13,7 +14,6 @@
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
-        <span ng-show="user">Welcome, {{user.firstName}}!</span>
         </ul>
         <button ng-show="!user" ui-sref="signup" class="btn login-button">Signup</button>
         <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
