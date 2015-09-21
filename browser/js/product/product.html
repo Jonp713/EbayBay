@@ -1,21 +1,26 @@
-<div class='jumbotron'>
-	<span>
-		<div><h3>{{product.name}}</h3></div>
-	<img ng-src="{{product.photo}}"/>
+<span class = "col-xs-11 col-xs-offset-1">
+
+	<span class = "col-xs-6">
+		<h3>{{product.name}}</h3>
+		<img class = "img-responsive" src="{{product.photo}}"/>
+		<h6>Cost: ${{product.price}}</h6>
+		<h6>Category: {{product.category}}</h6>
+		<h>Qty Available: {{product.quantity}}</h6>
+	
+		<h5>Description: {{product.description}}</h5>
+		
+		 <form name="productForm" ng-submit="productForm.$valid && addToCart()">
+		     <button type="submit">Add to Cart</button>
+		     <input type="number" name='quantity' placeholder='quantity' ng-model="quantity" ng-max='product.quantity'/>
+		     <p ng-show='productForm.quantity.$error.max'>
+		     	<small>You have ordered more than are available</small>
+		     </p>
+		 </form>
 	</span>
-<hr>
-<h5>Description: {{product.description}}</h5>
-<h6>Cost: ${{product.price}}</h6>
-<h6>Category: {{product.category}}</h6>
-<h6>Qty Available: {{product.quantity}}</h6>
+	
+ 	<location-detail class = "col-xs-5" locations = "product.location"></location-detail>
+	
+</span>
 
-<form name="productForm" ng-submit="productForm.$valid && addToCart()">
-    <button type="submit">Add to Cart</button>
-    <input type="number" name='quantity' placeholder='quantity' ng-model="quantity" ng-max='product.quantity'/>
-    <p ng-show='productForm.quantity.$error.max'>
-    	<small>You have ordered more than are available</small>
-    </p>
 
-</form>
-</div>
-<location-detail locations = "product.location"></location-detail>
+
