@@ -5,21 +5,23 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/order/order.html',
         controller: 'OrderCtrl',
         // resolve: {
-        //     products: function(OrderFactory){
-        //         return OrderFactory.find();
-        //     }
+        //     // orders: function(OrderFactory, AuthService){
+        //     //     console.log('in order resolve')
+        //     //     return AuthService.getLoggedInUser().then(function(user){
+        //     //         console.log('legloggedinuser', user)
+        //     //         return OrderFactory.findAll({user: user._id});
+        //     //     });
+        //     // }
         // }
     });
 
 });
 
-app.controller('OrderCtrl', function ($scope, CartFactory, $state, cartItems) {
-    // $scope.updateCart = false;
-    // $scope.cartItems = cartItems;
-    // $scope.runUpdate = function() {
-    //     CartFactory.updateCart($scope.cartItems)
-    //     .then(function() {
-    //             $state.go('cart');
-    //         })
-    // }
+app.controller('OrderCtrl', function ($scope, OrderFactory, $state, orders) {
+    $scope.orders = orders,
+    console.log(orders)
+    $scope.checkout = function(){
+        console.log('orders', $scope.orders)
+    }
+    
 });

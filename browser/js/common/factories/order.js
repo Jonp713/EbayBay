@@ -18,11 +18,11 @@ app.factory('OrderFactory', function(DS) {
             }
         },
         // methods: {
-        //     var getProducts = function() {
-
-        //         return $http.get('/api/products/', {_id: })
-        //         .then(function(response) {
-        //                 return response.data;
+        //     getTotal: function() {
+        //         this.products.reduce(function(total, prod.price)){
+                    
+        //         }
+                
         //     })
         // }
         

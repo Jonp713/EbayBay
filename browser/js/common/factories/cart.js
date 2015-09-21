@@ -12,6 +12,7 @@ app.factory('CartFactory', function($http) {
     var getCart = function() {
         return $http.get('/api/cart/')
         .then(function(response) {
+            console.log('cart on front end', response.data)
                 return response.data;
             })
     }

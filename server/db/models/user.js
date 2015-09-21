@@ -184,7 +184,7 @@ schema.method('mergeCart', function(sessionCart, cb) {
         this.cart.concat(sessionCart);
     return this.save(function(err, user) {
         if(err) return cb(err);
-        user.deepPopulate('cart.product', function(err, _user) {
+        user.deepPopulate('cart.product, cart.product.user, cart.product.location', function(err, _user) {
             if(err) return cb(err);
             cb(null, _user);
         })

@@ -17,15 +17,16 @@ var schema = new mongoose.Schema({
 	date: {
 		type: Date,
 		default: Date.now
-	}
+	},
+	total: {type: Number, min: 0},
 });
 
 schema.plugin(autopopulate);
 
-schema.methods.total = function () {
-	return 20;
-	//this.populate("products")
-};
+// schema.methods.total = function () {
+// 	return 20;
+// 	//this.populate("products")
+// };
 
 schema.methods.subtotal = function () {
 	return 15;
