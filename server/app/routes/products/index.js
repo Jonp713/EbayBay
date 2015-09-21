@@ -43,6 +43,7 @@ router.post('/', function(req, res, next) {
     // need to verify users is logged in - in order to add a product to their page
     // if user is admin, should be able to create product on anyones pag
     var productObj = req.body;
+    console.log(productObj);
     productObj.user = req.user._id;
     Product.create(productObj)
     .then(function(results) {

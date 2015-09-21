@@ -4,21 +4,24 @@
             <!-- <a ui-sref="user({id: product.user._id})">{{user.firstName}}</a> -->
             <a ui-sref="home"><fullstack-logo></fullstack-logo></a>
         </div>
-        <span ng-show="user">Welcome, {{user.firstName}}!</span>
-        <ul class="nav navbar-nav">
-<!--             <li>
-                <form name="searchForm"></form>
-                <input type="text" placeholder=""/>
 
-            </li> -->
+        <button ng-show="!user" ui-sref="signup" class="btn pull-right login-button">Signup</button>
+        <button ng-show="!user" ui-sref="login" class="btn pull-right login-button">Login</button>
+        <div ng-show="user" class="pull-right welcome">
+            <a ng-click="logout()">Logout</a>
+        </div>
+
+        <span ng-show="user">Welcome, {{user.firstName}}!</span>
+
+        <ul class="nav navbar-nav">
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
-                <a ui-sref-active="active" ui-sref="{{ item.state }}">{{ item.label }}</a>
+                <a ui-sref-active="active" class = "pull-left" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
         </ul>
-        <button ng-show="!user" ui-sref="signup" class="btn login-button">Signup</button>
-        <button ng-show="!user" ui-sref="login" class="btn login-button">Login</button>
-        <div ng-show="user" class="welcome">
-            <a ng-click="logout()">Logout</a>
+        <div class="navbar-header pull-left">
+            <form name="searchForm" class="form-group form-inline search-navbar">
+                <input type="text" placeholder="product name" class="form-control"/><button class = "btn btn-default"><span class = "glyphicon glyphicon-search"></span></button>
+            </form>
         </div>
     </div>
 </nav>
