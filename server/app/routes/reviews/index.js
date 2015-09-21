@@ -6,7 +6,7 @@ var Review = mongoose.model('Review');
 
 
 var missingItemHandler = function(error, cb) {
-    error.status(404);
+    error.status = 404;
     cb(error);
     //custom error handler for missing users and products
 };
