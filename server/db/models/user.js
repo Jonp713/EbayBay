@@ -181,7 +181,7 @@ schema.method('mergeCart', function(sessionCart, cb) {
     //remove the matched product from the session cart
     if (idx) sessionCart.splice(idx, 1);
   });
-        user.cart.concat(sessionCart);
+        this.cart.concat(sessionCart);
     return this.save(function(err, user) {
         if(err) return cb(err);
         user.deepPopulate('cart.product', function(err, _user) {

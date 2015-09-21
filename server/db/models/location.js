@@ -23,6 +23,13 @@ var schema = new mongoose.Schema({
 	}
 });
 
+schema.statics.findOrCreate = function(searchParams) {
+    var self = this;
+    self.find(searchParams).exec()
+    .then(function(element) {
+            if(element === undefined) return element;
+        })
+}
 
 schema.virtual("fulladdress").get(function() {
 		return this.street + ", " + (this.city) + ", " + (this.state) + ", " + (this.zip) + ", USA";
