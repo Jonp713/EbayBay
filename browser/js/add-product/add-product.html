@@ -18,6 +18,7 @@
                     <!--<option value="{{choice.quantity}}" ng-repeat="choice in quantitySelections">{{choice.name}}</option>-->
                     <!--</select>-->
                 </div>
+                <label for="productState">State</label>
                 <select name="" ng-options="state.name for state in states" ng-model="product.location.state">
 
                 </select>
@@ -25,8 +26,6 @@
                 <input type="text" class="form-control" ng-model="product.location.street" />
                 <label class="pull-left">City</label>
                 <input type="text" class="form-control" ng-model="product.location.city"/>
-                <label class="pull-left">State</label>
-                <input type="text" class="form-control" ng-model="product.location.state"/>
                 <label class="pull-left">Zip</label>
                 <input type="text" class="form-control" ng-model="product.location.zip"/>
                 <label class="pull-left" for="productPhoto">Photo Url</label>

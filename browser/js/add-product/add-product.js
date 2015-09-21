@@ -26,8 +26,10 @@ app.controller('AddProductController', function($scope, $state, ProductFactory, 
         $scope.product.keywords = $scope.product.keywords.map(function(element) {
             return element.text;
         });
+        //$scope.product.location.state = $scope.product.location.state._id;
         ProductFactory.create($scope.product)
         .then(function(element) {
+                console.log(element);
                 $state.go('product', {id: element._id});
             })
     }
