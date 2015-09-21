@@ -1,0 +1,93 @@
+<form name="orderForm" ng-submit="checkout()">
+    <h3>
+        Checkout
+    </h3>
+    <hr>
+    <div>
+        <h4>Shipping Address</h4>
+        <div class="container">
+            <form name="shippingForm" ng-submit="addShippingInfo(shipping)">
+                <label class="pull-left">Street Address</label>
+                <input type="text" class="form-control" id="street" placeholder="Enter street address here" ng-model="shipping.street" required />
+                <label class="pull-left">City</label>
+                <input type="text" class="form-control" id="city" placeholder="Enter city here" ng-model="shipping.city" required/>
+                <label class="pull-left">State</label>
+                <input type="text" class="form-control" id="state" placeholder="Enter state here" ng-model="shipping.state" required/>
+                <label class="pull-left">Zip</label>
+                <input type="text" class="form-control" id="zip" placeholder="Enter zipcode here" ng-model="shipping.zip" required/>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="text" ng-model="card.email" class="form-control" id="email" placeholder="Enter prefered email address for confirmation" required>
+                </div>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> Check to receive notification emails regarding shipping
+                    </label>
+                  </div>
+                <br>
+                <button type="submit" class="btn btn-success pull-left">Enter shipping address</button>
+            </form>
+        </div>
+    </div>
+    <hr>
+    <form id="payment-form" name="paymentForm" ng-submit="paymentForm.$valid && sendpayment(card)">
+        <h4>Payment Method</h4>
+        <div class="container">
+            <h5>Enter your credit or debit card information</h5>
+            <div class="form-group">
+                <label for="cardNumer">Card Number</label>
+                <input type="text" ng-model="card.number" class="form-control" id="cardNumber" placeholder="Enter Credit Card Number" required>
+            </div>
+             <div class="form-group">
+                <label for="cardName">Name on Card</label>
+                <input type="text" ng-model="card.name" class="form-control" id="cardName" placeholder="Enter Full Name" required>
+            </div>
+            <div class="form-group">
+                <label for="expirationDate">Expiration Date</label>
+                <input type="text" ng-model="card.expirationDate" class="form-control" id="expirationDate" placeholder="Enter Experiation Date" required>
+            </div>
+            <button type="submit" class="btn btn-success pull-left">Enter payment information</button>
+        </div>
+    </form>
+    <hr>
+    <h4>Review Items and Shipping</h4>
+
+
+  <!--   <button type='button' class="btn btn-info" ng-click='updateCart = !updateCart' ng-show="!updateCart">Modify</button>
+    <button type="submit" ng-show="updateCart" ng-click='updateCart=!updateCart' class="btn btn-default">Update</button> -->
+    <div class='container'>
+        <div ng-repeat="cartItem in cartItems">{{cardItem}}
+            <!-- <div class="row"> -->
+<!--                 <div class="col-xs-12 col-sm-10 item-container">
+                    <product-list-item product="cartItem.product"></product-list-item>
+                </div>
+                <div class="col-xs-12 col-sm-2 remove-and-update-item">
+                <button>Remove</button>
+                <p ng-show="!updateCart">{{cartItem.quantity}}</p>
+                <input type="number" ng-model="cartItem.quantity" ng-show="updateCart"/> -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h4>Order Summary</h4>
+    <div class="container">
+<<<<<<< HEAD
+        <div class="row">
+        <br>
+        <span>Order Summary</span>
+        <hr>
+        <div>Items:
+            <ng-repeat=
+        </div>
+=======
+        <div>Items:</div>
+>>>>>>> 090a7030ad50c07939cc44e00672cd5c4a8611da
+        <div>Shipping &amp handling:</div>
+        <div>Total before tax:</div>
+        <div>Estimated tax:</div>
+        <div>Order total:</div>
+    </div>
+    <br>
+    <button ng-show="!updateCart" class="btn btn-success"><a ui-sref="checkout">Submit order</a></button>
+
