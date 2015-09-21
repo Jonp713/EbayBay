@@ -46,11 +46,12 @@ module.exports = function (app) {
                 console.log("logged in ", user);
                 if (loginErr) return next(loginErr);
                 //mergeCart merges session cart with user cart in the db
-                user.mergeCart(req.session.cart)
-                .then(function(user){
+                user.mergeCart(req.session.cart, function(err, user){
+                    if(err) return next(err);
                     //user cart has been updated, so session cart can just be set to user cart
                     //!! needs to be populated
                     // We respond with a response object that has user with _id and email.
+                    console.log('user cart', user.cart)
                     req.session.cart = user.cart;
                     res.status(200).send({
                         user: _.omit(user.toJSON(), ['password', 'salt'])
