@@ -1,18 +1,18 @@
-app.config(function($stateProvider) {
+app.config(function ($stateProvider) {
     $stateProvider
         .state('addProduct', {
             url: '/products/add',
             templateUrl: 'js/add-product/add-product.html',
             controller: 'AddProductController',
             resolve: {
-                states: function(StateFactory) {
+                states: function (StateFactory) {
                     return StateFactory.findAll();
                 }
             }
         });
 });
 
-app.controller('AddProductController', function($scope, $state, ProductFactory, LocationFactory, states) {
+app.controller('AddProductController', function ($scope, $state, ProductFactory, LocationFactory, states) {
     console.log(states);
     $scope.states = states;
     $scope.product = {
@@ -23,19 +23,19 @@ app.controller('AddProductController', function($scope, $state, ProductFactory, 
         description: null,
         keywords: []
     }
-    $scope.addProduct = function() {
+    $scope.addProduct = function () {
         var productObj = angular.copy($scope.product);
-        productObj.keywords = productObj.keywords.map(function(element) {
+        productObj.keywords = productObj.keywords.map(function (element) {
             return element.text;
         });
         //$scope.product.location.state = $scope.product.location.state._id;
         LocationFactory.create(productObj.location)
-        .then(function(location) {
-                if(location) productObj.location = location._id;
-                console.log('scope.product',productObj);
+            .then(function (location) {
+                if (location) productObj.location = location._id;
+                console.log('scope.product', productObj);
                 return ProductFactory.create(productObj);
             })
-            .then(function(element) {
+            .then(function (element) {
                 $state.go('product', {id: element._id});
             })
     }
