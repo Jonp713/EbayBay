@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory) {
+app.controller('SignupCtrl', function ($scope, AuthService, $state) {
 
     $scope.signup = {};
     $scope.error = null;
