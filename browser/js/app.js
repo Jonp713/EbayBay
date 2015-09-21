@@ -145,9 +145,6 @@ app.config(function(DSProvider, $urlRouterProvider, $locationProvider) {
           });
       LocationFactory.findAll();
 
-  })
+  });
 
-  //app.run(function(LocationFactory) {
-  //    LocationFactory.findAll();
-  //})
 

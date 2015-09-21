@@ -14,22 +14,37 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory)
     $scope.error = null;
 
     $scope.sendSignup = function (signupInfo) {
-
+        console.log('send signup');
         $scope.error = null;
-        console.log(signupInfo);
-        UserFactory.create(signupInfo)
-        .then(function(){
-            $state.go("home");
-        }).catch(function() {
-            $scope.error = "Missing signup credentials";
+
+        AuthService.signup(signupInfo).then(function(){
+          AuthService.login(signupInfo).then(function () {
+              $state.go('home');
+          }).catch(function () {
+              $scope.error = 'Invalid login credentials.';
+          });
+        }).then(null,function(err){
+          $scope.error = err;
         });
-
-        // AuthService.signup(signupInfo).then(function () {
-        //     $state.go('home');
-        // }).catch(function () {
-        //     $scope.error = 'Missing signup credentials.';
-        // });
-
     };
+
+    // $scope.sendSignup = function (signupInfo) {
+
+    //     $scope.error = null;
+    //     console.log(signupInfo);
+    //     UserFactory.create(signupInfo)
+    //     .then(function(){
+    //         $state.go("home");
+    //     }).catch(function() {
+    //         $scope.error = "Missing signup credentials";
+    //     });
+
+    //     // AuthService.signup(signupInfo).then(function () {
+    //     //     $state.go('home');
+    //     // }).catch(function () {
+    //     //     $scope.error = 'Missing signup credentials.';
+    //     // });
+
+    // };
 
 });
