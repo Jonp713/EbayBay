@@ -13,7 +13,7 @@ app.factory('OrderFactory', function(DS) {
             hasMany: {
                 products: {
                     localField: 'product',
-                    foreignKey: 'orderId'
+                    foreignKey: 'productId'
                 }
             }
         },

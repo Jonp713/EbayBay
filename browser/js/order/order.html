@@ -50,37 +50,27 @@
         </div>
     </form>
     <hr>
-    <h4>Review Items and Shipping</h4>
-
-
-  <!--   <button type='button' class="btn btn-info" ng-click='updateCart = !updateCart' ng-show="!updateCart">Modify</button>
-    <button type="submit" ng-show="updateCart" ng-click='updateCart=!updateCart' class="btn btn-default">Update</button> -->
-    <div class='container'>
-        <div ng-repeat="cartItem in cartItems">
-            <div class="row">
-<!--                 <div class="col-xs-12 col-sm-10 item-container">
-                    <product-list-item product="cartItem.product"></product-list-item>
-                </div>
-                <div class="col-xs-12 col-sm-2 remove-and-update-item">
-                <button>Remove</button>
-                <p ng-show="!updateCart">{{cartItem.quantity}}</p>
-                <input type="number" ng-model="cartItem.quantity" ng-show="updateCart"/> -->
-                <!-- </div> -->
-            </div>
-        </div>
-
-    <hr>
     <h4>Order Summary</h4>
-    <div class="container">
-        <div class="row">
-        <br>
-        <span>Order Summary</span>
+    <div >
         <hr>
-        <div>Items:</div>
-        <div>Shipping &amp handling:</div>
-        <div>Total before tax:</div>
-        <div>Estimated tax:</div>
-        <div>Order total:</div>
+        Items:
+            <div ng-repeat="cartItem in order.products">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-10 item-container">
+                        <product-list-item product="cartItem.product"></product-list-item>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 remove-and-update-item">
+                        <button>Remove</button>
+                        <p ng-show="!updateCart">{{cartItem.quantity}}</p>
+                        <input type="number" ng-model="cartItem.quantity" ng-show="updateCart"/>
+                    </div>
+                </div>
+            </div>
     </div>
+    <div>Shipping &amp handling:</div>
+    <div>Total before tax:</div>
+    <div>Estimated tax:</div>
+    <div>Order total:</div>
+    
 </div>
 </form>

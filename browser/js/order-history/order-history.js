@@ -1,24 +1,23 @@
-app.config(function($stateProvider) {
-    $stateProvider
-        .state('order-history', {
-            url: '/order/history',
-            templateUrl: 'js/order-history/order-history.html',
-            controller: 'OrderHistoryCtrl',
-            // resolve: {
-            //     products: function(ProductFactory, $stateParams) {
-            //         // console.log('in the resolve');
-            //         // console.log($stateParams);
-            //         return ProductFactory.findAll($stateParams)
-            //         .then(function(elements){
-            //             // console.log(elements);
-            //             return elements;
-            //         });
-            //     }
-            // }
-        });
+app.config(function ($stateProvider) {
+
+    $stateProvider.state('pastOrders', {
+        url: '/order/history',
+        templateUrl: 'js/past-orders/past-orders.html',
+        controller: 'OrderCtrl',
+        resolve: {
+            orders: function(OrderFactory, AuthService){
+                console.log('in order resolve')
+                return AuthService.getLoggedInUser().then(function(user){
+                    console.log(user)
+                    return OrderFactory.findAll({user: user._id});
+                });
+            }
+        }
+    });
+
 });
 
-
-app.controller('OrderHistoryCtrl', function($scope, $location, products) {
-    // $scope.products = products;
+app.controller('PastOrderCtrl', function ($scope, OrderFactory, $state, orders) {
+    $scope.orders = orders,
+    console.log('orders', orders)
 });
