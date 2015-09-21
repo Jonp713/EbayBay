@@ -7,7 +7,7 @@ var Product = mongoose.model('Product');
 
 var missingItemHandler = function(error, cb) {
     console.log("couldn't find the product");
-    error.status(404);
+    error.status = 404;
     cb(error);
     //custom error handler for missing users and products
 };

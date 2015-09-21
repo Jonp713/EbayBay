@@ -6,7 +6,7 @@ var Location = mongoose.model('Location');
 
 
 var missingItemHandler = function(error, cb) {
-    error.status(404);
+    error.status = 404;
     cb(error);
     //custom error handler for missing users and products
 };
@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
     Location.find()
 		.then(function(results) {
 			console.log(results);
-			
+
             res.json(results);
         })
         .then(null, next);
