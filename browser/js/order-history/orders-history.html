@@ -5,6 +5,7 @@
     
     <div class='container'>
         <div ng-repeat="order in orders">
+            date: {{order.date}}
             <div ng-repeat='cartItem in order.products'>
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 item-container">
@@ -13,6 +14,8 @@
                 </div>
             </div>
              <p>Total: {{order.total}}</p>
+             <hr>
+
         </div>
     </div>
 </div>

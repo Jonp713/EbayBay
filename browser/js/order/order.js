@@ -17,11 +17,9 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('OrderCtrl', function ($scope, OrderFactory, $state, orders) {
-    $scope.orders = orders,
-    console.log(orders)
+app.controller('OrderCtrl', function ($scope, OrderFactory, $state) {
     $scope.checkout = function(){
-        console.log('orders', $scope.orders)
+        console.log('checking out')
     }
     
 });

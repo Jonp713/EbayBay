@@ -18,7 +18,22 @@ var schema = new mongoose.Schema({
 		type: Date,
 		default: Date.now
 	},
+	shippingAdress: {
+		streetAddress: String,
+		city: String,
+		state: String,
+		zip: String,
+		email: String,
+		receiveEmails: Boolean
+	},
+	payment: {
+		cardNumber: String,
+		name: String,
+		expire: String,
+		csv: String
+	},
 	total: {type: Number, min: 0},
+	submitted: Boolean
 });
 
 schema.plugin(autopopulate);
