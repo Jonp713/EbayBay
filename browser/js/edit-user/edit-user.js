@@ -5,17 +5,21 @@ app.config(function ($stateProvider) {
             templateUrl: 'js/edit-user/edit-user.html',
             controller: 'EditUserController',
             resolve: {
-                states: function(StateFactory) {
-                    return StateFactory.findAll();
-                },
-                product: function(UserFactory, $stateParams) {
+                user: function(UserFactory, $stateParams) {
                     return UserFactory.find($stateParams.id)
                 }
             }
         });
 });
 
-app.controller('EditUserController', function ($scope, $state, product, states) {
-    $scope.states = states;
-    $scope.product = product;
+app.controller('EditUserController', function ($scope, $state, user, UserFactory) {
+    $scope.user = user;
+	console.log(user);
+	 
+	 $scope.edit = function(){ 
+	 	UserFactory.update(user._id, $scope.user).then(function(item){
+			console.log(item);
+	 		$state.go("user", {id: item._id});
+	 	});
+	 }
 });

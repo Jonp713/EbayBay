@@ -17,4 +17,10 @@ app.config(function ($stateProvider) {
 
 app.controller("UserListCtrl", function($scope, UserFactory, userlist) {
     $scope.userlist = userlist;
+	 
+	 $scope.edit = function(){ 
+	 	ProductFactory.update(product._id, $scope.user).then(function(item){
+	 		$state.go("product", {id: item._id});
+	 	});
+	 }
 });
