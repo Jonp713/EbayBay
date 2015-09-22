@@ -5,6 +5,7 @@ var deepPopulate = require('mongoose-deep-populate')(mongoose);
 var Product = mongoose.model('Product');
 var R = require('ramda');
 var _ = require('lodash');
+var Promise = require('bluebird');
 
 
 var schema = new mongoose.Schema({
@@ -69,30 +70,46 @@ schema.methods.tax = function () {
 };
 
 function createOrEditObj(arr, product) {
-    _.reduce(arr, function (obj, cartItem) {
-        var relatedItemId = cartItem.product.toString();
-        if (!obj[relatedItemId]) {
-            obj[relatedItemId] = {
-                inSameOrder: 0,
-                inSameCategory: product.category === cartItem.product.category,
-                ratioOfMatchingKeywords: _.intersection(product.keywords, cartItem.product.keywords).length / _.uniq(product.keywords, cartItem.product.keywords).length
-            }
-        }
-        obj[relatedItemId].inSameOrder++;
-        return obj;
-    });
+	//returns a promise for similarity obj
+	console.log('increate', arr);
+	var promisedArr = [];
+	//make array of products in arr (items in order)
+	for (var i = 0; i<arr.length; i++){
+		promisedArr.push(Product.findById(arr[i].product).exec());
+	}
+	return Promise.all(promisedArr)
+	.then(function(prodArr){
+		return _.reduce(prodArr, function (obj, popProd) {
+			console.log('cart item after pop', popProd)
+	        var relatedItemId = popProd._id;
+	        console.log('id', relatedItemId)
+	        console.log(product)
+	        if (!obj[relatedItemId]) {
+	            obj[relatedItemId] = {
+	                inSameOrder: 0,
+	                inSameCategory: product.category === popProd.category,
+	                ratioOfMatchingKeywords: _.intersection(product.keywords, popProd.keywords).length / _.uniq(product.keywords, popProd.keywords).length || 0
+	            }
+	        }
+	        obj[relatedItemId].inSameOrder++;
+	        console.log('obj after adding', obj)
+	        return obj;
+	    },{});
+	});
 }
 
 function findIndex(order, product) {
     var productIndex = -1;
-    order.products.some(function (cartItem) {
-        productIndex = R.findIndex(R.propEq(product._id, R.path(['product', '_id'], cartItem)));
+    order.products.some(function (cartItem, index) {
+    	if(cartItem.product.toString() === product._id.toString()) productIndex = index;
         return productIndex > -1;
     });
     return productIndex;
 }
 
 function calcSim(obj) {
+    //returns array of objects containing similarities between target object
+    //sorted by similarity score
     var arr = [];
     for(var key in obj) {
         var simScore = obj[key].inSameOrder * (1 + .4*obj[key].inSameCategory + .4*obj[key].ratioOfMatchingKeywords);
@@ -102,27 +119,41 @@ function calcSim(obj) {
     return arr.sort(function(a, b) {
         return b.score - a.score;
     });
-    //rseturns array of objects containing similarities between target object
-    //sorted by similarity score
 }
 
 
 schema.statics.getSimilarities = function (product, num) {
     //loop through Orders database and create hashtables for item and other items
-    this.findAll()
+    return this.find()
         .then(function (orders) {
-            var obj = {};
+            var allSharedProds = [];
             orders.forEach(function (order) {
-                if (findIndex(order, product)) {
-                    var newArr = _.without(order.products, order.products[productIndex]);
-                    obj = createOrEditObj(newArr, product)
+            	var productIndex = findIndex(order, product)
+                if (productIndex > -1) {
+                	// console.log('prod index', productIndex)
+                	console.log(order.products)
+                	//collect all the products that are in an order with the ref product
+                    allSharedProds = allSharedProds.concat(_.without(order.products, order.products[productIndex]));
+                    // console.log('newArr', newArr)
+                    // console.log('obj', obj)
+                    console.log('shared', allSharedProds);
+                    // console.log('obj after create', obj)
                 }
+               
             });
-            return obj;
+            return allSharedProds;
         })
+        .then(function(allSharedProds){
+        	//return object with sim props for each shared prop
+        	console.log('allSharedProds', allSharedProds)
+        	if (allSharedProds.length) return createOrEditObj(allSharedProds, product);
+        })
+        // return obj;
+        // })
         .then(function (obj) {
+        	// console.log('returning sim from db', obj)
             return calcSim(obj).slice(0, num);
-        })
+        });
 };
 
 

@@ -23,11 +23,11 @@
                 <div class="btn-group dropdown" dropdown dropdown-append-to-body>
                     <button type="button" class="btn btn-default dropdown-toggle search-param-toggle" dropdown-toggle>Search by product {{searchParam}} <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu">
-                        <li ng-repeat="paramOption in parmOptions track by $index" ng-click="setSearchParam(paramOption)">{{paramOption}}</li>
+                        <li ng-repeat="paramOption in paramOptions track by $index" ng-click="setSearchParam(paramOption)">{{paramOption}}</li>
                     </ul>
                 </div>
                 <input type="text" ng-model="searchStr" class="form-control"/>
-                <a ui-sref="product-list(setQueryParam())"><button class = "btn btn-default"><span class = "glyphicon glyphicon-search"></span></button></a>
+                <button ng-click="setQueryParam()" class = "btn btn-default"><span class = "glyphicon glyphicon-search"></span></button>
             </form>
         </div>
     </div>
