@@ -1,0 +1,19 @@
+.userBadge {
+	&:before {
+	    content: "";
+	    display: block;
+	    clear: both;
+	}
+	padding-top: 300px;
+  a { 
+	display: block;
+	font-size: 18px;
+  	}
+  img {
+  	display: block;
+  }
+}
+
+.mapBox {
+	@include clearfix;
+	}

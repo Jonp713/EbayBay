@@ -65,16 +65,16 @@ schema.methods.tax = function () {
 	});
 };
 
-schema.statics.getPopulatedOrders = function (searchParams, cb) {
+// schema.statics.getPopulatedOrders = function (searchParams, cb) {
 
-	return this.find(searchParams).exec(function(err, orders){
-		if (err) return cb(err);
-		orders.deepPopulate('products.product.user, products.product.location', function(err, _order){
-			if(err) return cb(err);
-			cb(null, _order);
-		});
-	});
-};
+// 	return this.find(searchParams).exec(function(err, orders){
+// 		if (err) return cb(err);
+// 		orders.deepPopulate('products.product.user, products.product.location', function(err, _order){
+// 			if(err) return cb(err);
+// 			cb(null, _order);
+// 		});
+// 	});
+// };
 
 
 mongoose.model('Order', schema);
