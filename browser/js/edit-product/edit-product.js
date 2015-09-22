@@ -18,13 +18,12 @@ app.config(function ($stateProvider) {
 app.controller('EditProductController', function ($scope, $state, product, states, ProductFactory) {
     $scope.states = states;
     $scope.product = product;
-  
-	 $scope.edit = function(){
+    $scope.edit = function(){
 		var productObj = angular.copy($scope.product);
 		productObj.keywords = productObj.keywords.map(function (element) {
 		  return element.text;
 		});
-				 
+
 	 	ProductFactory.update(product._id, productObj).then(function(item){
 	 		$state.go("product", {id: item._id});
 	 	});
