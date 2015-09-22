@@ -7,13 +7,20 @@ app.config(function($stateProvider) {
             resolve: {
                 product: function(ProductFactory, $stateParams) {
                     return ProductFactory.find($stateParams.id);
+                },
+                canEdit: function(AuthService, product) {
+                    return AuthService.getLoggedInUser()
+                    .then(function(user) {
+                            if(!user) return false;
+                            return product.user._id === user._id;
+                        })
                 }
             }
         });
 });
 
-app.controller('ProductController', function($scope, product, CartFactory, $state) {
-    //Quantity is set to one so adding one to the cart is the default
+app.controller('ProductController', function($scope, product, CartFactory, $state, AuthService, canEdit) {
+    $scope.canEdit = canEdit;
     $scope.quantity = 1;
     // console.log($scope.quantity);
     $scope.product = product;
