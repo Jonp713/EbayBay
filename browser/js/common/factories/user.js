@@ -26,6 +26,8 @@ app.factory('UserFactory', function (DS, ReviewFactory) {
 							} else {
 								result = "No Reviews";
 							}
+							if(	typeof result == "number" && result.toString().length > 3) result = result.toString().slice(0,3);
+							
 						return result;
 						});
 					}
