@@ -12,9 +12,22 @@
 		     <p ng-show='productForm.quantity.$error.max'>
 		     	<small>You have ordered more than are available</small>
 		     </p>
+		     <hr>
 		 </form>
 	</div>
-        <location-detail class = "col-xs-5" locations = "product.location"></location-detail>
+	<div class="col-xs-5">
+		<h4>Product location:</h4>
+	  	<location-detail class='mapBox' locations = "product.location"></location-detail>
+	</div >
+	<div class="col-xs-5" class='userBadge'>
+  		<h4>Sold by:</h4>
+		<a ui-sref="user({id: product.user._id})">{{product.user.firstName}}</a>
+  		<img class="img-responsive col-xs-4" ng-src="{{product.user.photoUrl}}">
+	</div>
+</div>
+<div>
+	<h4>You may also be interested in... </h4>
+	<div>Put Recomendations Here</div>
 </div>
 
 

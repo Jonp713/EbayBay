@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
         controller: 'OrderHistoryCtrl',
         resolve: {
             orders: function(OrderFactory, AuthService){
-                console.log('in order resolve')
+                // console.log('in order resolve');
                 return AuthService.getLoggedInUser().then(function(user){
                     return OrderFactory.findAll({user: user._id});
                 });
@@ -17,6 +17,6 @@ app.config(function ($stateProvider) {
 });
 
 app.controller('OrderHistoryCtrl', function ($scope, $state, orders) {
-    $scope.orders = orders,
-    console.log('orders', orders)
+    $scope.orders = orders;
+    // console.log('orders', orders);
 });
