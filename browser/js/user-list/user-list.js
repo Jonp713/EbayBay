@@ -5,19 +5,15 @@ app.config(function ($stateProvider) {
             templateUrl: 'js/user-list/user-list.html',
             controller: 'UserListCtrl',
             resolve: {
-                    userlist: function(UserFactory) {
-                        // console.log('in the resolve');
-                        // console.log($stateParams);
-                        return UserFactory.findAll({})
+                userlist: function(UserFactory) {
+                    return UserFactory.findAll({})
                         .then(function(elements){
-                            console.log(elements);
                             return elements;
                         });
                     }
             }
         });
 });
-
 
 app.controller("UserListCtrl", function($scope, UserFactory, userlist) {
     $scope.userlist = userlist;
