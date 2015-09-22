@@ -2,7 +2,7 @@
 	<span class = "user-profile col-xs-offset-1 col-xs-2">
 		<img class = "img-responsive" src="{{user.photoUrl}}">
 		<h3>
-		{{user.firstName}} {{user.lastName}}<a ng-show = "isAdmin" ui-sref="editUser({id: user._id})"><button class=" btn btn-default glyphicon glyphicon-edit"></button></a>
+		{{user.firstName}} {{user.lastName}}<a ng-show = "isAdmin()" ui-sref="editUser({id: user._id})"><button class=" btn btn-default glyphicon glyphicon-edit"></button></a>
 		<h5>
 		<h5 class = "glyphicon glyphicon-star">{{aggRating}}</h5>
 		<h5><a ui-sref = "product-list({user: user._id})">See my products</a></h5>

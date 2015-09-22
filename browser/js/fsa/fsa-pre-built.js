@@ -63,8 +63,9 @@
             return !!Session.user;
         };
         this.isAdmin = function () {
-            return !!Session.user.isAdmin;
-        };
+			  if(!this.isAuthenticated()) return false;
+           else return !!Session.user.isAdmin;
+        }.bind(this);
 
         this.getLoggedInUser = function (fromServer) {
 
