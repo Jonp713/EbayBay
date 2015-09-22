@@ -129,15 +129,15 @@ var seedUsers = function () {
 
     var users = [
         {
-            firstName: "James",
+            firstName: "Cara",
             lastName: "Maddy",
             email: 'jm@fsa.com',
             password: 'password',
             photoUrl: randPhoto()
         },
         {
-            firstName: "Jimmy",
-            lastName: "Carter",
+            firstName: "James",
+            lastName: "Carrier",
             email: 'carty@fsa.com',
             password: 'password',
             photoUrl: randPhoto()
@@ -152,12 +152,47 @@ var seedUsers = function () {
             photoUrl: randPhoto()
         },
         {
-            firstName: "Gabe",
-            lastName: "Neon",
+            firstName: "Casidy",
+            lastName: "Spencer",
+            email: 'cass@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
+        {
+            firstName: "Brett",
+            lastName: "Corey",
             email: 'gabe@fsa.com',
             password: 'password',
             photoUrl: randPhoto()
-        }
+        },
+        {
+            firstName: "Earnst",
+            lastName: "Coby",
+            email: 'ec@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
+        {
+            firstName: "Pace",
+            lastName: "Roscoe",
+            email: 'pr@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
+        {
+            firstName: "Darian",
+            lastName: "Malone",
+            email: 'dm@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
+        {
+            firstName: "Laurie",
+            lastName: "Whitaker",
+            email: 'laurie@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
     ];
 
     return User.createAsync(users);
@@ -379,10 +414,10 @@ var seedLocation = function(states) {
         zip: "11216"
     },
     {
-        street: "26 St Andrews Place",
+        street: "505 Franklin Ave",
         city: "Brooklyn",
         state: states[31]._id,
-        zip: "11216"
+        zip: "11238"
     },
     {
         street: "5 Hanover Square",
@@ -391,10 +426,28 @@ var seedLocation = function(states) {
         zip: "10004"
     },
     {
+        street: "64th St and 5th Ave",
+        city: "New York",
+        state: states[31]._id,
+        zip: "10021"
+    },
+    {
+        street: "207 Avenue A",
+        city: "New York",
+        state: states[31]._id,
+        zip: "10009"
+    },
+    {
         street: "1720 Grape Ave",
         city: "Boulder",
         state: states[4]._id,
         zip: "80304"
+    },
+    {
+        street: "71 Washington St",
+        city: "Bloonfield",
+        state: states[29]._id,
+        zip: "07003"
     }
     ];
     return Location.createAsync(location);
@@ -509,7 +562,7 @@ var seedOrders = function (users, products) {
         var orderProducts = [];
             //i must not be changed to a number higher than the number of products in the db
             //using this method instead of math.random so that we don't risk adding the same product twice
-        for (var i=0; i<3; i++){
+        for (var i=0; i<4; i++){
             orderProducts.push({
                 product: products[i]._id,
                 // Math.ceil will avoid giving 0 as quantity
