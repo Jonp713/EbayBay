@@ -409,7 +409,8 @@ var seedOrders = function (users, products) {
 
         var order = [{
             user: users[Math.floor(Math.random() * users.length)]._id,
-            products: orderProducts
+            products: orderProducts,
+            
         }];
 
         return Order.createAsync(order);

@@ -1,5 +1,5 @@
 
-app.factory('OrderFactory', function(DS) {
+app.factory('OrderFactory', function(DS, $http) {
     return DS.defineResource({
         name: 'orders',
         idAttribute: '_id',
@@ -10,20 +10,24 @@ app.factory('OrderFactory', function(DS) {
                     localField: 'user'
                 }
             },
-            hasMany: {
-                products: {
-                    localField: 'product',
-                    foreignKey: 'productId'
-                }
-            }
+            // hasMany: {
+            //     products: {
+            //         localField: 'products',
+            //         foreignKey: 'orderId'
+            //     }
+            // }
         },
         // methods: {
-        //     getTotal: function() {
-        //         this.products.reduce(function(total, prod.price)){
+        //     getPopulatedOrders: function(searchParams){
+
+        //         return $http.get('/orders', searchParams)
+        //     },
+            // getTotal: function() {
+            //     this.products.reduce(function(total, prod.price)){
                     
-        //         }
+            //     }
                 
-        //     })
+            // })
         // }
         
     });
