@@ -5,12 +5,25 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
         scope: {},
         templateUrl: 'js/common/directives/navbar/navbar.html',
         link: function (scope) {
+            scope.searchStr = '';
+            scope.paramOptions = ['name', 'user', 'category', 'keywords', 'location'];
+            scope.searchParam = 'name';
+
+            scope.setSearchParam = function(newSearchParam) {
+                scope.searchParam = newSearchParam;
+            };
+
+            scope.setQueryParam = function() {
+                var obj = {};
+                obj[scope.searchParam] = scope.searchStr;
+                return obj;
+            }
+
             scope.items = [
                 { label: 'Products', state: 'product-list'},
                 { label: 'Cart', state: 'cart' },
                 { label: "Add Product", state: "addProduct", auth: true},
                 { label: "Add Review", state: "addReview", auth: true},
-                { label: "Checkout", state: "order"},
                 { label: "Order History", state:"orderHistory", auth: true},
                 { label: "Users", state:"user-list", auth: true},
                 // { label: 'Documentation', state: 'docs' },
