@@ -16,7 +16,8 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.setQueryParam = function() {
                 var obj = {};
                 obj[scope.searchParam] = scope.searchStr;
-                return obj;
+                console.log('setQueryParam', obj)
+                $state.go('product-list', obj);
             };
 
             scope.items = [
