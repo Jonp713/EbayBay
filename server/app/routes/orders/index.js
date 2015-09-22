@@ -50,6 +50,7 @@ router.post('/', function(req, res, next) {
         .then(function(results) {
             results.deepPopulate('products.product.user products.product.location', function(err, order){
                 if (err) return next(err);
+                console.log('newly created order:', order.products[0]);
                 res.json(order);
             });
         });

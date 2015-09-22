@@ -86,6 +86,31 @@
 
         };
 
+        this.getLoggedInUserOrNone = function (fromServer) {
+            //this is just like getLoggedInUser, except it returns 
+            //a user object with user:'none' if the user is not logged in
+            
+            // If an authenticated session exists, we
+            // return the user attached to that session
+            // with a promise. This ensures that we can
+            // always interface with this method asynchronously.
+
+            // Optionally, if true is given as the fromServer parameter,
+            // then this cached value will not be used.
+
+            if (this.isAuthenticated() && fromServer !== true) {
+                return $q.when(Session.user);
+            }
+
+            // Make request GET /session.
+            // If it returns a user, call onSuccessfulLogin with the response.
+            // If it returns a 401 response, we catch it and instead resolve to null.
+            return $http.get('/getuser').catch(function () {
+                return null;
+            });
+
+        };
+
         this.login = function (credentials) {
             return $http.post('/login', credentials)
                 .then(onSuccessfulLogin)
@@ -129,5 +154,7 @@
         };
 
     });
+
+    
 
 })();
