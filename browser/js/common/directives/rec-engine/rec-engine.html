@@ -1,7 +1,14 @@
 
 <div>
 	<h3>Recommended Products</h3>
+	<div class='col-sm-4 col-xs-12' ng-repeat='rankedItem in recProds'>
+		<div>
+			<a ui-sref="product({id: rankedItem.product._id})">
+			<p class = "product-name">{{rankedItem.product.name}}</p></a>
+			<p class = "product-category">Category: {{rankedItem.product.category}}</p></a>
+			<p class = "product-price">{{rankedItem.product.price | currency}}</p></a>
+			<img class="img-responsive" ng-src="{{rankedItem.product.photo}}">
+			
+		</div>
 	
-	<product-list-item product='rankedItem.product' ng-repeat='rankedItem in recProds'>
-	    </product-list-item>
 </div>

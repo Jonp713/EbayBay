@@ -1,10 +1,11 @@
 .userBadge {
+	@include clearfix;
 	&:before {
 	    content: "";
 	    display: block;
 	    clear: both;
 	}
-	padding-top: 300px;
+	padding-top: 30px;
   a { 
 	display: block;
 	font-size: 18px;
@@ -17,3 +18,12 @@
 .mapBox {
 	@include clearfix;
 	}
+
+.rec {
+	&:before {
+	    content: "";
+	    display: block;
+	    clear: both;
+	}
+	padding-top: 300px;
+}
