@@ -4,8 +4,8 @@
     </h3>
     <button type='button' class='btn btn-default' ng-click='transmitToOrder()' ng-show="!updateCart">Go to Checkout</a></button>
     <hr>
-    <button type='button' ng-click='updateCart = !updateCart' ng-show="!updateCart">Modify</button>
-    <button type="submit" ng-show="updateCart" ng-click='updateCart=!updateCart'>Update</button>
+    <button type='button' ng-click='updateCart = !updateCart' class="btn btn-link" ng-show="!updateCart">Modify</button>
+    <button type="submit" ng-show="updateCart" class="btn btn-link" ng-click='updateCart=!updateCart'>Update</button>
     <div class='container'>
         <div ng-repeat="cartItem in cartItems">
             <div class="row">
@@ -13,7 +13,7 @@
                     <product-list-item product="cartItem.product"></product-list-item>
                 </div>
                 <div class="col-xs-12 col-sm-2 remove-and-update-item">
-                    <button ng-show="updateCart">Remove</button>
+                    <button class="btn btn-default" ng-show="updateCart">Remove</button>
                     <p ng-show="!updateCart">Qty: {{cartItem.quantity}}</p>
                     <input type="number" ng-model="cartItem.quantity" ng-show="updateCart"/>
                 </div>
