@@ -17,9 +17,6 @@
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" class = "pull-left" ui-sref="{{ item.state }}">{{ item.label }}</a>
             </li>
-            <li ng-show="isLoggedIn() && user.isAdmin">
-                <a ui-sref-active="active" class = "pull-left" ui-sref="{{ user.list }}">Users</a>
-            </li>
         </ul>
         <div class="navbar-header pull-left">
             <form name="searchForm" class="form-group form-inline search-navbar">
