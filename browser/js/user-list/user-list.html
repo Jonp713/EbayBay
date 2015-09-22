@@ -1,1 +1,24 @@
-<h3>This is the user list page</h3>
+<div class="container">
+  <div class="row">
+		<h3>All Users</h3>
+		<button>Modify Users</button>
+		<div ng-repeat='user in userlist'>
+			<div class="col-xs-9">
+				<hr>
+				<h3>{{user.firstName}}</h3>
+				<img class="img-responsive col-xs-4" ng-src="{{user.photoUrl}}">
+				<p>First Name: <span ng-model = "user.firstname">{{user.firstName}}</span>Last Name: <span ng-model = "user.lastname">{{user.lastName}}</span></p>
+				<!-- <p>Last Name: {{user.lastName}}</p> -->
+				<p>Admin Status: {{user.isAdmin}}</p>
+				<p>Email: {{user.email}}</p>
+				<p>Photo Url: {{user.photoUrl}}</p>
+				<!-- <p>Google: {{user.google}}</p> -->
+				<p>Cart: {{user.cart}}</p>
+			</div>
+		</div>
+   </div>
+</div>
+
+
+
+
