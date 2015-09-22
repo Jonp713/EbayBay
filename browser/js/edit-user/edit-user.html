@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="jumbotron text-center">
+        <div class="row">
+            <h2 class="pull-left">Edit a new user</h2>
+        </div>
+        <div class="row">
+            <form name="editUserForm" ng-submit="editUserForm.$valid">
+                <label class="pull-left" for="userName">Name</label>
+                <input type="text" class="form-control" name="userName" ng-model="user.name" required/>
+                <label for="userDescription" class="pull-left">Description</label>
+                <input type="text" class="form-control" name="userDescription" ng-model="user.description" required/>
+                <div class=" form-inline">
+                    <label for="userCategory">Category</label>
+                    <input type="text" class="form-control" name="userCategory" ng-model="user.category" required/>
+                    <label for="userPrice">Price</label>
+                    <input type="number" class="form-control" name="userPrice" ng-model="user.price" min="0.01" required/>
+                    <label for="userQuantity">Quantity</label>
+                    <input type="number" class="form-control" name="userQuantity" ng-model="user.quantity" placeholder="1" min="0" required/>
+                </div>
+                <label for="userState">State</label>
+                <select name="" ng-options="state.name for state in states" ng-model="user.location.state" required></select>
+                <label class="pull-left">Street Address</label>
+                <input type="text" class="form-control" ng-model="user.location.street" required/>
+                <label class="pull-left">City</label>
+                <input type="text" class="form-control" ng-model="user.location.city" required/>
+                <label class="pull-left">Zip</label>
+                <input type="text" class="form-control" ng-model="user.location.zip" required/>
+                <label class="pull-left" for="userPhoto">Photo Url</label>
+                <input type="text"class="form-control" name="userPhoto" ng-model="user.photo"/>
+
+                <tags-input ng-model="user.keywords"></tags-input>
+                <button type="submit" class="btn btn-success pull-left">Edit</button>
+            </form>
+        </div>
+    </div>
+</div>
