@@ -2,9 +2,7 @@
 var crypto = require('crypto');
 var mongoose = require('mongoose');
 var Promise = require('bluebird');
-require('./order.js'); //Remove
-require('./product.js');//Remove
-var Order = mongoose.model('Order');//Remove
+var Order = mongoose.model('Order');
 var Product = mongoose.model('Product');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var deepPopulate = require('mongoose-deep-populate')(mongoose);
@@ -181,11 +179,11 @@ schema.method('mergeCart', function(sessionCart, cb) {
     //remove the matched product from the session cart
     if (idx) sessionCart.splice(idx, 1);
   });
-  
+
   sessionCart.forEach(function(cartItem){
     self.cart.push({product:cartItem.product._id, quantity: cartItem.quantity})
   });
-        
+
   return this.save(function(err, user) {
       if(err) return cb(err);
       user.deepPopulate('cart.product, cart.product.user, cart.product.location', function(err, _user) {
