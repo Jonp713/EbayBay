@@ -181,14 +181,18 @@ schema.method('mergeCart', function(sessionCart, cb) {
     //remove the matched product from the session cart
     if (idx) sessionCart.splice(idx, 1);
   });
-        this.cart.concat(sessionCart);
-    return this.save(function(err, user) {
-        if(err) return cb(err);
-        user.deepPopulate('cart.product, cart.product.user, cart.product.location', function(err, _user) {
-            if(err) return cb(err);
-            cb(null, _user);
-        })
-    });
+  
+  sessionCart.forEach(function(cartItem){
+    self.cart.push({product:cartItem.product._id, quantity: cartItem.quantity})
+  });
+        
+  return this.save(function(err, user) {
+      if(err) return cb(err);
+      user.deepPopulate('cart.product, cart.product.user, cart.product.location', function(err, _user) {
+          if(err) return cb(err);
+          cb(null, _user);
+      })
+  });
 });
 
 mongoose.model('User', schema);

@@ -1,8 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
-// var deepPopulate = require('mongoose-deep-populate')(mongoose);
-var autopopulate = require('mongoose-autopopulate');
+var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 
 var schema = new mongoose.Schema({
@@ -12,7 +11,7 @@ var schema = new mongoose.Schema({
 	},
 	products: [{
 		quantity: {type: Number, min: 0},
-		product: {type: ObjectId, ref: 'Product', autopopulate: true}
+		product: {type: ObjectId, ref: 'Product'}
 	}],
 	date: {
 		type: Date,
@@ -32,11 +31,19 @@ var schema = new mongoose.Schema({
 		expire: String,
 		csv: String
 	},
-	total: {type: Number, min: 0},
-	submitted: Boolean
+	total: {
+		type: Number, 
+		min: 0
+	},
+	status: {
+		type:String, 
+		enum: ['created', 'processing', 'cancelled', 'completed'], 
+		default: 'created'
+	}
 });
 
-schema.plugin(autopopulate);
+schema.plugin(deepPopulate, {});
+
 
 // schema.methods.total = function () {
 // 	return 20;
@@ -55,6 +62,17 @@ schema.virtual('shipping').get(function() {
 schema.methods.tax = function () {
 	return this.total().then(function(total){
 		return total * 0.07;
+	});
+};
+
+schema.statics.getPopulatedOrders = function (searchParams, cb) {
+
+	return this.find(searchParams).exec(function(err, orders){
+		if (err) return cb(err);
+		orders.deepPopulate('products.product.user, products.product.location', function(err, _order){
+			if(err) return cb(err);
+			cb(null, _order);
+		});
 	});
 };
 

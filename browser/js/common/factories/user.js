@@ -8,7 +8,7 @@ app.factory('UserFactory', function (DS, ReviewFactory) {
             hasMany: {
                 products: {
                     localField: 'products',
-                    foreignKey: 'userId'
+                    localKey: 'userId'
                 }
             }
         },
