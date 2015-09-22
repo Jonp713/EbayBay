@@ -24,3 +24,8 @@ app.controller("UserListCtrl", function($scope, UserFactory, userlist) {
 	 	});
 	 }
 });
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> 4418a3127b8bd6125cd9800d0244ef77206e124b
