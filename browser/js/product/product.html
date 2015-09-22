@@ -1,14 +1,14 @@
-<span class = "col-xs-11 col-xs-offset-1">
+<div class = "col-xs-11 col-xs-offset-1">
 
-	<span class = "col-xs-6">
-		<h3>{{product.name}}</h3>
+	<div class = "col-xs-6">
+		<h3>{{product.name}}</h3> <span><a ui-sref="product.edit"><span><button class="glyphicon glyphicon-edit"></button></span></a></span>
 		<img class = "img-responsive" src="{{product.photo}}"/>
 		<h6>Cost: ${{product.price}}</h6>
 		<h6>Category: {{product.category}}</h6>
 		<h>Qty Available: {{product.quantity}}</h6>
-	
+
 		<h5>Description: {{product.description}}</h5>
-		
+
 		 <form name="productForm" ng-submit="productForm.$valid && addToCart()">
 		     <button type="submit">Add to Cart</button>
 		     <input type="number" name='quantity' placeholder='quantity' ng-model="quantity" ng-max='product.quantity'/>
@@ -16,11 +16,11 @@
 		     	<small>You have ordered more than are available</small>
 		     </p>
 		 </form>
-	</span>
-	
+	</div>
+
  	<location-detail class = "col-xs-5" locations = "product.location"></location-detail>
-	
-</span>
+    <ui-view></ui-view>
+</div>
 
 
 
