@@ -10,7 +10,7 @@ app.config(function ($stateProvider) {
 			UserFactory.find(user._id).then(function(user){
 				return user.aggRating();
 			}).then(function(aggRating){
-				aggRating = aggRating.toString().slice(0,3);
+				if(	typeof aggRating == "number") aggRating = aggRating.toString().slice(0,3);
 				$scope.aggRating = aggRating;
 			});
         	//view products => change to product filter state
