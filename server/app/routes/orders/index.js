@@ -14,13 +14,12 @@ var missingItemHandler = function(error, cb) {
 
 router.param('orderId', function(req, res, next, id) {
     Order.findById(id)
-        .then(function(element) {
-            req.order = element;
-            next();
-        })
-        .then(null, function(error) {
-            missingItemHandler(error, next);
-        });
+    .deepPopulate('products.product.user products.product.location')
+    .exec(function(err, order){
+        if(err) return missingItemHandler(error, next);
+        req.order = order;
+        next();
+    });
 });
 
 router.get('/:orderId', function(req, res, next) {
@@ -35,7 +34,9 @@ router.get('/:orderId', function(req, res, next) {
 // });
 
 router.get('/', function(req, res, next) {
-    Order.find(req.query).deepPopulate('products.product.user products.product.location').exec(function(err, orders){
+    Order.find(req.query)
+    .deepPopulate('products.product.user products.product.location')
+    .exec(function(err, orders){
         if(err) return next(err);
         res.json(orders);
     });
@@ -47,9 +48,11 @@ router.post('/', function(req, res, next) {
     // if user is admin, should be able to create product on anyones page
     Order.create(req.body)
         .then(function(results) {
-            res.json(results);
-        })
-        .then(null, next);
+            results.deepPopulate('products.product.user products.product.location', function(err, order){
+                if (err) return next(err);
+                res.json(order);
+            });
+        });
 });
 
 //router.put('/:productId', function(req, res, next) {

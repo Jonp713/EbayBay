@@ -2,7 +2,7 @@
     <h3>
         Shopping Cart
     </h3>
-    <span ng-show="!updateCart"><a ui-sref="order">Go to Checkout</a></span>
+    <button type='button' class='btn btn-default' ng-click='transmitToOrder()' ng-show="!updateCart">Go to Checkout</a></button>
     <hr>
     <button type='button' ng-click='updateCart = !updateCart' ng-show="!updateCart">Modify</button>
     <button type="submit" ng-show="updateCart" ng-click='updateCart=!updateCart'>Update</button>

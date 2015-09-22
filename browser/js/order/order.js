@@ -1,23 +1,21 @@
 app.config(function ($stateProvider) {
 
     $stateProvider.state('order', {
-        url: '/order',
+        url: '/orders/:id',
         templateUrl: 'js/order/order.html',
         controller: 'OrderCtrl',
-        // resolve: {
-        //     // orders: function(OrderFactory, AuthService){
-        //     //     console.log('in order resolve')
-        //     //     return AuthService.getLoggedInUser().then(function(user){
-        //     //         console.log('legloggedinuser', user)
-        //     //         return OrderFactory.findAll({user: user._id});
-        //     //     });
-        //     // }
-        // }
+        resolve: {
+            order: function(OrderFactory, $stateParams){
+                console.log($stateParams)
+                return OrderFactory.find($stateParams.id)
+            }
+        }
     });
 
 });
 
-app.controller('OrderCtrl', function ($scope, OrderFactory, $state) {
+app.controller('OrderCtrl', function ($scope, OrderFactory, $state, order) {
+    $scope.order = order;
     $scope.checkout = function(){
         console.log('checking out')
     }
