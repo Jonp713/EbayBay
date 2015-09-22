@@ -13,11 +13,9 @@ app.config(function ($stateProvider) {
 				$scope.aggRating = aggRating;
 			});
 			
-         $scope.isAdmin = AuthService.isAdmin();
+         $scope.isAdmin = AuthService.isAdmin;
 			
 			$scope.isLoggedIn = AuthService.isAuthenticated;
-        	//view products => change to product filter state
-        	//ui-sref="product-list({userId: user._id})"
         }, 
         resolve: {
         	user: function(UserFactory, $stateParams){
