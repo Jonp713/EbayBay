@@ -62,6 +62,9 @@
         this.isAuthenticated = function () {
             return !!Session.user;
         };
+        this.isAdmin = function () {
+            return !!Session.user.isAdmin;
+        };
 
         this.getLoggedInUser = function (fromServer) {
 
