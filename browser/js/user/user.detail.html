@@ -1,14 +1,12 @@
 <div class = "col-xs-12">
 	<span class = "user-profile col-xs-offset-1 col-xs-2">
 		<img class = "img-responsive" src="{{user.photoUrl}}">
-		<br>
-		{{user.firstName}} {{user.lastName}}
-		<br>
-		<span class = "glyphicon glyphicon-star">{{aggRating}}</span>
-		<br>
-		<a ui-sref = "product-list({user: user._id})">See my products</a><br>
+		<h3>
+		{{user.firstName}} {{user.lastName}}<a ui-sref="editUser({id: user._id})"><button class=" btn btn-default glyphicon glyphicon-edit"></button></a>
+		<h5>
+		<h5 class = "glyphicon glyphicon-star">{{aggRating}}</h5>
+		<h5><a ui-sref = "product-list({user: user._id})">See my products</a></h5>
 		<a ng-show="isLoggedIn()" ui-sref = "addReview({userId: user._id})">Write a review</a>
-		<br><br>
 	</span>
 	<span class = "user-profile col-xs-7">
 		<div class = "white-bg">
