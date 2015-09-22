@@ -6,12 +6,12 @@ app.directive('recProducts', function(UserFactory) {
         	products: function(ProductFactory) {
         		return ProductFactory.find();
         	}
-        }
+        },
         scope: {
 
             // recommendedProducts: '='
         },
-       	link: 
+       	link: {}
 
     };
 });
