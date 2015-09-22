@@ -4,7 +4,7 @@
 		<p>sold by <a ui-sref="user({id: product.user._id})">{{product.user.firstName}}</a></p>
 		<hr>
 		<p>Description: {{product.description}}</p>
-		<p>Cost: ${{product.price}}</p>
+		<p>Cost: {{product.price | currency}}</p>
 		<p>Category: {{product.category}}</p>
 		<p>Location: {{product.location.city}}</p>
 	</div>

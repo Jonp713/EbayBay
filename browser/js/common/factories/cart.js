@@ -4,7 +4,6 @@ app.factory('CartFactory', function($http, AuthService, $state) {
     }
 
     var removeFromCart = function(product){
-        console.log('in the removeFromCart');
         return $http.delete('/api/cart/'+product._id);
 
     }
@@ -12,7 +11,6 @@ app.factory('CartFactory', function($http, AuthService, $state) {
     var getCart = function() {
         return $http.get('/api/cart/')
         .then(function(response) {
-            console.log('cart on front end', response.data)
                 return response.data;
             })
     }
@@ -24,16 +22,17 @@ app.factory('CartFactory', function($http, AuthService, $state) {
             });
     };
         var transmitToOrder = function(cartObj){
-        return AuthService.getLoggedInUser()
+        return AuthService.getLoggedInUserOrNone()
             .then(function(user){
+                console.log('user', user)
                 var newOrder = {
-                    products: cartObj,
-                    user: user
+                    products: cartObj
                 };
+                if(user._id) newOrder.user = user;
                 $http.post('/api/orders/', newOrder)
                 .then(function(order){
-                    console.log(order._id)
-                    $state.go('order', {id: order._id});
+                    console.log('order passed to state.go', order.data)
+                    $state.go('order', {id: order.data._id});
                 });
                
                 

@@ -51,9 +51,9 @@
     </form>
     <hr>
     <h4>Order Summary</h4>
-    <div >
-        <hr>
-        Items:
+    <hr>
+        <div class="container">
+            Items:
             <div ng-repeat="cartItem in order.products">
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 item-container">
@@ -66,11 +66,30 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="container"
+            <span>Shipping &amp handling:</span><br>
+            <span>Total before tax:</span><br>
+            <span>Estimated tax:</span><br>
+            <span>Order total:</span><br>
+        </div>
+        <hr>
+    <div>
+        <h4>Recommendations</h4>
+        <div class="container">
+            <h5>Based on the items in your cart, you may be interested in the following</h5>
+            <div>Put reccomendations here</div><hr>
+        </div>
+
     </div>
-    <div>Shipping &amp handling:</div>
-    <div>Total before tax:</div>
-    <div>Estimated tax:</div>
-    <div>Order total:</div>
+
+
+
+
+
+
+
+
     
 </div>
 </form>

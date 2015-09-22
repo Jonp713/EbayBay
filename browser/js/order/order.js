@@ -6,7 +6,7 @@ app.config(function ($stateProvider) {
         controller: 'OrderCtrl',
         resolve: {
             order: function(OrderFactory, $stateParams){
-                console.log($stateParams)
+                console.log('stateParams', $stateParams)
                 return OrderFactory.find($stateParams.id)
             }
         }
@@ -16,6 +16,7 @@ app.config(function ($stateProvider) {
 
 app.controller('OrderCtrl', function ($scope, OrderFactory, $state, order) {
     $scope.order = order;
+    console.log('order in order ctlr', order)
     $scope.checkout = function(){
         console.log('checking out')
     }
