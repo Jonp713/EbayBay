@@ -3,6 +3,7 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var Order = mongoose.model('Order');
+// var deepPopulate = require('mongoose-deep-populate')(mongoose);
 
 var missingItemHandler = function(error, cb) {
     error.status = 404;
@@ -26,13 +27,18 @@ router.get('/:orderId', function(req, res, next) {
     res.json(req.order);
 });
 
+// router.get('/', function(req, res, next) {
+//     Order.getPopulatedOrders(req.query, function(err, orders){
+//         if(err) return next(err);
+//         res.json(orders);
+//     });
+// });
+
 router.get('/', function(req, res, next) {
-    Order.find(req.query)
-        //req.query will contain search params for filtering products
-        .then(function(results) {
-            res.json(results);
-        })
-        .then(null, next);
+    Order.find(req.query).deepPopulate('products.product.user products.product.location').exec(function(err, orders){
+        if(err) return next(err);
+        res.json(orders);
+    });
 });
 
 router.post('/', function(req, res, next) {

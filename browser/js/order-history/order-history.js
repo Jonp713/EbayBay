@@ -1,14 +1,13 @@
 app.config(function ($stateProvider) {
 
-    $stateProvider.state('pastOrders', {
+    $stateProvider.state('orderHistory', {
         url: '/order/history',
-        templateUrl: 'js/past-orders/past-orders.html',
-        controller: 'OrderCtrl',
+        templateUrl: 'js/order-history/order-history.html',
+        controller: 'OrderHistoryCtrl',
         resolve: {
             orders: function(OrderFactory, AuthService){
                 console.log('in order resolve')
                 return AuthService.getLoggedInUser().then(function(user){
-                    console.log(user)
                     return OrderFactory.findAll({user: user._id});
                 });
             }
@@ -17,7 +16,7 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('PastOrderCtrl', function ($scope, OrderFactory, $state, orders) {
+app.controller('OrderHistoryCtrl', function ($scope, $state, orders) {
     $scope.orders = orders,
     console.log('orders', orders)
 });
