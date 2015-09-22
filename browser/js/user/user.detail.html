@@ -6,8 +6,8 @@
 		<br>
 		<span class = "glyphicon glyphicon-star">{{aggRating}}</span>
 		<br>
-		<a ui-sref = "product-list({userId: user._id})">See my products</a><br>
-		<a ui-sref = "addReview({userId: user._id})">Write a review</a>
+		<a ui-sref = "product-list({user: user._id})">See my products</a><br>
+		<a ng-show="isLoggedIn()" ui-sref = "addReview({userId: user._id})">Write a review</a>
 		<br><br>
 	</span>
 	<span class = "user-profile col-xs-7">

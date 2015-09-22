@@ -2,7 +2,7 @@ app.config(function ($stateProvider) {
     $stateProvider.state('user', {
         url: '/users/:id',
         templateUrl: 'js/user/user.detail.html',
-        controller: function($scope, user, reviews, UserFactory){
+        controller: function($scope, user, reviews, UserFactory, AuthService){
 						
         	$scope.user = user;			
         	$scope.reviews = reviews;
@@ -13,6 +13,8 @@ app.config(function ($stateProvider) {
 				if(	typeof aggRating == "number") aggRating = aggRating.toString().slice(0,3);
 				$scope.aggRating = aggRating;
 			});
+			
+			$scope.isLoggedIn = AuthService.isAuthenticated;
         	//view products => change to product filter state
         	//ui-sref="product-list({userId: user._id})"
         }, 
