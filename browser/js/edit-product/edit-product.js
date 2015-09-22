@@ -18,5 +18,4 @@ app.config(function ($stateProvider) {
 app.controller('EditProductController', function ($scope, $state, product, states) {
     $scope.states = states;
     $scope.product = product;
-    console.log("YOOO ",product);
 });

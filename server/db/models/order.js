@@ -32,12 +32,12 @@ var schema = new mongoose.Schema({
 		csv: String
 	},
 	total: {
-		type: Number, 
+		type: Number,
 		min: 0
 	},
 	status: {
-		type:String, 
-		enum: ['created', 'processing', 'cancelled', 'completed'], 
+		type:String,
+		enum: ['created', 'processing', 'cancelled', 'completed'],
 		default: 'created'
 	}
 });
@@ -75,6 +75,7 @@ schema.statics.getPopulatedOrders = function (searchParams, cb) {
 		});
 	});
 };
+
 
 
 mongoose.model('Order', schema);
