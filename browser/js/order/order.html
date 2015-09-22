@@ -50,10 +50,8 @@
         </div>
     </form>
     <hr>
-    <h4>Order Summary</h4>
-    <hr>
+    <h4>Review Items</h4>
         <div class="container">
-            Items:
             <div ng-repeat="cartItem in order.products">
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 item-container">
@@ -61,35 +59,28 @@
                     </div>
                     <div class="col-xs-12 col-sm-2 remove-and-update-item">
                         <button>Remove</button>
-                        <p ng-show="!updateCart">{{cartItem.quantity}}</p>
+                        <p ng-show="!updateCart">Qty: {{cartItem.quantity}}</p>
                         <input type="number" ng-model="cartItem.quantity" ng-show="updateCart"/>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container"
-            <span>Shipping &amp handling: {{order.shippingCosts}}</span><br>
-            <span>Total before tax: {{order.preTaxTotal}}</span><br>
-            <span>Estimated tax: {{order.estTax}}</span><br>
-            <span>Order total: {{order.total}}</span><br>
+        <hr>
+        <h4>Order Summary</h4>
+        <div class="container">
+            <div>Shipping &amp handling: {{order.shippingCosts}}</div>
+            <div>Total before tax: {{order.preTaxTotal}}</div>
+            <div>Estimated tax: {{order.estTax}}</div>
+            <div>Order total: {{order.total}}</div>
         </div>
         <hr>
-    <div>
-        <h4>Recommendations</h4>
+    <h4>Recommendations</h4>
         <div class="container">
             <h5>Based on the items in your cart, you may be interested in the following</h5>
-            <div>Put reccomendations here</div><hr>
+            <div>Put reccomendations here</div><br>
         </div>
 
     </div>
 
-
-
-
-
-
-
-
-    
 </div>
 </form>
