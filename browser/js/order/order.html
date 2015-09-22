@@ -68,10 +68,10 @@
         <hr>
         <h4>Order Summary</h4>
         <div class="container">
-            <div>Shipping &amp handling: {{order.shippingCosts}}</div>
-            <div>Total before tax: {{order.preTaxTotal}}</div>
-            <div>Estimated tax: {{order.estTax}}</div>
-            <div>Order total: {{order.total}}</div>
+            <div>Subtotal: {{preTaxTotal() | currency}}</div>
+            <div>Estimated tax: {{estTax() | currency}}</div>
+            <div>Shipping &amp handling: {{shippingCosts() | currency}}</div>
+            <div>Order total: {{total() | currency}}</div>
         </div>
         <hr>
     <h4>Recommendations</h4>
