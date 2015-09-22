@@ -4,7 +4,7 @@
             <h2 class="pull-left">Edit a new Product</h2>
         </div>
         <div class="row">
-            <form name="editProductForm" ng-submit="editProductForm.$valid">
+            <form name="editProductForm" ng-submit="editProductForm.$valid && edit()" novalidate>
                 <label class="pull-left" for="productName">Name</label>
                 <input type="text" class="form-control" name="productName" ng-model="product.name" required/>
                 <label for="productDescription" class="pull-left">Description</label>
@@ -17,14 +17,6 @@
                     <label for="productQuantity">Quantity</label>
                     <input type="number" class="form-control" name="productQuantity" ng-model="product.quantity" placeholder="1" min="0" required/>
                 </div>
-                <label for="productState">State</label>
-                <select name="" ng-options="state.name for state in states" ng-model="product.location.state" required></select>
-                <label class="pull-left">Street Address</label>
-                <input type="text" class="form-control" ng-model="product.location.street" required/>
-                <label class="pull-left">City</label>
-                <input type="text" class="form-control" ng-model="product.location.city" required/>
-                <label class="pull-left">Zip</label>
-                <input type="text" class="form-control" ng-model="product.location.zip" required/>
                 <label class="pull-left" for="productPhoto">Photo Url</label>
                 <input type="text"class="form-control" name="productPhoto" ng-model="product.photo"/>
 

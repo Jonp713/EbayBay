@@ -17,16 +17,15 @@ app.config(function ($stateProvider) {
 
 app.controller("UserListCtrl", function($scope, UserFactory, userlist) {
     $scope.userlist = userlist;
-    console.log(userlist);
+	 
+	 $scope.edit = function(){ 
+	 	ProductFactory.update(product._id, $scope.user).then(function(item){
+	 		$state.go("product", {id: item._id});
+	 	});
+	 }
 });
+<<<<<<< HEAD
 
 
-// app.controller('StoryDetailCtrl', function ($scope, story, users, Auth) {
-// 	$scope.story = story;
-// 	$scope.users = users;
-// 	console.log("in scope: ", Auth.isLoggedIn());
-// 	$scope.isLoggedIn = Auth.isLoggedIn();
-// 	$scope.$watch('story', function () {
-// 		$scope.story.save();
-// 	}, true);
-// });
+=======
+>>>>>>> 4418a3127b8bd6125cd9800d0244ef77206e124b

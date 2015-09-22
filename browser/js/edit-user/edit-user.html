@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="jumbotron text-center">
+        <div class="row">
+            <h2 class="pull-left">Edit a new user</h2>
+        </div>
+        <div class="row">
+            <form name="editUserForm" ng-submit="editUserForm.$valid && edit()">
+                <label class="pull-left" for="userFirstName">First Name</label>
+                <input type="text" class="form-control" name="userName" ng-model="user.firstName" required/>
+                <label class="pull-left" for="userLastName">Name</label>
+                <input type="text" class="form-control" name="userName" ng-model="user.lastName" required/>
+               <label class="pull-left" for="userEmail">Name</label>
+               <input type="text" class="form-control" name="userEmail" ng-model="user.email" required/>
+               <label class="pull-left" for="userIsAdmin">IsAdmin</label>
+               <input type="checkbox" class = "form-control" ng-model="user.isAdmin" ng-checked="user.isAdmin" name = "userIsAdmin">
+                <label class="pull-left" for="userPhoto">Photo Url</label>
+					 
+                <input type="text"class="form-control" name="userPhoto" ng-model="user.photoUrl"/>
+
+                <button type="submit" class="btn btn-success pull-left">Edit</button>
+            </form>
+        </div>
+    </div>
+</div>
