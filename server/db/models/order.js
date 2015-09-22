@@ -86,6 +86,7 @@ function createOrEditObj(arr, product) {
 	        console.log(product)
 	        if (!obj[relatedItemId]) {
 	            obj[relatedItemId] = {
+	            	product: popProd,
 	                inSameOrder: 0,
 	                inSameCategory: product.category === popProd.category,
 	                ratioOfMatchingKeywords: _.intersection(product.keywords, popProd.keywords).length / _.uniq(product.keywords, popProd.keywords).length || 0
@@ -113,7 +114,7 @@ function calcSim(obj) {
     var arr = [];
     for(var key in obj) {
         var simScore = obj[key].inSameOrder * (1 + .4*obj[key].inSameCategory + .4*obj[key].ratioOfMatchingKeywords);
-        var newObj = {id: key, score: simScore};
+        var newObj = {id: key, product: obj[key].product, score: simScore};
         arr.push(newObj);
     }
     return arr.sort(function(a, b) {
