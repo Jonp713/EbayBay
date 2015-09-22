@@ -80,6 +80,12 @@ var seedReviews = function(users) {
     {
         byUser: users[Math.floor(Math.random() * users.length)]._id,
         aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Has anyone else tried pouring this stuff over dry cereal? A-W-E-S-O-M-E!",
+        stars: 4
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
         content: "no warranty on car! damaged with use! seller will not refund my money.. BEWARE!",
         stars: 1
     },
@@ -111,6 +117,36 @@ var seedReviews = function(users) {
         byUser: users[Math.floor(Math.random() * users.length)]._id,
         aboutUser: users[Math.floor(Math.random() * users.length)]._id,
         content: "Honda R-Type sticker did not add horsepower as advertised.",
+        stars: 5
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "What can I say about the 571B Banana Slicer that hasnt already been said about the wheel, penicillin, or the iPhone?",
+        stars: 5
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Unfortunately I already had this exact picture tattooed on my chest, but this shirt is very useful in colder weather.",
+        stars: 3
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Its OK Iguess, but the bumpy road majkes it hard to type. And therees a lot of pedeestrians and traffic that keep distracting me fromm my computer.",
+        stars: 4
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "The cable knew where to go, and hooked itself into the correct ports without help from me.",
+        stars: 5
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "It is not cat food…. The cat's huge and well, doesn't really look much like a cat anymore",
         stars: 5
     },
     {
@@ -460,6 +496,7 @@ var seedProducts = function (users, location) {
             name: "belly button lint",
             price: 32,
             description: "I have a collection of belly button lint, will trade for muscle car, herley, rifles, gold coins work also or make cash offer. Also interested in motor cycles, no lowball serious only willing to split if you have what I'm looking for,,",
+            keywords: ["human", "willing to trade"],
             photo: "http://ak-hdl.buzzfed.com/static/2014-06/9/8/enhanced/webdr07/enhanced-8194-1402316194-17.png",
             category: "Human",
             user: users[Math.floor(Math.random() * users.length)]._id,
@@ -470,6 +507,7 @@ var seedProducts = function (users, location) {
             name: "J. Fred Muggs!",
             price: 425,
             description: "Dave Garroway's lovable chimpanzee sidekick on the original Today show, was actually a nasty ol' critter who once knocked a March of Dimes poster girl off her crutches. The garrulous Garroway, meanwhile, would psych himself for each show by consulting what he called the Doctor--liquid codeine, which he would swig daily before airtime.",
+            keywords: ["animal", "cute", "loveable", "live"],
             photo: "http://weknowyourdreams.com/images/monkey/monkey-02.jpg",
             category: "Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
@@ -480,6 +518,7 @@ var seedProducts = function (users, location) {
             name: "rifraf",
             price: 75,
             description: "Bluegrass song and a well-used couch",
+            keywords: ["human", "song", "furniture"],
             photo: "http://i.ytimg.com/vi/y3hNju5yDhE/maxresdefault.jpg",
             category: "Furniture",
             user: users[Math.floor(Math.random() * users.length)]._id,
@@ -490,6 +529,7 @@ var seedProducts = function (users, location) {
             name: "Bacon balm",
             price: 4,
             description: "Just carry around a tube of this Bacon Lip Balm and you can keep your lips moist and meaty around the clock. Warning: Your lips will smell like bacon, but they are not bacon.",
+            keywords: ["bacon", "animal", "yumm"],
             photo: "http://mcphee.com/shop/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/b/a/bacon_lip_balm.jpg",
             category: "Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
@@ -500,6 +540,7 @@ var seedProducts = function (users, location) {
             name: "This project is my life bear!",
             price: 26034,
             description: "Grant's Bears. Small kinship group. Girls been together for six months. Good friends. Stallion was next to mares for 3 months and in with them for 3 months, stallion bred zinnia one month ago. Have pics. May have bred zuri, but we didn't see. 1 stallion and two mares, $19,500 for trio. Stallion ,Zutali, 8 years old. Proven. Mare, Zuri, 12 years old. Mare, Zinnia, 9 years old. Zuri has been handled some and allows petting, has been haltered carefully a couple of times. Zinnia is not handled but is fine in close contact. Zutali is good in close contact and has been completely non aggressive with people and is gentle with his mares. His previous owner says he breeds donkeys too.",
+            keywords: ["animal", "live", "living", "buyer beware", "bear"],
             photo: "http://www.blueeyedyonder.com/wp-content/uploads/2011/12/grizzly1.jpg",
             category: "Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
@@ -510,6 +551,7 @@ var seedProducts = function (users, location) {
             name: "Napoleon's hair",
             price: 9000,
             description: "The hair was cut from his head after he died in exile in 1821 on St Helena by Denzil Ibbetson, commissionary officer on the during the French Emperor's incarceration on the island. The lock is one of 40 lots of memorabilia from Napoleon up for auction.",
+            keywords: ["human", "antique", "politics"],
             photo: "http://i.telegraph.co.uk/multimedia/archive/01669/napoleon-hair_1669762c.jpg",
             category: "Human",
             user: users[Math.floor(Math.random() * users.length)]._id,
@@ -520,6 +562,7 @@ var seedProducts = function (users, location) {
             name: "The Best Milkshake ever!",
             price: 205,
             description: "Purple Haze",
+            keywords: ["food", "amazing", "yumm"],
             photo: "https://thenypost.files.wordpress.com/2014/07/140707_cordon_gp_9.jpg",
             category: "Milkshake",
             user: users[Math.floor(Math.random() * users.length)]._id,
@@ -531,6 +574,7 @@ var seedProducts = function (users, location) {
             name: "A tub of 1,500 live ladybirds.",
             price: 9,
             description: "Live adult ladybugs. Prefer to eat Aphids. Can devour up to 50 Aphids a day. Will not harm vegetarian.",
+            keywords: ["animal", "bugs", "spots"],
             photo: "http://4.bp.blogspot.com/-Djel3yAcCFw/UWine3SyBMI/AAAAAAAAAus/kHd2p38LK4g/s1600/Ladybugs+001.JPG",
             category: "Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
@@ -539,13 +583,36 @@ var seedProducts = function (users, location) {
         },
         {
             name: "James the giant bear",
-            price: 15,
+            price: 35,
             description: "Not a Fullstack Mascot",
+            keywords: ["bear", "animal", "mascot", "priceless", "stuffed animal"],
             photo: "http://cdn1.bigcommerce.com/server1900/dee9d/product_images/theme_images/Giant_Teddy_Bears_at_Park_.jpg?t=1439493405",
             category: "Stuffed Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 5
+        },
+        {
+            name: "Human-size hampster wheel",
+            price: 0,
+            description: "Free human sized hampster wheel available for pick-up. Can accomodate up to 200lbs. Fully functional. Not reccomended for houses with small children or animals. 50lbs of newspaper also available.",
+            keywords: ["hampster", "wheel", "priceless"],
+            photo: "http://ak-hdl.buzzfed.com/static/2014-06/9/9/enhanced/webdr06/enhanced-20749-1402321459-28.png",
+            category: "Ranom Stuff",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 1
+        },
+        {
+            name: "A nicolse case pillowcase cover",
+            price: 35,
+            description: "Standard Size 20x30inch. Polyester. Form-fitting design",
+            keywords: ["nicolas cage", "pillow", "polyester"],
+            photo: "https://cdn.society6.com/cdn/0026/v/12439745_7769234-plwfr2_pm.jpg",
+            category: "Random Stuff",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 7
         },
     ];
 
