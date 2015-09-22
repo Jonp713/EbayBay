@@ -105,7 +105,10 @@
             // Make request GET /session.
             // If it returns a user, call onSuccessfulLogin with the response.
             // If it returns a 401 response, we catch it and instead resolve to null.
-            return $http.get('/getuser').catch(function () {
+            return $http.get('/getuser')
+            .then(function(response){
+                return $q.when(response.data);
+            }).catch(function () {
                 return null;
             });
 
