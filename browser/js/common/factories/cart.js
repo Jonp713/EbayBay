@@ -24,16 +24,17 @@ app.factory('CartFactory', function($http, AuthService, $state) {
             });
     };
         var transmitToOrder = function(cartObj){
-        return AuthService.getLoggedInUser()
+        return AuthService.getLoggedInUserOrNone()
             .then(function(user){
+                console.log('user', user)
                 var newOrder = {
-                    products: cartObj,
-                    user: user
+                    products: cartObj
                 };
+                if(user._id) newOrder.user = user;
                 $http.post('/api/orders/', newOrder)
                 .then(function(order){
-                    console.log(order._id)
-                    $state.go('order', {id: order._id});
+                    console.log('order passed to state.go', order.data)
+                    $state.go('order', {id: order.data._id});
                 });
                
                 
