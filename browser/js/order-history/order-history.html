@@ -2,8 +2,11 @@
     <h3>
         Past Orders
     </h3>
-    
+    <hr>
     <div class='container'>
+        <div ng-show="{{!order}}">
+            <h5>You don't have any previous orders at this time</h5><hr>
+        </div>
         <div ng-repeat="order in orders">
             date: {{order.date}}
             <div ng-repeat='cartItem in order.products'>
