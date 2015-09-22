@@ -562,7 +562,7 @@ var seedOrders = function (users, products) {
         var orderProducts = [];
             //i must not be changed to a number higher than the number of products in the db
             //using this method instead of math.random so that we don't risk adding the same product twice
-        for (var i=0; i<4; i++){
+        for (var i=0; i<8; i++){
             orderProducts.push({
                 product: products[i]._id,
                 // Math.ceil will avoid giving 0 as quantity
