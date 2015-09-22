@@ -24,9 +24,6 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory)
           }).catch(function () {
               $scope.error = 'Invalid login credentials.';
           });
-        }).then(null,function(err){
-          $scope.error = err;
-        });
     };
 
     // $scope.sendSignup = function (signupInfo) {

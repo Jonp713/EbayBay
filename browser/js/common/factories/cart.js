@@ -4,7 +4,6 @@ app.factory('CartFactory', function($http, AuthService, $state) {
     }
 
     var removeFromCart = function(product){
-        console.log('in the removeFromCart');
         return $http.delete('/api/cart/'+product._id);
 
     }
@@ -12,7 +11,6 @@ app.factory('CartFactory', function($http, AuthService, $state) {
     var getCart = function() {
         return $http.get('/api/cart/')
         .then(function(response) {
-            console.log('cart on front end', response.data)
                 return response.data;
             })
     }
