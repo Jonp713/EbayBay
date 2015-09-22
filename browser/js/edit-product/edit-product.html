@@ -4,7 +4,7 @@
             <h2 class="pull-left">Edit a new Product</h2>
         </div>
         <div class="row">
-            <form name="addProductForm" ng-submit="addProductForm.$valid && editProduct()">
+            <form name="editProductForm" ng-submit="editProductForm.$valid">
                 <label class="pull-left" for="productName">Name</label>
                 <input type="text" class="form-control" name="productName" ng-model="product.name" required/>
                 <label for="productDescription" class="pull-left">Description</label>

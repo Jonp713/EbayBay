@@ -4,7 +4,7 @@ window.app = angular.module('FullstackGeneratedApp', ['ui.router', 'js-data', 'u
 app.config(function(DSProvider, $urlRouterProvider, $locationProvider) {
 
     $locationProvider.html5Mode(true);
-    $urlRouterProvider.otherwise('/');
+    //$urlRouterProvider.otherwise('/');
 
 
     DSProvider.defaults.basePath = '/api';
