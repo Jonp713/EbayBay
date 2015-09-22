@@ -52,6 +52,14 @@ module.exports = function (app) {
         }
     });
 
+    app.get('/getuser', function (req, res) {
+        if (req.user) {
+            res.send({ user: _.omit(req.user.toJSON(), ['salt', 'password']) });
+        } else {
+            res.send({user:'nope'})
+        }
+    });
+
     // Simple /logout route.
     app.get('/logout', function (req, res) {
         req.session.cart = [];
