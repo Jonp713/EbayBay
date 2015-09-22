@@ -44,7 +44,6 @@ module.exports = function (app) {
             // req.logIn will establish our session.
             req.logIn(user, function (loginErr) {
                 console.log("logged in ", user);
-					 console.log(loginErr);
                 if (loginErr) return next(loginErr);
                 //mergeCart merges session cart with user cart in the db
                 user.mergeCart(req.session.cart, function(err, user){
