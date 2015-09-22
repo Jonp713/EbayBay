@@ -29,7 +29,6 @@ var Product = Promise.promisifyAll(mongoose.model('Product'));
 var State = Promise.promisifyAll(mongoose.model('State'));
 var chance = require('chance')(123);
 
-
 var tempData = {};
 
 function randPhoto () {
@@ -39,7 +38,7 @@ function randPhoto () {
         max: 96
     });
     return 'http://api.randomuser.me/portraits/med/' + g + '/' + n + '.jpg';
-}
+};
 
 var seedReviews = function(users) {
     var reviews = [{
@@ -89,6 +88,7 @@ var seedUsers = function () {
             lastName: "Zeke",
             email: 'omri@fsa.com',
             password: 'password',
+			isAdmin: 1,
             photoUrl: randPhoto()
         },
         {
