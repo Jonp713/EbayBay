@@ -23,5 +23,9 @@ app.controller("UserListCtrl", function($scope, UserFactory, userlist) {
 	 		$state.go("product", {id: item._id});
 	 	});
 	 }
+<<<<<<< HEAD
+});
+=======
 });
 
+>>>>>>> e72e111be1adff7c4611622ae5be57daeca165d6

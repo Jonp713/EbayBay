@@ -38,13 +38,13 @@ function randPhoto () {
         max: 96
     });
     return 'http://api.randomuser.me/portraits/med/' + g + '/' + n + '.jpg';
-};
+}
 
 var seedReviews = function(users) {
     var reviews = [{
         byUser: users[Math.floor(Math.random() * users.length)]._id,
         aboutUser: users[Math.floor(Math.random() * users.length)]._id,
-        content: "This person is a horrible horrible person. He came to my house and ate my food",
+        content: "My mom always said Sketch Bay is like a box of chocolates. You never know whatcha gonna git.",
         stars: 5,
     },
     {
@@ -56,8 +56,68 @@ var seedReviews = function(users) {
     {
         byUser: users[Math.floor(Math.random() * users.length)]._id,
         aboutUser: users[Math.floor(Math.random() * users.length)]._id,
-        content: "Surprised that a dog managed to use the internet. Bad communication. Great licks.",
+        content: "Payment flew in so fast I had to duck! Bumped my head, but it wasn’t the buyers fault.",
+        stars: 5
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Very polite but I never spoke to him. Great item but I never bought it.",
+        stars: 1
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "The plain brown packaging seemed to have worked like a charm & fooled my wife. Thanks!!!",
         stars: 4
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "The plain brown packaging seemed to have worked like a charm & fooled my wife. Thanks!!!",
+        stars: 4
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "no warranty on car! damaged with use! seller will not refund my money.. BEWARE!",
+        stars: 1
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "though u did nothing wrong, let this negative feedback teach you that the universe is arbitrary & unfair.",
+        stars: 1
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Buying this 1999 Space lunchbox failed to fill the empty void in my life like I hoped it would.",
+        stars: 3
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Item never recv'd. No response from seller. I'm out $! Other than that, great transaction.",
+        stars: 2
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Excellent communication, but should've poked holes in box before shipping the kitten. Refunded.",
+        stars: 5
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "Honda R-Type sticker did not add horsepower as advertised.",
+        stars: 5
+    },
+    {
+        byUser: users[Math.floor(Math.random() * users.length)]._id,
+        aboutUser: users[Math.floor(Math.random() * users.length)]._id,
+        content: "I was hoping that by bidding on this it would make me famous. It didn't work. Life goes on.",
+        stars: 2
     }];
 
         return Review.createAsync(reviews);
@@ -69,15 +129,15 @@ var seedUsers = function () {
 
     var users = [
         {
-            firstName: "James",
+            firstName: "Cara",
             lastName: "Maddy",
             email: 'jm@fsa.com',
             password: 'password',
             photoUrl: randPhoto()
         },
         {
-            firstName: "Jimmy",
-            lastName: "Carter",
+            firstName: "James",
+            lastName: "Carrier",
             email: 'carty@fsa.com',
             password: 'password',
             photoUrl: randPhoto()
@@ -92,12 +152,47 @@ var seedUsers = function () {
             photoUrl: randPhoto()
         },
         {
-            firstName: "Gabe",
-            lastName: "Neon",
+            firstName: "Casidy",
+            lastName: "Spencer",
+            email: 'cass@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
+        {
+            firstName: "Brett",
+            lastName: "Corey",
             email: 'gabe@fsa.com',
             password: 'password',
             photoUrl: randPhoto()
-        }
+        },
+        {
+            firstName: "Earnst",
+            lastName: "Coby",
+            email: 'ec@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
+        {
+            firstName: "Pace",
+            lastName: "Roscoe",
+            email: 'pr@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
+        {
+            firstName: "Darian",
+            lastName: "Malone",
+            email: 'dm@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
+        {
+            firstName: "Laurie",
+            lastName: "Whitaker",
+            email: 'laurie@fsa.com',
+            password: 'password',
+            photoUrl: randPhoto()
+        },
     ];
 
     return User.createAsync(users);
@@ -319,10 +414,10 @@ var seedLocation = function(states) {
         zip: "11216"
     },
     {
-        street: "26 St Andrews Place",
+        street: "505 Franklin Ave",
         city: "Brooklyn",
         state: states[31]._id,
-        zip: "11216"
+        zip: "11238"
     },
     {
         street: "5 Hanover Square",
@@ -331,10 +426,28 @@ var seedLocation = function(states) {
         zip: "10004"
     },
     {
+        street: "64th St and 5th Ave",
+        city: "New York",
+        state: states[31]._id,
+        zip: "10021"
+    },
+    {
+        street: "207 Avenue A",
+        city: "New York",
+        state: states[31]._id,
+        zip: "10009"
+    },
+    {
         street: "1720 Grape Ave",
         city: "Boulder",
         state: states[4]._id,
         zip: "80304"
+    },
+    {
+        street: "71 Washington St",
+        city: "Bloonfield",
+        state: states[29]._id,
+        zip: "07003"
     }
     ];
     return Location.createAsync(location);
@@ -344,45 +457,96 @@ var seedLocation = function(states) {
 var seedProducts = function (users, location) {
     var products = [
         {
-            name: "Patrick the teddy bear",
-            price: 20,
-            description: "Fullstack Mascot",
-            photo: "http://thecatapi.com/api/images/get?format=src&type=gif",
-            category: "Stuffed Animal",
+            name: "belly button lint",
+            price: 32,
+            description: "I have a collection of belly button lint, will trade for muscle car, herley, rifles, gold coins work also or make cash offer. Also interested in motor cycles, no lowball serious only willing to split if you have what I'm looking for,,",
+            photo: "http://ak-hdl.buzzfed.com/static/2014-06/9/8/enhanced/webdr07/enhanced-8194-1402316194-17.png",
+            category: "Human",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 4
+        },
+        {
+            name: "J. Fred Muggs!",
+            price: 425,
+            description: "Dave Garroway's lovable chimpanzee sidekick on the original Today show, was actually a nasty ol' critter who once knocked a March of Dimes poster girl off her crutches. The garrulous Garroway, meanwhile, would psych himself for each show by consulting what he called the Doctor--liquid codeine, which he would swig daily before airtime.",
+            photo: "http://weknowyourdreams.com/images/monkey/monkey-02.jpg",
+            category: "Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 1
         },
         {
-            name: "James the giant bear",
-            price: 15,
-            description: "Not a Fullstack Mascot",
-            photo: "http://thecatapi.com/api/images/get?format=src&type=gif",
-            category: "Stuffed Animal",
+            name: "rifraf",
+            price: 75,
+            description: "Bluegrass song and a well-used couch",
+            photo: "http://i.ytimg.com/vi/y3hNju5yDhE/maxresdefault.jpg",
+            category: "Furniture",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 1
+        },
+        {
+            name: "Bacon balm",
+            price: 4,
+            description: "Just carry around a tube of this Bacon Lip Balm and you can keep your lips moist and meaty around the clock. Warning: Your lips will smell like bacon, but they are not bacon.",
+            photo: "http://mcphee.com/shop/media/catalog/product/cache/1/image/1200x1200/9df78eab33525d08d6e5fb8d27136e95/b/a/bacon_lip_balm.jpg",
+            category: "Animal",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 20
+        },
+        {
+            name: "This project is my life bear!",
+            price: 26034,
+            description: "Grant's Bears. Small kinship group. Girls been together for six months. Good friends. Stallion was next to mares for 3 months and in with them for 3 months, stallion bred zinnia one month ago. Have pics. May have bred zuri, but we didn't see. 1 stallion and two mares, $19,500 for trio. Stallion ,Zutali, 8 years old. Proven. Mare, Zuri, 12 years old. Mare, Zinnia, 9 years old. Zuri has been handled some and allows petting, has been haltered carefully a couple of times. Zinnia is not handled but is fine in close contact. Zutali is good in close contact and has been completely non aggressive with people and is gentle with his mares. His previous owner says he breeds donkeys too.",
+            photo: "http://www.blueeyedyonder.com/wp-content/uploads/2011/12/grizzly1.jpg",
+            category: "Animal",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
             quantity: 2
         },
         {
-            name: "This project is my life bear",
-            price: 25,
-            description: "I'm scary, I swear!",
-            photo: "http://thecatapi.com/api/images/get?format=src&type=gif",
-            category: "Real Animal",
+            name: "Napoleon's hair",
+            price: 9000,
+            description: "The hair was cut from his head after he died in exile in 1821 on St Helena by Denzil Ibbetson, commissionary officer on the during the French Emperor's incarceration on the island. The lock is one of 40 lots of memorabilia from Napoleon up for auction.",
+            photo: "http://i.telegraph.co.uk/multimedia/archive/01669/napoleon-hair_1669762c.jpg",
+            category: "Human",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
-            quantity: 3
+            quantity: 1
         },
         {
             name: "The Best Milkshake ever!",
             price: 205,
             description: "Purple Haze",
-            photo: "http://thecatapi.com/api/images/get?format=src&type=gif",
+            photo: "https://thenypost.files.wordpress.com/2014/07/140707_cordon_gp_9.jpg",
             category: "Milkshake",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
-            quantity: 1
-        }
+            quantity: 3
+        },
+
+        {
+            name: "A tub of 1,500 live ladybirds.",
+            price: 9,
+            description: "Live adult ladybugs. Prefer to eat Aphids. Can devour up to 50 Aphids a day. Will not harm vegetarian.",
+            photo: "http://4.bp.blogspot.com/-Djel3yAcCFw/UWine3SyBMI/AAAAAAAAAus/kHd2p38LK4g/s1600/Ladybugs+001.JPG",
+            category: "Animal",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 12
+        },
+        {
+            name: "James the giant bear",
+            price: 15,
+            description: "Not a Fullstack Mascot",
+            photo: "http://cdn1.bigcommerce.com/server1900/dee9d/product_images/theme_images/Giant_Teddy_Bears_at_Park_.jpg?t=1439493405",
+            category: "Stuffed Animal",
+            user: users[Math.floor(Math.random() * users.length)]._id,
+            location: location[Math.floor(Math.random() * location.length)]._id,
+            quantity: 5
+        },
     ];
 
     // the function below wasn't working, so I commented it out
@@ -398,7 +562,7 @@ var seedOrders = function (users, products) {
         var orderProducts = [];
             //i must not be changed to a number higher than the number of products in the db
             //using this method instead of math.random so that we don't risk adding the same product twice
-        for (var i=0; i<3; i++){
+        for (var i=0; i<4; i++){
             orderProducts.push({
                 product: products[i]._id,
                 // Math.ceil will avoid giving 0 as quantity

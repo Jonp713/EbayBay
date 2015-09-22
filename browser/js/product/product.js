@@ -25,7 +25,7 @@ app.config(function($stateProvider) {
         });
 });
 
-app.controller('ProductController', function($scope, product, CartFactory, $state, AuthService, canEdit) {
+app.controller('ProductController', function($scope, product, CartFactory, UserFactory, $state, AuthService, canEdit) {
     $scope.canEdit = canEdit;
     $scope.quantity = 1;
     // console.log($scope.quantity);
@@ -44,4 +44,11 @@ app.controller('ProductController', function($scope, product, CartFactory, $stat
                 $state.go('home');
             });
     };
+	 
+	UserFactory.find(product.user._id).then(function(user){
+		return user.aggRating();
+	}).then(function(aggRating){
+		if(typeof aggRating == "number") aggRating = aggRating.toString().slice(0,3);
+		$scope.product.user.aggRating = aggRating;
+	});
 });

@@ -27,7 +27,7 @@ app.config(function ($stateProvider) {
                 .then(function(reviews) {
                     return reviews;
                 });
-        	}
+        		}
         }
     });
 			

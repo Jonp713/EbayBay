@@ -21,4 +21,6 @@ app.config(function($stateProvider) {
 
 app.controller('ProductListController', function($scope, $location, products) {
     $scope.products = products;
+	 
+	 
 });

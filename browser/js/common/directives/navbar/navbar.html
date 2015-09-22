@@ -4,7 +4,6 @@
             <!-- <a ui-sref="user({id: product.user._id})">{{user.firstName}}</a> -->
             <a ui-sref="home"><fullstack-logo></fullstack-logo></a>
         </div>
-
         <button ng-show="!user" ui-sref="signup" class="btn pull-right login-button">Signup</button>
         <button ng-show="!user" ui-sref="login" class="btn pull-right login-button">Login</button>
         <div ng-show="user" class="pull-right welcome">
@@ -16,6 +15,9 @@
         <ul class="nav navbar-nav">
             <li ng-repeat="item in items" ng-show="!item.auth || isLoggedIn()">
                 <a ui-sref-active="active" class = "pull-left" ui-sref="{{ item.state }}">{{ item.label }}</a>
+            </li>
+            <li>
+                <a ui-sref="cart"><cart-logo></cart-logo></a>
             </li>
         </ul>
         <div class="navbar-header pull-left">
