@@ -1,4 +1,4 @@
-app.factory('CartFactory', function($http) {
+app.factory('CartFactory', function($http, AuthService, $state) {
     var addToCart = function(product, quantity) {
         return $http.post('/api/cart/', {product: product, quantity: quantity});
     }
@@ -23,11 +23,28 @@ app.factory('CartFactory', function($http) {
                 return response.data;
             });
     };
+        var transmitToOrder = function(cartObj){
+        return AuthService.getLoggedInUser()
+            .then(function(user){
+                var newOrder = {
+                    products: cartObj,
+                    user: user
+                };
+                $http.post('/api/orders/', newOrder)
+                .then(function(order){
+                    console.log(order._id)
+                    $state.go('order', {id: order._id});
+                });
+               
+                
+            });
+    };
 
     return {
         addToCart: addToCart,
         getCart: getCart,
         removeFromCart: removeFromCart,
-        updateCart: updateCart
+        updateCart: updateCart,
+        transmitToOrder: transmitToOrder
     }
 });

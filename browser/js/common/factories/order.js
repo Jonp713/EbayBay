@@ -17,18 +17,15 @@ app.factory('OrderFactory', function(DS, $http) {
             //     }
             // }
         },
-        // methods: {
-        //     getPopulatedOrders: function(searchParams){
+        methods: {
 
-        //         return $http.get('/orders', searchParams)
-        //     },
             // getTotal: function() {
             //     this.products.reduce(function(total, prod.price)){
                     
             //     }
                 
-            // })
-        // }
+            
+        }
         
     });
 }).run(function(OrderFactory) {});
