@@ -5,7 +5,7 @@
 		<img class = "img-responsive" ng-src="{{product.photo}}"/>
 		<h6>Cost: ${{product.price}}</h6>
 		<h6>Category: {{product.category}}</h6>
-		<h>Qty Available: {{product.quantity}}</h6>
+		<h6 contenteditable ng-model = "quantity">Qty Available: {{product.quantity}}</h6>
 	
 		<h5>Description: {{product.description}}</h5>
 		
