@@ -39,14 +39,4 @@ app.controller('AddProductController', function ($scope, $state, ProductFactory,
                 $state.go('product', {id: element._id});
             })
     }
-
-    //$scope.quantitySelections = [];
-    //function createQuantity(num) {
-    //    return {name: String(num), quantity: num};
-    //}
-    //for(var i = 1; i <= 9; i++) {
-    //    $scope.quantitySelections.push(createQuantity(i));
-    //}
-    //console.log($scope.quantitySelections);
-    //$scope.quantitySelections.push({name: '10+', quantity: 10});
 });
