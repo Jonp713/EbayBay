@@ -1,34 +1,56 @@
-<div class = "col-xs-11 col-xs-offset-1">
-	<div class = "col-xs-6">
-		<h3>{{product.name}} <a ui-sref="editProduct({id: product._id})" ng-show="canEdit"><button class=" btn btn-default glyphicon glyphicon-edit"></button></a></h3>
-		<img class = "img-responsive" src="{{product.photo}}"/>
-		<h6>Cost: ${{product.price}}</h6>
-		<h6>Category: {{product.category}}</h6>
-		<h>Qty Available: {{product.quantity}}</h6>
-		<h5>Description: {{product.description}}</h5>
-		 <form name="productForm" ng-submit="productForm.$valid && addToCart()">
-		     <button type="submit">Add to Cart</button>
-		     <input type="number" name='quantity' placeholder='quantity' ng-model="quantity" ng-max='product.quantity'/>
-		     <p ng-show='productForm.quantity.$error.max'>
-		     	<small>You have ordered more than are available</small>
-		     </p>
+<div class = "col-xs-11 col-xs-offset-2">
+	<div class = "col-xs-5 product-left">
+		
+		<h2>{{product.name}} <a ui-sref="editProduct({id: product._id})" ng-show="canEdit"><button class=" btn btn-default glyphicon glyphicon-edit"></button></a></h2>
+		
+		<img class = "img-responsive no-padding product-image col-xs-12" src="{{product.photo}}"/>
+		
+		<span class = "row">
+		<span class = "price col-xs-5 well well-sm no-padding">{{product.price | currency}}</span>
+		<div class = "col-xs-7">
+			<div class = "col-xs-12 no-padding category">
+				 Category: <a ui-sref = "product-list({category: product.category})"> {{product.category}}</a>
+	 		</div>
+			<h6 class = "col-xs-12 no-padding">{{product.description}}</h6></div>
+
+		</span>
+		
+		 <form name="productForm" class = "no-padding col-xs-12 form-inline" ng-submit="productForm.$valid && addToCart()">
+	     <p ng-show='productForm.quantity.$error.max'>
+	     	<small>You have ordered more than are available</small>
+	     </p>
+			<h5 >Available: {{product.quantity}}</h5>
+		  
+		     <input type="number" name='quantity' placeholder='quantity' class = "form-control" ng-model="quantity" ng-max='product.quantity'/>
+
+		     <button class = "btn btn-primary" type="submit">Add to Cart</button>
+		  
 		     <hr>
 		 </form>
+	 
+		 
 	</div>
-	<div class="col-xs-5">
-		<h4>Product location:</h4>
+	<div class="col-xs-4 product-right">
+		<h3>Product location:</h3>
 	  	<location-detail class='mapBox' locations = "product.location"></location-detail>
 	</div >
 	<div class="col-xs-5" class='userBadge'>
-  		<h4>Sold by:</h4>
-		<a ui-sref="user({id: product.user._id})">{{product.user.firstName}}</a>
-  		<img class="img-responsive col-xs-4" ng-src="{{product.user.photoUrl}}">
+  		
+		<h4>Sold by:</h4>
+		<img class = "no-padding col-xs-4 img-responsive" src="{{product.user.photoUrl}}">
+		<div class = "col-xs-8">
+			<h3>
+			<a ui-sref="user({id: product.user._id})">{{product.user.firstName}}</a>
+			<h5 class = "glyphicon glyphicon-star">{{product.user.aggRating}}</h5>
+			<h5><a ui-sref = "product-list({user: product.user._id})">See my products</a></h5>
+		</div>
+	</div>
+	<div class = "col-xs-12">
+		<h4>You may also be interested in... </h4>
+		<div>Put Recomendations Here</div>
 	</div>
 </div>
-<div>
-	<h4>You may also be interested in... </h4>
-	<div>Put Recomendations Here</div>
-</div>
+
 
 
 

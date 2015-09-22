@@ -1,13 +1,13 @@
-	<div class="col-xs-9">
-		<a ui-sref="product({id: product._id})">
-		<h3>{{product.name}}</h3></a>
-		<p>sold by <a ui-sref="user({id: product.user._id})">{{product.user.firstName}}</a></p>
-		<hr>
-		<p>Description: {{product.description}}</p>
-		<p>Cost: {{product.price | currency}}</p>
-		<p>Category: {{product.category}}</p>
-		<p>Location: {{product.location.city}}</p>
-	</div>
-	<div class = "col-xs-3">
-		<img class="img-responsive" ng-src="{{product.photo}}">
-	</div>
+<div class="col-xs-9">
+	<a ui-sref="product({id: product._id})">
+	<h3>{{product.name}}</h3></a>
+	<p>Sold by <a ui-sref="user({id: product.user._id})">{{product.user.firstName}}</a></p>
+	<hr>
+	<p>Description: {{product.description}}</p>
+	<p>Cost: {{product.price | currency}}</p>
+	<p>Category: {{product.category}}</p>
+	<p>Location: {{product.location.city}}</p>
+</div>
+<div class = "col-xs-3">
+	<img class="img-responsive" ng-src="{{product.photo}}">
+</div>
