@@ -20,11 +20,13 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory)
        UserFactory.create(signupInfo).then(function(){
           AuthService.login(signupInfo).then(function () {
               $state.go('home');
-			  
           }).catch(function () {
-              $scope.error = 'Invalid login credentials.';
+              $scope.error = 'Invalid login credentials';
           });
+        });
     };
+
+});
 
     // $scope.sendSignup = function (signupInfo) {
 
@@ -44,5 +46,3 @@ app.controller('SignupCtrl', function ($scope, AuthService, $state, UserFactory)
     //     // });
 
     // };
-
-});
