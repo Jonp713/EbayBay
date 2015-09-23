@@ -10,6 +10,7 @@ app.config(function ($stateProvider) {
                 return CartFactory.getCart();
             },
             recProds: function($http, cartItems) {
+                if(!cartItems.length) return [];
                 var numItems = cartItems.length + 3;
                 return $http.get(`/api/products/${cartItems[0].product._id}/recommendations/${numItems}`)
                 .then(function(response){

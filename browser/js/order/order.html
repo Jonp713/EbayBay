@@ -49,7 +49,7 @@
             <div class='form-row'>
               <div class='form-group'>
                          <label class='control-label'></label>
-               <button class='form-control btn btn-primary' type='submit'> Continue →</button>
+               <a href='#shipping-info'><button class='form-control btn btn-primary' type='submit'> Continue →</button></a>
               </form>    
               </div>
             </div>    
@@ -62,14 +62,14 @@
                 <input type="hidden" id="token" value="token-supersecuretoken123123123"></input>
                <a href="#paypal"><img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/checkout-logo-large.png" alt="paypal" width="100%"></a>
                <br><br><br>
-                  <button class='form-control btn btn-primary submit-button' type='submit'> Continue →</button>
+                  <button class='form-control btn btn-primary submit-button'> Continue →</button>
               </div>
             </div>
         </div>
         <div class="col-sm-6">
            <label class='control-label'></label><!-- spacing -->
         
-          <div class="alert alert-info"">Please choose your method of payment and hit continue. You will then be sent down to pay using your selected payment option.</div>
+          <div class="alert alert-info">Please choose your method of payment and hit continue. You will then be sent down to pay using your selected payment option.</div>
        <br>
          <div class="btn-group-vertical btn-block">
              <a class="btn btn-default" style="text-align: left;" data-toggle="tab" href="#stripe">Stripe/Credit Card</a>
@@ -89,11 +89,11 @@
         </div>
         </form>
 
-<form name="orderForm" ng-submit="checkout()">
+<form name="orderForm" ng-submit="submitPayment()">
     <hr>
     <div>
         <!-- <h4>Shipping Address</h4> -->
-        <div style="text-align: center"><h3>Shipping Address</h3></div>
+        <div name='shipping-info' style="text-align: center"><h3>Shipping Address</h3></div>
 
         <div class="container">
             <form name="shippingForm" ng-submit="addShippingInfo(shipping)">
@@ -115,14 +115,14 @@
                     </label>
                   </div>
                 <br>
-                <button type="submit" class="btn btn-success pull-left">Enter shipping address</button>
+                <a href='order-info'> <button type="submit" class="btn btn-success pull-left">Enter shipping address</button>
             </form>
         </div>
     </div>
 
 
     <hr>
-    <div style="text-align: center"><h3>Review Items</h3></div>
+    <div name='order-info' style="text-align: center"><h3>Review Items</h3></div>
         <div class="container">
             <div ng-repeat="cartItem in order.products">
                 <div class="row">
@@ -146,6 +146,7 @@
             <div>Order total: {{total() | currency}}</div>
         </div>
         <hr>
+        <button ui-sref='home' class='btn btn-primary submit-button'> Submit Order →</button>
 
     
     <div class='row'>

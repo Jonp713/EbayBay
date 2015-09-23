@@ -41,10 +41,22 @@ app.controller('OrderCtrl', function ($scope, OrderFactory, $state, order, recPr
     $scope.recProds = recProds;
     console.log('recPRods', recProds)
     console.log('order in order ctlr', order);
-    $scope.checkout = function(){
+    
+    $scope.checkout = function(order){
         console.log('checking out');
+        order.status='processing';
+        order.total = $scope.total();
+        if($scope.shippingMethod) order.shippingMethod = $scope.shippingMethod;
+        return OrderFactory.submitOrder(order)
+        .then(function(){
+            state.go('home')
+        });
     };
 
+    // $scope.submitPayment = function(){
+
+    // }
+    $scope.shippingMethod;
     $scope.shippingCosts = function() {
         // shipping is a flat rate $5.00
         if ($scope.preTaxTotal > 0){
