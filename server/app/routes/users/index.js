@@ -48,14 +48,16 @@ router.post('/', function(req, res, next) {
 });
 
 router.put('/:userId', function(req, res, next) {
+	
     var isAdmin = req.user.isAdmin;
 
-    if(req.user !== req.foundUser && !isAdmin) return res.sendStatus(403);
+   if(req.user !== req.foundUser && !isAdmin) return res.sendStatus(403);
     //if user is an admin or is the viewed user allow for changes
     if(req.user && !isAdmin) delete req.body.isAdmin;
     Object.keys(req.body).forEach(function(key) {
-        if(req.foundUser[key]) req.foundUser[key] = req.body[key];
+        if(req.foundUser[key] === false || key === 'isAdmin') req.foundUser[key] = req.body[key];
     });
+	 console.log(req.foundUser);
     return req.foundUser.save()
         .then(function(element) {
             return res.json(element);

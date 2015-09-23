@@ -27,7 +27,7 @@ app.config(function ($stateProvider) {
                     return reviews;
                 });
         		}
-        }
+        },
     });
 			
 });

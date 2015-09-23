@@ -31,6 +31,7 @@ app.controller('ProductController', function($scope, product, CartFactory, UserF
     // console.log($scope.quantity);
     $scope.product = product;
     $scope.recProds = recProds;
+    $scope.isAdmin = AuthService.isAdmin;
 
     $scope.addToCart = function() {
         CartFactory.addToCart($scope.product,$scope.quantity)
@@ -45,7 +46,7 @@ app.controller('ProductController', function($scope, product, CartFactory, UserF
                 $state.go('home');
             });
     };
-	 
+
 	UserFactory.find(product.user._id).then(function(user){
 		return user.aggRating();
 	}).then(function(aggRating){

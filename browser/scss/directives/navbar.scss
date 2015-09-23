@@ -58,7 +58,16 @@ navbar {
     }
   }
   .search-navbar {
-    padding-top:9px;
+    padding-top: 9px;
   }
-
+  .search-item:hover {
+    background-color: #718398;
+    cursor: pointer;
+  }
+  .search-item-dropdown {
+    padding: 0 !important;
+  }
+  .search-bar {
+    border: 1px solid #2A3E50;
+  }
 }
