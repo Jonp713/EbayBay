@@ -604,11 +604,11 @@ var seedProducts = function (users, location) {
             quantity: 1
         },
         {
-            name: "A nicolas case pillowcase cover",
+            name: "A Nicolas Cade pillowcase",
             price: 35,
             description: "Standard Size 20x30inch. Polyester. Form-fitting design",
             keywords: ["nicolas cage", "pillow", "polyester"],
-            photo: "http://g04.a.alicdn.com/kf/HTB11NGUIXXXXXbjXFXXq6xXFXXXh.jpg",
+            photo: "https://static2.artfire.com/uploads/products/2015/04/24/f6/11750816/large/bdp_40_nicolas_cage_see_you_in_my_dream_pillow_case_16_x_16_inch_1_side_d48f971a_951630.jpg",
             category: "Random Stuff",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
