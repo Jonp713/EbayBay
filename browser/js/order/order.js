@@ -23,17 +23,18 @@ app.controller('OrderCtrl', function ($scope, OrderFactory, $state, order) {
 
     $scope.shippingCosts = function() {
         // shipping is a flat rate $5.00
-        return 5;
+        if ($scope.preTaxTotal > 0){
+            return 5;
+        }   // returns $0 is no items have been added to the order
+        return 0;
     };
 
     $scope.preTaxTotal = function() {
-        // console.log("scope order ", $scope.order);
         var sum = 0;
         $scope.order.products.forEach(function(cartItem) {
             console.log('cart item ', cartItem);
             sum += cartItem.product.price;
         });
-
         return sum;
     };
 
