@@ -16,11 +16,9 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.setQueryParam = function() {
                 var obj = {};
                 obj[scope.searchParam] = scope.searchStr;
-                console.log('setQueryParam', obj)
                 if($location.url().match(/\/products\?/)){
-                    console.log('matched');
                     return $state.transitionTo('product-list', obj);
-                    //I LOVE YOU SO MUCH!!!!
+                    //Dear transitionTo - I LOVE YOU SO MUCH!!!!
 
 
                 }
