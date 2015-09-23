@@ -36,27 +36,56 @@ app.config(function ($stateProvider) {
 
 });
 
-app.controller('OrderCtrl', function ($scope, OrderFactory, $state, order, recProds) {
+app.controller('OrderCtrl', function ($scope, $http, OrderFactory, $state, order, recProds) {
     $scope.order = order;
     $scope.recProds = recProds;
     console.log('recPRods', recProds)
     console.log('order in order ctlr', order);
     
-    $scope.checkout = function(order){
+    $scope.checkout = function(){
         console.log('checking out');
-        order.status='processing';
-        order.total = $scope.total();
-        if($scope.shippingMethod) order.shippingMethod = $scope.shippingMethod;
-        return OrderFactory.submitOrder(order)
+        $scope.order.status='processing';
+        $scope.order.total = $scope.total();
+        return $scope.submitOrder($scope.order)
         .then(function(){
             state.go('home')
         });
     };
 
-    // $scope.submitPayment = function(){
-
+    // $scope.shippingAdress = {
+    //     streetAddress: null,
+    //     city: null,
+    //     state: null,
+    //     zip: null,
+    //     email: null,
+    //     receiveEmails: false
     // }
-    $scope.shippingMethod;
+
+    $scope.payment = {
+        cardNumber: null,
+        name: null,
+        expire: null,
+        csv: null
+    },
+
+    $scope.submitPayment = function(){
+        $scope.order.payment = $scope.payment;
+        return $scope.submitOrder($scope.order)
+        .then(function(order){
+            $state.href('#shipping-info')
+        });
+    }
+    $scope.shipping;
+    $scope.addShippingInfo = function(shipping){
+        $scope.order.shippingAdress = shipping;
+        console.log($scope.order);
+        return $scope.submitOrder($scope.order)
+                .then(function(order){
+                    console.log(order)
+                    $state.href('#order-info')
+        });
+    }
+    
     $scope.shippingCosts = function() {
         // shipping is a flat rate $5.00
         if ($scope.preTaxTotal > 0){
@@ -80,5 +109,10 @@ app.controller('OrderCtrl', function ($scope, OrderFactory, $state, order, recPr
     $scope.total = function() {
         return $scope.estTax() + $scope.preTaxTotal() + $scope.shippingCosts();
     };
+
+    $scope.submitOrder= function(order){
+        console.log(order._id)
+                return $http.put('/orders/'+order._id, order);
+            };
     
 });
