@@ -5,6 +5,8 @@ var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
 // var Location = mongoose.model('Location');
 var Order = mongoose.model('Order');
+var Promise = require('bluebird');
+var _ = require('lodash');
 
 
 var missingItemHandler = function(error, cb) {
@@ -107,4 +109,44 @@ router.get('/:productId/recommendations/:num', function(req, res, next) {
         console.log('sim prods', simProds);
         res.json(simProds);
     });
+});
+
+router.get('/recommendations/:num', function(req, res, next) {
+    console.log(req.query);
+    var cartItems = req.query;
+    var productArr = [];
+    var idsArr = []
+    for(var i in cartItems) {
+        idsArr.push(cartItems[i]);
+        var newPromise = Product.findById(cartItems[i])
+        .then(function(element){
+                return Order.getSimilarities(element, req.params.num)
+            });
+        productArr.push(newPromise);
+    }
+    Promise.all(productArr)
+        .then(function(arr) {
+            var idObj = {};
+            arr = _.flatten(arr).sort(function(a,b) {
+                return b.score - a.score;
+            });
+            arr = arr.filter(function(element) {
+                console.log('element', element);
+                if(!idObj[element.id]) {
+                    idObj[element.id] = 1;
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            })
+
+
+            console.log('arr',arr);
+            arr = arr.filter(function(element) {
+                console.log(element);
+                return idsArr.indexOf(element.product._id.toString()) === -1;
+            });
+            res.json(arr.slice(0, req.params.num));
+        })
 });

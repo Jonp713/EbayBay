@@ -5,32 +5,21 @@ app.config(function ($stateProvider) {
         templateUrl: 'js/cart/cart.html',
         controller: 'CartCtrl',
         resolve: {
-            cartItems: function(CartFactory){
+            cartItems: function (CartFactory) {
                 console.log('in the cart resolve');
                 return CartFactory.getCart();
             },
-            recProds: function($http, cartItems) {
-                if(!cartItems.length) return [];
+            recProds: function ($http, cartItems) {
+                var obj = {};
+                cartItems.forEach(function(element, index) {
+                    obj['product' + index] = element.product._id;
+                })
                 var numItems = cartItems.length + 3;
-                return $http.get(`/api/products/${cartItems[0].product._id}/recommendations/${numItems}`)
-                .then(function(response){
-                    console.log('responseData', response.data);
-                    return response.data;
-                }).then(function(recProds){
-                    console.log(recProds);
-                    var returnArr = [];
-                    recProds.some(function(item){
-                        for(var i = 0; i<cartItems.length; i++){
-                            //moves to the next loop of some if the product is already in the cart
-                            console.log(item.product, cartItems[i].product)
-                            if (item.product === cartItems[i].product) return false;
-                        }
-                        console.log('unique', item.product)
-                        returnArr.push(item);
-                        return returnArr.length>2;
-                    });
-                    return returnArr;
-                });             
+                return $http.get(`/api/products/recommendations/${numItems}`, {params: obj})
+                    .then(function (response) {
+                        console.log('responseData', response.data);
+                        return response.data;
+                    })
             }
 
             // recProds: function($http, cartItems){
@@ -40,7 +29,7 @@ app.config(function ($stateProvider) {
             //         .then(function(response){
             //             console.log('response', response.data)
             //         return response.data;
-            //         });   
+            //         });
             //     });
             //     return $q.all(recProdsArr)
             //     .then(function(recProdArrMap){
@@ -70,7 +59,7 @@ app.config(function ($stateProvider) {
 
 
             // }
-                
+
         }
     });
 
@@ -81,14 +70,14 @@ app.controller('CartCtrl', function ($scope, CartFactory, $state, cartItems, rec
     $scope.cartItems = cartItems;
     $scope.recProds = recProds;
     console.log($scope.recProds)
-    $scope.runUpdate = function() {
+    $scope.runUpdate = function () {
         CartFactory.updateCart($scope.cartItems)
-        .then(function(response) {
+            .then(function (response) {
                 $scope.cartItems = response;
             });
     };
-    $scope.transmitToOrder = function(){
+    $scope.transmitToOrder = function () {
         console.log('transmit from the cart ctlr');
         return CartFactory.transmitToOrder($scope.cartItems);
-        };
+    };
 });
