@@ -71,7 +71,7 @@ overflow: auto;
 }
 
 .paymentAmt {
-    font-size: 80px; 
+    font-size: 80px;
 }
 
 .centered {
@@ -79,7 +79,7 @@ overflow: auto;
 }
 
 .title {
- padding-top: 15px;   
+ padding-top: 15px;
 }
 
 
@@ -7140,3 +7140,7 @@ a.list-group-item-danger.active:focus {
   border: none;
 }
 
+li.tag-item{
+  color: black !important;
+}
+//possibly remove
