@@ -5,6 +5,9 @@ app.directive('productListItem', function(UserFactory) {
         scope: {
             product: '='
         },
+        link: function (scope){
+        	scope.keywords = scope.product.keywords.join(', ')
+        }
 
     };
 });

@@ -8,7 +8,7 @@
             <h5>You don't have any previous orders at this time</h5><hr>
         </div>
         <div ng-repeat="order in orders">
-            Order Date: {{order.date}}
+        <h3>Ordered on: {{order.date | date}}</h3>
             <div ng-repeat='cartItem in order.products'>
                 <div class="row">
                     <div class="col-xs-12 col-sm-10 item-container">
@@ -16,7 +16,8 @@
                     </div>
                 </div>
             </div>
-             <p>Total: {{order.total}}</p>
+             <h4>Total: {{order.total}}</h4>
+             <p>Status: {{order.status}}</p>
              <hr>
 
         </div>
