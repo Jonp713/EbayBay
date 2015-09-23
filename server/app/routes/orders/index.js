@@ -17,6 +17,7 @@ router.param('orderId', function(req, res, next, id) {
     .deepPopulate('products.product.user products.product.location')
     .exec(function(err, order){
         if(err) return missingItemHandler(error, next);
+        console.log('found order', order)
         req.order = order;
         next();
     });
@@ -58,18 +59,18 @@ router.post('/', function(req, res, next) {
 
 
 
-//router.put('/:productId', function(req, res, next) {
-//    if(req.product.userId !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
-//    //if user is an admin or is the owner of the product, allow for changes
-//    Object.keys(req.body).forEach(function(key) {
-//        if(req.foundProduct[key]) req.foundProduct[key] = req.body[key];
-//    });
-//    req.foundProduct.save()
-//        .then(function(element) {
-//            res.json(element);
-//        })
-//        .then(null, next);
-//});
+router.put('/:orderId', function(req, res, next) {
+   // if(req.product.userId !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
+   //if user is an admin or is the owner of the product, allow for changes
+   Object.keys(req.body).forEach(function(key) {
+       if(req.order[key]) req.order[key] = req.body[key];
+   });
+   req.order.save()
+       .then(function(element) {
+           res.json(element);
+       })
+       .then(null, next);
+});
 
 //router.delete('/:productId', function(req, res, next) {
 //    if(req.product.userId !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
