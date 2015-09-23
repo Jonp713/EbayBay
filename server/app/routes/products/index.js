@@ -30,10 +30,15 @@ router.get('/:productId', function(req, res) {
 });
 
 router.get('/', function(req, res, next) {
-    console.log(req.query);
-    Product.find(req.query)
+    var newObj = {};
+    for(var i in req.query) {
+        newObj[i] = RegExp('\w*' + req.query[i] + "\w*", 'i');
+    }
+    console.log(newObj);
+    Product.find(newObj)
         //req.query will contain search params for filtering products
         .then(function(results) {
+            console.log(results);
             res.json(results);
         })
         .then(null, next);
