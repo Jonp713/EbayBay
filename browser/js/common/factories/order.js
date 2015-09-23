@@ -20,7 +20,7 @@ app.factory('OrderFactory', function(DS, $http) {
         methods: {
             submitOrder: function(order){
 
-                return $http.put('/order/'+order._id, order);
+                return $http.put('/order/'+order._id, order), order;
             },
             // getTotal: function() {
             //     this.products.reduce(function(total, prod.price)){
