@@ -21,7 +21,6 @@ app.controller('AddReviewCtrl', function ($scope, $state, ReviewFactory, AuthSer
 			
 			review.byUser = user._id;
 			review.aboutUser = $stateParams.userId;
-			console.log(user);
 			return ReviewFactory.create(review);
 			
 		}).then(function(element){

@@ -14,7 +14,7 @@ app.config(function ($stateProvider) {
 
 app.controller('EditUserController', function ($scope, $state, user, UserFactory) {
     $scope.user = user;
-	console.log(user);
+	console.log($scope.user);
 	 
 	 $scope.edit = function(){ 
 	 	UserFactory.update(user._id, $scope.user).then(function(item){
