@@ -32,13 +32,13 @@ router.get('/:productId', function(req, res) {
 router.get('/', function(req, res, next) {
     var newObj = {};
     for(var i in req.query) {
-        newObj[i] = RegExp('\w*' + req.query[i] + "\w*", 'i');
+        if(i !== 'user') {
+            newObj[i] = RegExp('\w*' + req.query[i] + "\w*", 'i');
+        }
     }
-    console.log(newObj);
     Product.find(newObj)
         //req.query will contain search params for filtering products
         .then(function(results) {
-            console.log(results);
             res.json(results);
         })
         .then(null, next);
@@ -49,7 +49,6 @@ router.post('/', function(req, res, next) {
     // need to verify users is logged in - in order to add a product to their page
     // if user is admin, should be able to create product on anyones pag
     var productObj = req.body;
-    console.log(productObj);
     productObj.user = req.user._id;
     Product.create(productObj)
     .then(function(results) {
