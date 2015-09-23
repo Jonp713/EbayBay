@@ -13,13 +13,13 @@ app.config(function($stateProvider) {
                     .then(function(user) {
                             if(!user) return false;
                             return product.user._id === user._id;
-                        })
+                        });
                 },
                 recProds: function($http, $stateParams){
                     return $http.get(`/api/products/${$stateParams.id}/recommendations/3`)
                     .then(function(response){
                         return response.data;
-                    })
+                    });
                 }
             }
         });
