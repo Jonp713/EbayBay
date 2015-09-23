@@ -3,7 +3,8 @@ var router = require('express').Router();
 module.exports = router;
 var mongoose = require('mongoose');
 var Product = mongoose.model('Product');
-var Location = mongoose.model('Location');
+// var Location = mongoose.model('Location');
+var Order = mongoose.model('Order');
 
 
 var missingItemHandler = function(error, cb) {
@@ -90,10 +91,16 @@ router.delete('/:productId', function(req, res, next) {
         return res.sendStatus(403);
     }
     // console.log('am I an admin?', req.user.isAdmin)
-    console.log('prod', req.foundProduct)
     req.foundProduct.remove()
         .then(function() {
             res.status(204).end();
         })
         .then(null, next);
+});
+
+router.get('/:productId/recommendations/:num', function(req, res, next) {
+    Order.getSimilarities(req.foundProduct, req.params.num).then(function(simProds){
+        console.log('sim prods', simProds);
+        res.json(simProds);
+    });
 });

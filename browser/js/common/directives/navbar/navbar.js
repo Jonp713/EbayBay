@@ -16,13 +16,14 @@ app.directive('navbar', function ($rootScope, AuthService, AUTH_EVENTS, $state, 
             scope.setQueryParam = function() {
                 var obj = {};
                 obj[scope.searchParam] = scope.searchStr;
-                return obj;
+                console.log('setQueryParam', obj)
+                $state.go('product-list', obj);
             };
 
             scope.items = [
                 { label: 'Products', state: 'product-list'},
                 // { label: 'Cart', state: 'cart' },
-                { label: "Add Product", state: "addProduct", auth: true},
+                { label: "Add Product", state: "addProduct"},
                 // { label: "Add Review", state: "addReview", auth: true},
                 { label: "Order History", state:"orderHistory", auth: true},
                 { label: "Users", state:"user-list", auth: true},

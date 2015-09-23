@@ -56,6 +56,8 @@ router.post('/', function(req, res, next) {
         });
 });
 
+
+
 //router.put('/:productId', function(req, res, next) {
 //    if(req.product.userId !== req.user._id && !req.user.isAdmin) return res.sendStatus(403);
 //    //if user is an admin or is the owner of the product, allow for changes

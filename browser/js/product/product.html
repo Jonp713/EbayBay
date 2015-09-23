@@ -34,7 +34,7 @@
 		<h3>Product location:</h3>
 	  	<location-detail class='mapBox' locations = "product.location"></location-detail>
 	</div >
-	<div class="col-xs-5" class='userBadge'>
+	<div class="col-xs-5 userBadge">
   		
 		<h4>Sold by:</h4>
 		<img class = "no-padding col-xs-4 img-responsive" src="{{product.user.photoUrl}}">
@@ -44,13 +44,11 @@
 			<h5 class = "glyphicon glyphicon-star">{{product.user.aggRating}}</h5>
 			<h5><a ui-sref = "product-list({user: product.user._id})">See my products</a></h5>
 		</div>
-	</div>
-	<div class = "col-xs-12">
-		<h4>You may also be interested in... </h4>
-		<div>Put Recomendations Here</div>
-	</div>
+	</div>	
 </div>
-
+<div class='row'>
+		<rec-engine class='recs' rec-prods='recProds'></rec-engine>
+	</div>
 
 
 

@@ -14,16 +14,23 @@ app.config(function($stateProvider) {
                             if(!user) return false;
                             return product.user._id === user._id;
                         })
+                },
+                recProds: function($http, $stateParams){
+                    return $http.get(`/api/products/${$stateParams.id}/recommendations/3`)
+                    .then(function(response){
+                        return response.data;
+                    })
                 }
             }
         });
 });
 
-app.controller('ProductController', function($scope, product, CartFactory, UserFactory, $state, AuthService, canEdit) {
+app.controller('ProductController', function($scope, product, CartFactory, UserFactory, $state, AuthService, canEdit, recProds) {
     $scope.canEdit = canEdit;
     $scope.quantity = 1;
     // console.log($scope.quantity);
     $scope.product = product;
+    $scope.recProds = recProds;
 
     $scope.addToCart = function() {
         CartFactory.addToCart($scope.product,$scope.quantity)

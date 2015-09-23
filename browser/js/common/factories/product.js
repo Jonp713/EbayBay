@@ -13,6 +13,6 @@ app.factory('ProductFactory', function (DS) {
                     localField: 'location'
 				}
             },
-        }
-	})
+        },
+	});
 }).run(function(ProductFactory){});
