@@ -604,11 +604,11 @@ var seedProducts = function (users, location) {
             quantity: 1
         },
         {
-            name: "A nicolse case pillowcase cover",
+            name: "A nicolas case pillowcase cover",
             price: 35,
             description: "Standard Size 20x30inch. Polyester. Form-fitting design",
             keywords: ["nicolas cage", "pillow", "polyester"],
-            photo: "https://cdn.society6.com/cdn/0026/v/12439745_7769234-plwfr2_pm.jpg",
+            photo: "http://g04.a.alicdn.com/kf/HTB11NGUIXXXXXbjXFXXq6xXFXXXh.jpg",
             category: "Random Stuff",
             user: users[Math.floor(Math.random() * users.length)]._id,
             location: location[Math.floor(Math.random() * location.length)]._id,
