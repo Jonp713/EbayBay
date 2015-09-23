@@ -25,11 +25,11 @@
             <form name="searchForm" class="form-group form-inline search-navbar">
                 <div class="btn-group dropdown" dropdown dropdown-append-to-body>
                     <button type="button" class="btn btn-default dropdown-toggle search-param-toggle" dropdown-toggle>Search by product {{searchParam}} <span class="caret"></span></button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li ng-repeat="paramOption in paramOptions track by $index" ng-click="setSearchParam(paramOption)">{{paramOption}}</li>
+                    <ul class="dropdown-menu search-item-dropdown" role="menu">
+                        <li ng-repeat="paramOption in paramOptions track by $index" class="search-item" ng-click="setSearchParam(paramOption)">{{paramOption}}</li>
                     </ul>
                 </div>
-                <input type="text" ng-model="searchStr" class="form-control"/>
+                <input type="text" ng-model="searchStr" class="form-control search-bar"/>
                 <button ng-click="setQueryParam()" class = "btn btn-default"><span class = "glyphicon glyphicon-search"></span></button>
             </form>
         </div>
