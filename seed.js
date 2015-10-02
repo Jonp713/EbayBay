@@ -657,9 +657,7 @@ connectToDb.then(function () {
             process.kill(0);
         }
     }).then(function (users) {
-
         tempData.users = users;
-
         return seedState();
     }).then(function(states) {
         tempData.states = states;
