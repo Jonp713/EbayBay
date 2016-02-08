@@ -4,11 +4,6 @@ app.config(function ($stateProvider) {
         url: '/review/add/:userId',
         templateUrl: 'js/add-review/add-review.html',
         controller: 'AddReviewCtrl',
-        // resolve: {
-  //       	aboutUser: function($stateParams){
-  //       		return UserFactory.find($stateParams.id);
-  // 			};
-  //       }
     });
 
 });
